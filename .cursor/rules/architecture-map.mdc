@@ -1,0 +1,85 @@
+---
+description: Repo geography — src/test layout, project roles, dependency direction
+alwaysApply: true
+---
+
+# Repo geography map
+
+Orientation for placing a first contribution. There is no equivalent overview under `docs/` (only build/security docs). Per-area implementation detail lives in `.agents/skills/<area>/SKILL.md`.
+
+## Version management
+
+- Never hardcode package versions in `.csproj` files.
+- Central versions: `eng/Versions.props` (version variables) + root `Directory.Packages.props` (central package versions; imports `eng/Versions.props`).
+- `test/Directory.Packages.props` exists for out-of-tree / test-specific package pins.
+
+## Source dependency direction (`src/`)
+
+Arrows mean "depends on" (ProjectReference). Leaf projects have no in-repo project deps.
+
+```
+EFCore.Abstractions          # attributes/APIs usable without pulling in EF Core
+EFCore.Analyzers            # Roslyn analyzers (shipped with EFCore)
+Microsoft.Data.Sqlite.Core  # ADO.NET SQLite provider (no native binary)
+
+EFCore ──► Abstractions, Analyzers
+  ├─ EFCore.InMemory
+  ├─ EFCore.Proxies
+  ├─ EFCore.Cosmos                    # non-relational provider
+  └─ EFCore.Relational
+       ├─ EFCore.SqlServer
+       │    ├─ EFCore.SqlServer.NTS          # NetTopologySuite
+       │    └─ EFCore.SqlServer.HierarchyId  # also ► SqlServer.Abstractions
+       ├─ EFCore.Sqlite.Core ──► Relational, Microsoft.Data.Sqlite.Core
+       │    ├─ EFCore.Sqlite                 # meta: Core + native binary
+       │    └─ EFCore.Sqlite.NTS
+       └─ EFCore.Design                      # migrations + scaffolding
+
+Microsoft.Data.Sqlite ──► Microsoft.Data.Sqlite.Core   # meta: Core + native binary
+EFCore.SqlServer.Abstractions                           # HierarchyId types without full provider
+
+Tooling (wrap shared `ef` exe; `ef` itself is not packed):
+  ef ◄── dotnet-ef | EFCore.Tools (PMC) | EFCore.Tasks (MSBuild)
+EFCore.Templates   # T4 scaffolding templates (standalone)
+
+src/Shared/        # compile-linked helpers (Check, extensions) — not a project
+```
+
+| Project | Role |
+|---------|------|
+| `EFCore` | Core ORM: model, LINQ, change tracking, `SaveChanges` |
+| `EFCore.Relational` | Shared ADO.NET relational layer (SQL gen, migrations infra, updates) |
+| `EFCore.SqlServer` / `Sqlite*` / `Cosmos` / `InMemory` | Database providers |
+| `EFCore.Design` | Design-time: migrations, scaffolding |
+| `EFCore.Proxies` | Lazy-loading / change-tracking proxies |
+| `Microsoft.Data.Sqlite*` | ADO.NET SQLite (usable without EF); EF Sqlite provider builds on Core |
+| `dotnet-ef` / `EFCore.Tools` / `EFCore.Tasks` / `ef` | CLI / PMC / MSBuild tooling |
+
+**Where to edit:** provider-specific SQL/behavior → that provider project; shared relational → `EFCore.Relational`; core LINQ/tracking/model → `EFCore`; migrations/scaffold UX → `EFCore.Design` (+ tooling projects for CLI surface).
+
+## Test layout (`test/`)
+
+Specification tests define *what* to assert; provider functional tests inherit and assert *how* (e.g. SQL). See `.agents/skills/testing/SKILL.md` before adding tests.
+
+```
+EFCore.Specification.Tests          # abstract, provider-agnostic
+  ├─ *.FunctionalTests              # InMemory, Cosmos (non-relational)
+  └─ Relational.Specification.Tests
+       └─ {SqlServer,Sqlite}.FunctionalTests   # SQL baselines live here
+
+Unit / isolated:  EFCore.Tests, Relational.Tests, {Provider}.Tests
+Design / tooling: EFCore.Design.Tests, ef.Tests, dotnet-ef.Tests, Analyzers.Tests
+ADO.NET:          Microsoft.Data.Sqlite*.Tests
+Surface / AOT:    ApiBaseline.Tests, TrimmingTests, NativeAotTests
+Integration:      AspNet.*, OData, CrossStore, FSharp, VisualBasic
+```
+
+**First-contribution placement:** bug in core behavior → unit test under `EFCore.Tests` (or `Relational.Tests`); LINQ/query contract → add/override in Specification + every relevant `*.FunctionalTests` provider; provider SQL → that provider's FunctionalTests (+ baselines).
+
+## Related paths (not packages)
+
+| Path | Role |
+|------|------|
+| `eng/` | Arcade build, `Versions.props`, Helix, ApiChief |
+| `docs/` | Build/run instructions, security — not architecture |
+| `.agents/skills/` | Deep area guides (query, migrations, model-building, …) |

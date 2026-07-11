@@ -1,0 +1,23 @@
+---
+description: C# file shape for src/; defer repo conventions to copilot-instructions
+globs: src/**/*.cs
+alwaysApply: false
+---
+
+# Coding style (C# under `src/`)
+
+For ConfigureAwait, `.Internal` / `[EntityFrameworkInternal]`, resx errors, NativeAOT, and API baseline (and other shared conventions), follow [`.github/copilot-instructions.md`](../../.github/copilot-instructions.md) — do not restate them here.
+
+For the required `.Internal` / `[EntityFrameworkInternal]` XML doc-comment boilerplate on every member, copy from [`src/EFCore/Metadata/Internal/ClrCollectionAccessor.cs`](../../src/EFCore/Metadata/Internal/ClrCollectionAccessor.cs).
+
+## This rule only (omitted from copilot-instructions)
+
+- **License header** — every new `.cs` file starts with the .NET Foundation header, copied verbatim from a sibling file:
+
+```csharp
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+```
+
+- **File-scoped namespaces** — `namespace X.Y.Z;` (not block-scoped).
+- **One type per file** — do not add a second top-level type to an existing file.

@@ -1,0 +1,15 @@
+---
+description: Contribution lifecycle, commit format, and fork-only PR boundaries
+alwaysApply: true
+---
+
+# Contribution workflow
+
+For the issue-first contribution lifecycle (choose/create an issue, comment the plan, get team alignment, then implement), follow [`.github/CONTRIBUTING.md`](../../.github/CONTRIBUTING.md) — do not restate it here.
+
+For commit message format (`Summary` / detail bullets / `Fixes #N`), follow [`.github/PULL_REQUEST_TEMPLATE.md`](../../.github/PULL_REQUEST_TEMPLATE.md) — do not restate it here.
+
+## This rule only (omitted from those docs)
+
+- **Approved context** — when researching or implementing a contribution, use only this repo, its in-repo docs (`docs/`, `.github/`, `.agents/`), and [official EF Core documentation](https://learn.microsoft.com/ef/core/). Do not pull guidance from blogs, Stack Overflow, third-party samples, or other unapproved sources.
+- **PRs target this fork** — open pull requests against this repository (the fork), never against [dotnet/efcore](https://github.com/dotnet/efcore) upstream.

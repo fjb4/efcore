@@ -1,0 +1,31 @@
+---
+description: Test placement, baselines, and macOS local targets; defer infra to the testing skill
+globs: test/**/*.cs
+alwaysApply: false
+---
+
+# Test conventions (C# under `test/`)
+
+For fixtures, hierarchy, SQL baseline assertions, and the add-test workflow, read [`.agents/skills/testing/SKILL.md`](../../.agents/skills/testing/SKILL.md) — do not restate that infrastructure here.
+
+## Placement decision order
+
+Put the new test as far left as it still belongs:
+
+1. **Core unit** → `test/EFCore.Tests/`
+2. **Relational unit** → `test/EFCore.Relational.Tests/`
+3. **Specification** (provider-agnostic contract) → `EFCore.Specification.Tests` or `EFCore.Relational.Specification.Tests`
+4. **Provider functional** → `test/EFCore.{Provider}.FunctionalTests/` (override every inheriting provider; assert SQL there)
+
+## SQL baselines
+
+Regenerate expected SQL with `EF_TEST_REWRITE_BASELINES=1`. Details in the testing skill.
+
+## Local environment (this macOS setup)
+
+No SQL Server or Cosmos available here. Prefer targets that run locally:
+
+- Unit / core behavior → `EFCore.Tests` (and `EFCore.Relational.Tests` when relational)
+- Provider functional / SQL → **Sqlite only** (`EFCore.Sqlite.FunctionalTests`)
+
+Do not require SqlServer or Cosmos test runs for local verification; leave those for CI.
