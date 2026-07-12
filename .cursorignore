@@ -1,0 +1,13 @@
+# Build and tool output
+/artifacts/
+/.dotnet/
+/.packages/
+**/bin/
+**/obj/
+**/TestResults/
+*.binlog
+*.user
+
+# Private working docs
+/HANDOFF.md
+/JOURNAL.md
