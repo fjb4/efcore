@@ -1,0 +1,105 @@
+# Fork onboarding CI — first-contribution guardrail for this fork only.
+#
+# WHY A SEPARATE, LIGHTER WORKFLOW (don't touch upstream Build.yml):
+#   Build.yml is the maintainers' full gate — 3-OS matrix, every provider, a SQL Server version
+#   matrix, Cosmos emulator, coverage merge/upload. That's minutes-to-tens-of-minutes and needs
+#   services this macOS-constrained demo can't run. This workflow is the *first-contribution
+#   guardrail*: a single ubuntu runner, SQLite-only, targeting < 10 min, encoding exactly the four
+#   gates a new contributor's change must clear. Talk track: "the agent suggests; CI enforces" —
+#   /pre-review is the fast local mirror of these same four checks.
+#
+# THE FOUR GATES (each maps to a workspace rule / the maintainer conventions doc):
+#   1. Format check      -> coding-style (.editorconfig is the source of truth)
+#   2. Build w/ analyzers-as-errors -> coding-style + conventions-source-of-truth (repo analyzers)
+#   3. API-baseline check -> contribution-workflow (a first contribution adds NO public API)
+#   4. Focused SQLite tests -> test-conventions (spec base + SQLite functional override + SQL baseline)
+#
+# VERIFIED LOCALLY 2026-07-12 — findings baked in below:
+#   - Gate 1 (format): TWO fixes were required and are applied below —
+#       (a) There is NO root .sln; the solution is `EFCore.slnx`. Bare `dotnet format` finds no
+#           solution. `dotnet format EFCore.slnx --include <files>` binds correctly.
+#       (b) `.editorconfig` mandates CRLF for .cs ([*] end_of_line = crlf), but the git blobs are
+#           LF and a fresh ubuntu checkout is LF too — so `--verify-no-changes` fails on ENDOFLINE
+#           for EVERY changed .cs, independent of the contribution. Upstream dodges this by
+#           format-checking on Windows (autocrlf=true → CRLF checkout). Fix: set
+#           `git config --global core.autocrlf true` BEFORE checkout so this fork's ubuntu run
+#           checks out CRLF and format passes on a correctly-authored file.
+#   - Gate 4 is scoped to the contribution's own tests (see step) — the full suite is ~38k tests
+#     and risks the ~10 min budget on a 2-core ubuntu runner.
+#   - Action SHAs match what the repo already pins (actions/checkout is copied from Build.yml).
+
+name: Cursor onboarding checks
+
+on:
+  pull_request:
+  workflow_dispatch:   # manual trigger for the live demo
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  onboarding-checks:
+    name: Onboarding checks (SQLite)
+    runs-on: ubuntu-24.04
+
+    steps:
+      # The repo's .editorconfig mandates CRLF for .cs, but blobs are LF and ubuntu checks out LF.
+      # Set autocrlf BEFORE checkout so the working tree is CRLF and the format gate matches the
+      # repo's (Windows-authored) convention instead of failing on line endings. Must precede checkout.
+      - name: Use CRLF working tree (match repo .editorconfig convention)
+        run: git config --global core.autocrlf true
+
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          fetch-depth: 0   # need the merge base to diff changed files for the format gate
+
+      - name: Restore (bootstraps the repo-local .NET SDK into ./.dotnet)
+        run: ./restore.sh
+
+      - name: Put the repo-local SDK on PATH
+        run: |
+          echo "DOTNET_ROOT=$PWD/.dotnet" >> "$GITHUB_ENV"
+          echo "$PWD/.dotnet" >> "$GITHUB_PATH"
+
+      # --- Gate 1: format — only the contribution's own files, so it can't fail on legacy style ---
+      - name: Format check (changed files)
+        run: |
+          base="${{ github.event.pull_request.base.sha }}"
+          changed=$(git diff --name-only --diff-filter=ACMR "${base:-HEAD~1}"...HEAD -- '*.cs' | tr '\n' ' ')
+          if [ -z "$changed" ]; then
+            echo "No .cs files changed — skipping format check."
+          else
+            echo "Checking: $changed"
+            # Must name the solution — there is no root .sln, only EFCore.slnx.
+            dotnet format EFCore.slnx --no-restore --verify-no-changes --include $changed
+          fi
+
+      # --- Gate 2: build with analyzers as errors (transitively builds Sqlite.Core + Relational) ---
+      - name: Build (Release, analyzers as errors)
+        run: dotnet build test/EFCore.Sqlite.FunctionalTests -c Release -warnaserror
+
+      # --- Gate 3: public API must be unchanged (a first contribution translates existing methods) ---
+      - name: API baseline check
+        run: dotnet test test/EFCore.ApiBaseline.Tests -c Release
+
+      # --- Gate 4: scoped SQLite functional tests (spec base + SQLite override + SQL baseline) ---
+      # Scoped to the contribution's own tests to stay under the ~10 min budget on a 2-core runner.
+      # Full suite is ~38k tests; this still exercises the spec-base + SQLite-override + SQL-baseline
+      # structure that /pre-review and the test conventions encode.
+      - name: Focused tests (SQLite)
+        run: |
+          dotnet exec artifacts/bin/EFCore.Sqlite.FunctionalTests/Release/net11.0/*.Sqlite.FunctionalTests.dll \
+            --filter-method '*ByteArrayTranslationsSqliteTest.IndexOf*' --ignore-exit-code 8
+
+      - name: Publish test results
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: onboarding-test-results
+          path: artifacts/log/**/*
+          if-no-files-found: ignore

@@ -1,0 +1,83 @@
+# Cursor onboarding layer
+
+This directory is a **thin Cursor integration layer** over conventions this repo *already*
+documents. It exists so a new engineer's first contribution comes out convention-correct without a
+human walking them through the codebase — and so the team can maintain it without the person who
+built it.
+
+## The one idea: point, don't copy
+
+The maintainers already invested in machine-readable conventions:
+
+- **[`.github/copilot-instructions.md`](../.github/copilot-instructions.md)** — the repo-wide
+  conventions (code style, `ConfigureAwait(false)`, the `.Internal` / `[EntityFrameworkInternal]`
+  rule, the API-baseline process, NativeAOT safety, resx-only error messages).
+- **[`.agents/skills/`](../.agents/skills)** — deep, area-specific guides (testing, query-pipeline,
+  migrations, model-building, change-tracking, scaffolding, …).
+
+This layer **does not duplicate any of that.** The rules *point* at those documents as the source of
+truth and add only the **deltas Cursor needs and those docs don't cover**: repo geography, the
+local (macOS/SQLite) environment constraints, workflow commands, and glob scoping. When the
+maintainers update their conventions doc or a skill, this layer follows automatically — there is
+nothing here to fall out of sync **except** the deltas, which is the one thing to watch (see
+[Keeping it honest](#keeping-it-honest-known-limits) below).
+
+## What's here
+
+| Piece | What it is |
+|-------|------------|
+| `rules/conventions-source-of-truth.mdc` | Keystone. Points at the conventions doc + the area skills. Always on. |
+| `rules/architecture-map.mdc` | Repo geography: project roles, dependency direction, test layout. Always on. |
+| `rules/coding-style.mdc` | Thin C# delta for `src/**` (the conventions doc holds the rest). |
+| `rules/test-conventions.mdc` | Test placement, SQL baselines, the local SQLite-only target. Scoped to `test/**`. |
+| `rules/contribution-workflow.mdc` | Contribution lifecycle + the approved-context / fork-only boundary. Always on. |
+| `commands/first-contribution.md` | `/first-contribution <issue>` — plan → scaffold → verify a first change. |
+| `commands/pre-review.md` | `/pre-review` — check a change against the rules before human review or CI. |
+| `commands/scope-issue.md` | `/scope-issue <request>` — turn a rough request into a convention-aware issue. |
+| [`../.cursorignore`](../.cursorignore) | Keeps agent context on the source of truth and off build noise / private docs. |
+| [`../.github/workflows/cursor-onboarding-checks.yml`](../.github/workflows/cursor-onboarding-checks.yml) | The fast SQLite guardrail CI. "Agent suggests, CI enforces." |
+
+**How they fit:** rules are the always-available context; commands are the workflows that cite those
+rules by name; CI is the enforcement backstop. `/pre-review` is deliberately the *local mirror* of
+the four CI gates, so problems surface before the push, not after.
+
+## Extending it
+
+**Add or change a rule** (`rules/*.mdc`):
+
+1. First ask: **is this already in the conventions doc or a skill?** If yes, don't add a rule —
+   point at it. A rule earns its place only by covering a *delta* those docs miss.
+2. Frontmatter decides when it loads: `alwaysApply: true` for repo-wide orientation; `globs:` (e.g.
+   `src/**/*.cs`, `test/**/*.cs`) for rules that should wake only when a matching file is in play.
+   Keep always-on rules short — they cost context on every request.
+3. Keep it a **delta and a pointer**, never a restatement. Link the authoritative doc with a
+   relative markdown link so the model reads it on demand.
+
+**Add a command** (`commands/*.md`): one markdown file per command; the filename is the command name
+(`first-contribution.md` → `/first-contribution`). Follow the shape of the existing three: number
+the steps, **cite the applicable rules by name** (don't re-derive conventions), stop for approval
+before editing when the command writes code, and end with a **Guardrails** block (approved context,
+fork-only, draft-vs-act). Reference the matching skill instead of restating it.
+
+**Change the CI:** `cursor-onboarding-checks.yml` is intentionally SQLite-only and single-runner to
+stay under ~10 minutes — it is *not* the maintainers' full `Build.yml`. Keep new gates fast and
+local; heavy provider/matrix coverage belongs in the upstream workflow, not here.
+
+## Multi-audience doors
+
+- **New engineer** → `/first-contribution` (scaffold) + `/pre-review` (self-check).
+- **PM / product** → `/scope-issue` turns a request into a placed, testability-triaged issue.
+- **QA** → `/pre-review`'s test-gap analysis proposes the missing spec/functional tests; CI runs them.
+- **DevOps** → owns `cursor-onboarding-checks.yml` and `.cursorignore` (the enforcement + context
+  boundary).
+
+## Keeping it honest (known limits)
+
+- **Delta drift.** The pointers self-heal when the source docs change, but the *deltas* (architecture
+  map, glob scoping, style deltas) are judgment calls that can age. Re-check them when the repo's
+  project layout or conventions shift — a lightweight `/update-rules` command that diffs this layer
+  against the current conventions doc is the intended next step.
+- **Letter vs. intent.** Rules encode conventions the model can check mechanically; they don't
+  replace reviewer judgment. `/pre-review` is advisory — CI and a human are still the gate.
+- **Local scope.** Verification here is SQLite-only by environment constraint; SQL Server / Cosmos
+  coverage is left to the maintainers' full CI.

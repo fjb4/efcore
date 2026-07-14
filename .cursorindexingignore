@@ -1,0 +1,3 @@
+# Large authoritative fixtures: keep readable on demand, out of the background index
+**/*.baseline.json
+/test/**/*.sql

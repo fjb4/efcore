@@ -1,0 +1,10 @@
+---
+description: Point to repo conventions and area skills; do not restate them here
+alwaysApply: true
+---
+
+# Conventions source of truth
+
+For this repo's conventions, read [`.github/copilot-instructions.md`](../../.github/copilot-instructions.md) — do not rely on any rule restating them.
+
+For deep per-area implementation guidance, consult the matching skill under `.agents/skills/<area>/SKILL.md` (e.g. testing, migrations, query-pipeline, model-building, change-tracking, scaffolding).
