@@ -77,8 +77,12 @@ public surface entirely (translating an existing method does not touch it).
 Output findings grouped by severity, most serious first:
 
 - **Blocking** — correctness bugs, convention violations CI will reject (format, analyzers, API
-  baseline, `Check_all_tests_overridden`), missing required tests.
-- **Should-fix** — weaker coverage, a sibling pattern not followed, an avoidable client evaluation.
+  baseline, `Check_all_tests_overridden`), missing required tests. In the local SQLite-only loop, a
+  missing **SQLite** override (or SQLite baseline) is still Blocking; a missing override for a
+  *non-SQLite* provider (SqlServer, Cosmos, InMemory) is **not** Blocking here — report it as a
+  Should-fix follow-up per Step 5, since the focused SQLite loop does not run those suites.
+- **Should-fix** — weaker coverage, a sibling pattern not followed, an avoidable client evaluation,
+  or a non-SQLite provider override needed for full CI but out of the SQLite-only loop's scope.
 - **Nit** — style/readability within the rules' latitude.
 
 For each finding give `file:line`, the rule or skill it maps to, and a concrete fix. End with a
