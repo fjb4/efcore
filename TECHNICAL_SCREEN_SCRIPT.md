@@ -191,11 +191,11 @@ focused test, pre-review finding and fix, fork/CI evidence, or honest limitation
 > Server and SQLite. It also handles change tracking, database updates, migrations, scaffolding, and
 > command-line tooling.
 
-> It's a mature Microsoft and .NET Foundation project with roughly 15,000 GitHub stars and more than
-> 18,000 commits. It has thousands of source and test files, multiple database providers, a layered
-> architecture, a specialized test hierarchy, API checks, and a substantial CI matrix. A change can
-> look completely reasonable on its own and still be in the wrong project, miss a required test
-> override, violate a provider rule, or fail an API check.
+> The scale is part of why I chose it. It's a mature Microsoft and .NET Foundation project with
+> roughly 15,000 GitHub stars and more than 18,000 commits. There are thousands of source and test
+> files, multiple database providers, a specialized test hierarchy, API checks, and a substantial CI
+> matrix. So a change can look perfectly reasonable by itself and still be in the wrong project, miss
+> a required test override, violate a provider rule, or fail an API check.
 
 > I built a Cursor workflow that starts with an approved issue and helps the engineer produce an
 > evidence-backed plan, implement and test the change, review the diff, and take it through CI.
@@ -224,8 +224,8 @@ focused test, pre-review finding and fix, fork/CI evidence, or honest limitation
 
 ### Point to land
 
-> So this gives us the real version of the onboarding problem. These are the conventions and review
-> gates an actual EF Core contributor has to navigate.
+> That's the onboarding problem in a real codebase: the contributor has to navigate all of these
+> conventions and review gates before a change is actually ready.
 
 ### If interrupted or behind
 
@@ -238,15 +238,14 @@ first contributions difficult; resume on the customer problem.
 
 ### Say
 
-> The brief covers the whole development lifecycle. Rather than try to improve every stage at once,
-> I focused on one point that touches all of them: a developer's first contribution. That's where a
-> new engineer has to work out where the code belongs, find an example worth following, understand
-> the test structure, avoid an accidental API change, and eventually get through CI. Most of that
-> knowledge exists, but it's scattered across documentation, conventions, and experienced
-> maintainers.
+> The brief covers the whole development lifecycle, but I didn't try to improve every stage at once.
+> I focused on a developer's first contribution because it touches all of them. A new engineer has to
+> work out where the code belongs, find an example worth following, understand the test structure,
+> avoid an accidental API change, and eventually get through CI. Most of that knowledge already
+> exists, but it's scattered across documentation, conventions, and experienced maintainers.
 
-> If this is useful, the first reviewable PR should arrive sooner, and reviewers should spend less
-> time correcting repository mechanics. I'd look at time to first reviewable PR, first-run CI pass
+> If this works, the first reviewable PR should arrive sooner, and reviewers should spend less time
+> correcting repository mechanics. I'd measure time to the first reviewable PR, the first-run CI pass
 > rate, convention issues caught early, review rounds, and maintainer time.
 
 > Those metrics also give the customer a way to connect their investment in Cursor to delivery
@@ -285,22 +284,22 @@ hypothesis; resume on how the Cursor integration was built.
 
 ### Say
 
-> I started by asking what the repository already gave me. EF Core already has strong project-wide
+> I started by looking at what the repository already gave me. EF Core has strong project-wide
 > instructions, contribution guidance, issue and PR templates, and detailed skills for areas such
 > as query translation, testing, migrations, model building, and change tracking.
 
 > That gave me a simple design rule: point, don't copy. Copying all of those conventions into one
-> large Cursor prompt would create a second source of truth that could drift. So this layer points
-> back to the repository's own guidance and adds only what's missing: a compact repository map,
+> large Cursor prompt would create a second source of truth that could drift. So I kept this layer
+> thin. It points back to the repository's own guidance and adds only what's missing: a repository map,
 > scoped rules, the local SQLite constraint, the context boundary, and a few guided workflows.
 
 > In Cursor, those pieces have different jobs. Rules give the agent stable context for the work in
 > front of it. Commands are workflows that a person chooses to start. EF Core's existing skills add
 > deeper knowledge when a task needs it. And CI handles the checks that ought to be deterministic.
 
-> `/first-contribution` plans and scaffolds the candidate. `/pre-review` comes back to the diff with
-> a more skeptical job. Together, they support the engineer's path from approved issue to candidate
-> pull request.
+> `/first-contribution` plans and creates the first cut. `/pre-review` comes back to that diff with a
+> more skeptical job. Together, they take the engineer from an approved issue to a pull request that's
+> ready for review.
 
 ### Do
 
@@ -323,8 +322,8 @@ hypothesis; resume on how the Cursor integration was built.
 
 ### Point to land
 
-> Writing C# is only one piece. The workflow also has to reflect how this repository actually works
-> and where contributors really get stuck.
+> Writing the C# is only one part of the job. The workflow also has to understand how this repository
+> actually works and where contributors tend to get stuck.
 
 ### If interrupted or behind
 
@@ -349,13 +348,13 @@ rules/commands/skills/CI distinction; resume on the issue.
 
 ### Say
 
-> For the live example, I chose issue #19287 and bounded it to one SQLite-verifiable overload. It
-> has a nearby repository example, requires no public API, and exposes a real mismatch between
-> .NET's zero-based `IndexOf` and SQLite's one-based `instr`.
+> For the live example, I chose issue #19287 and narrowed it to one overload I can verify with SQLite.
+> There are nearby repository patterns to follow, it doesn't require a public API change, and it
+> exposes a real mismatch between .NET's zero-based `IndexOf` and SQLite's one-based `instr`.
 
-> There is active work upstream, so that implementation is outside the approved context, and
-> everything today stays in my fork. This command will investigate from repository evidence,
-> produce a plan, and stop before it writes code.
+> There's already active work upstream, so I deliberately kept that implementation outside the
+> approved context. Everything today stays in my fork. The command will inspect the issue and the
+> local repository, produce a plan, and stop before it writes any code.
 
 ### Present in Cursor
 
@@ -405,20 +404,21 @@ Use these in order and stop as soon as the plan is ready.
 > reviewed diff, and a passing CI run. I wanted the workflow to lead to an outcome.
 
 > I also considered splitting planning and implementation into two commands. I kept one
-> `/first-contribution` entry point because the approval stop lives inside the workflow, the context
-> stays together, and a new engineer has one place to start.
+> `/first-contribution` entry point because the approval gate stays inside the workflow, the context
+> stays together, and a new engineer only has one place to start.
 
 > This wasn't the first version. I started with the repository map and test-placement rules, then
-> added the contribution and pre-review workflows. The context boundary came next. I kept that core
-> engineer path narrow before adding the adjacent role surfaces I'll show later.
+> added the contribution and pre-review workflows. The context boundary came next. I kept the
+> engineer path narrow before adding the tools for the other roles I'll show later.
 
 > CI needed a few passes too. Plain `dotnet format` couldn't find `EFCore.slnx`, and the Ubuntu check
-> exposed a CRLF-versus-LF mismatch. The full upstream build was also too slow and service-dependent
-> for this loop. Narrowing the fork workflow to SQLite brought the run under four minutes.
+> exposed a CRLF-versus-LF mismatch. The full upstream build was also too slow and depended on
+> services I didn't want in this fast loop. Narrowing the fork workflow to SQLite brought the run
+> under four minutes.
 
-> I also chose not to create an issue or submit an upstream PR automatically. That adds permission
-> and trust risk before the workflow has earned it. Here, the agent recommends, a person approves,
-> and CI handles the deterministic checks.
+> I also chose not to create an issue or submit an upstream PR automatically. That would ask for more
+> permission and trust than this prototype has earned. Here, the agent recommends, a person approves,
+> and CI handles the checks that should be deterministic.
 
 ### Show
 
@@ -528,9 +528,8 @@ then state that instructions guide while permissions and CI enforce; resume on t
 
 ### Say
 
-> This is where a lead or maintainer can change the direction before anyone spends time implementing
-> the wrong thing. The agent's assumptions are visible and reviewable instead of being buried in the
-> implementation.
+> This is where a lead or maintainer can change direction before anyone spends time building the
+> wrong thing. The agent's assumptions are out in the open instead of being buried in the code.
 
 ### Do
 
@@ -592,10 +591,10 @@ visible stop and explicit approval; resume on the generated diff.
 
 ### Say
 
-> The implementation follows a nearby example instead of inventing a new translator pattern. The
-> key detail is in the SQL: SQLite's `instr` returns a one-based position, while .NET's `IndexOf` is
-> zero-based and returns `-1` when it finds nothing. The translation has to reconcile those two
-> behaviors.
+> The implementation combines two nearby patterns instead of inventing a new one: the byte-array
+> handling from `Contains`, and the `instr - 1` behavior from the string `IndexOf` translator. The key
+> detail is that SQLite's `instr` returns a one-based position, while .NET's `IndexOf` is zero-based
+> and returns `-1` when it finds nothing.
 
 > The tests tell the same story at two levels. The specification test defines the behavior EF Core
 > promises, and the SQLite override verifies the SQL used to deliver it.
@@ -605,8 +604,8 @@ visible stop and explicit approval; resume on the generated diff.
 > boundary sits.
 
 > At this point, here's what I know: the first cut compiles and passes the focused scenario. I don't
-> yet know that every convention is satisfied, the tests are complete, or the rest of the diff is
-> semantically correct. This is fast feedback, not a review certificate.
+> yet know that every convention is satisfied, the tests are complete, or the whole diff is correct.
+> This is fast feedback, not proof that the branch is ready.
 
 > And the human doesn't need to retype generated code just to show ownership. The responsibility is
 > to approve the plan, read the diff, validate the SQL and tests, and decide whether the change is
@@ -708,8 +707,8 @@ sees only the contribution:
 
 ### Say before running it
 
-> I planted this deliberately; otherwise, you'd watch the happy path twice. It shows whether the
-> review layer catches one known provider risk.
+> I planted this deliberately; otherwise, you'd watch the happy path twice. This lets us see whether
+> the review layer catches a known kind of provider bug.
 
 > I'm also using a fresh conversation. `/first-contribution` was trying to create a solution from an
 > approved plan. This pass starts with the diff and a different instruction: be skeptical. Check the
@@ -731,9 +730,9 @@ sees only the contribution:
 ### Say
 
 > It caught this because one-based SQL functions are a known source of provider bugs, and that
-> knowledge is now part of the review workflow. The model didn't magically guess. We took something
-> an experienced maintainer would normally raise in review and made it available earlier. CI and a
-> person still validate the result.
+> knowledge is part of the review workflow. The model didn't magically guess. I encoded something an
+> experienced maintainer would normally raise in review so it can surface earlier. CI and a person
+> still validate the result.
 
 > The output is useful to QA too. It doesn't just say "add more tests"; it names cases that can become
 > acceptance or regression tests.
@@ -755,8 +754,8 @@ sees only the contribution:
 ### Say after the green rerun
 
 > If pre-review had missed this and the defect had reached the PR unchanged, the focused SQLite test
-> would have failed in CI. The model-assisted review catches it earlier; the deterministic gate
-> remains the backstop.
+> would have failed in CI. The model-assisted review catches it earlier, and the CI test remains the
+> backstop.
 
 ### Present in Cursor
 
@@ -801,8 +800,8 @@ the final diff and PR.
 
 ### Say
 
-> I'm stopping at my fork. This workflow won't open or target an upstream PR. For this prototype,
-> that's an intentional trust boundary.
+> I'm stopping at my fork. This workflow won't open or target an upstream PR. That's deliberate: the
+> prototype can demonstrate the full contribution path without publishing competing work upstream.
 
 > The fork workflow checks formatting on the changed files, builds the SQLite functional tests with
 > analyzer warnings treated as errors, runs the API-baseline tests, and then runs the focused SQLite
@@ -820,8 +819,8 @@ the final diff and PR.
 > but I left it out of the timed path because Bugbot already runs here on the PR.
 
 > One honest limitation is the focused-test filter. It's tailored to this ByteArray scenario, which
-> made the MVP fast and the live demo reliable, but it isn't a general test selector. In a production
-> version, I'd derive the scope from the changed tests or validated PR metadata.
+> made this first version fast and the live demo reliable, but it isn't a general test selector. In a
+> production version, I'd derive the scope from the changed tests or validated PR metadata.
 
 ### Present in Cursor
 
@@ -851,19 +850,19 @@ close; resume on multi-role value.
 ### Say
 
 > This is one small slice of the software-factory idea: using Cursor to support shared work across
-> the SDLC, not just helping one developer type faster. So far, I've shown the primary engineer path
-> starting from an approved issue. Now I'll show how the roles around that engineer connect to the
-> same artifacts.
+> the SDLC, not just helping one developer type faster. So far, I've stayed with the engineer's path,
+> starting from an approved issue. Now let me show how the people around that engineer use the same
+> artifacts.
 
 - **PM / Product:**
 
-  > Immediately upstream, Product can start with the behavior they want in plain language. I pre-ran
-  > that optional entrance because the live centerpiece begins with an approved issue. `/scope-issue`
-  > classified and placed the work, assessed the first-contribution fit, drafted acceptance criteria,
-  > flagged the existing issue and PR, and stopped without opening or changing anything.
+  > Product sits one step before the live demo. They can start with the behavior they want in plain
+  > language. I ran that step beforehand so the live path could begin with an approved issue.
+  > `/scope-issue` found the right area, assessed whether this was a good first contribution, drafted
+  > acceptance criteria, flagged the existing issue and PR, and stopped at a draft.
 
-  > Plan Mode is Cursor's native planning surface. `/scope-issue` adds the repository-specific issue
-  > contract that Product and Engineering can share, even if the PM isn't the person running Cursor.
+  > Plan Mode is Cursor's native planning surface. `/scope-issue` adds the EF Core-specific structure
+  > that Product and Engineering can share, even if the PM isn't the person running Cursor.
 
 - **New engineer:**
 
@@ -877,8 +876,8 @@ close; resume on multi-role value.
 
 - **DevOps:**
 
-  > DevOps still owns the deterministic layer: runners, permissions, artifacts, CI gates, and the
-  > handoff into the full delivery pipeline.
+  > DevOps still owns the parts that must be enforced: runners, permissions, artifacts, CI gates, and
+  > the handoff into the full delivery pipeline.
 
 - **Maintainers / reviewers:**
 
@@ -930,26 +929,26 @@ artifacts; resume on limitations and customer value.
 ### Say
 
 > There are real limits to what I've shown. The local loop only covers SQLite. Cursor's rules and
-> commands guide the agent, but they don't enforce security. The focused CI test is specific to this
-> example, the architecture map can drift, and model output can vary. That's why approval, tests, CI,
-> and human review all remain part of the design. And this moves a change toward deployment; it
-> doesn't package or release EF Core itself.
+> commands guide the agent, but they aren't security controls. The focused CI test is specific to this
+> example, the architecture map can drift, and the model won't behave exactly the same every time.
+> That's why approval, tests, CI, and human review are still part of the design. This moves a change
+> toward deployment, but it doesn't package or release EF Core itself.
 
-> The first small improvement I'd make is a project-specific `.cursor/BUGBOT.md`, so the PR review
-> knows about the same high-value EF risks without copying the entire repository guide.
+> The first thing I'd add is a project-specific `.cursor/BUGBOT.md`. That would give PR review the
+> same high-value EF risks without copying the entire repository guide.
 
-> With a real customer, I'd grow this in three stages. First, strengthen the controls with hooks,
-> sandbox allowlists, and narrowly scoped MCP access where they're needed. Second, add specialization:
-> a read-only review agent, project-specific Bugbot guidance, and skills for recurring work. Third,
-> add scale through reproducible cloud environments, automations, and team-managed plugins. I would
-> add each of those because pilot data calls for it, not just because the feature is available.
+> With a real customer, I wouldn't turn on every feature at once. I'd strengthen the controls first,
+> with hooks, sandbox allowlists, and narrowly scoped MCP access where they're needed. Then I'd add
+> specialization: a read-only review agent, project-specific Bugbot guidance, and skills for recurring
+> work. If adoption grew, I'd add reproducible cloud environments, automations, and team-managed
+> plugins. Each step should solve a problem we actually saw in the pilot.
 
 > For the rollout, I'd establish a baseline for onboarding time and review rework, pilot this with
 > one provider team, and compare time to first reviewable PR and first-run CI pass rate. Then we'd
 > have evidence for whether the workflow is worth expanding.
 
-> That gives the account team a concrete value story: whether Cursor is reducing onboarding time
-> and review cost enough to justify broader adoption.
+> That gives the account team a concrete answer to the business question: is Cursor reducing
+> onboarding time and review cost enough to justify broader adoption?
 
 > The bottom line is that this isn't an autonomous developer. It's a maintainable, gated path that
 > makes the team's existing knowledge easier to use from the first request through CI.
@@ -992,31 +991,32 @@ one sentence.
 
 ### Answer
 
-> I considered Angular, but its CLI already handles a lot of scaffolding-by-convention, which made
-> it harder to isolate the value of this agentic workflow. I also evaluated OpenCV, one of the
-> suggested options, but its C++ build and test loop introduced too much risk for a live demo.
+> I looked at Angular, but its CLI already handles a lot of scaffolding by convention, so it was
+> harder to show what this workflow added. I also looked at OpenCV, one of the suggested options, but
+> its C++ build and test loop added too much risk for a live demo.
 
-> EF Core gave me a fast SQLite path, conventions complex enough to matter, an ecosystem I can
-> defend technically, and an enterprise delivery story I can carry into the final account round.
+> EF Core gave me a fast SQLite path, conventions complex enough to make the problem real, and a .NET
+> ecosystem I know well enough to defend the technical choices. It also fits the enterprise delivery
+> story I'll need in the final account round.
 
 ## 2. Why is issue #19287 a good first contribution if an upstream PR already exists?
 
 ### Answer
 
-> I wouldn't present the whole issue as unclaimed work. I'm using a small SQLite slice as a fork-only
-> simulation. That slice doesn't change EF's public API, has nearby examples, and runs locally, but
-> it still exposes a meaningful provider problem. The existing PR is outside my approved context,
-> and I wouldn't submit competing work upstream.
+> I wouldn't pretend the whole issue is unclaimed work. I'm using a small SQLite slice as a simulation
+> in my fork. It doesn't change EF's public API, it has nearby examples, and I can run it locally, but
+> it still exposes a meaningful provider problem. The existing PR is outside my approved context, and
+> I wouldn't submit competing work upstream.
 
 ## 3. Why Cursor commands and rules instead of a custom application?
 
 ### Answer
 
-> This problem shows up inside the engineering workflow, so I wanted the first version to live there
-> too. Repository-versioned commands and rules can use the local code and tools, and the team can
-> review them just like any other change. A separate application would add authentication,
-> deployment, and synchronization before I'd proven the main idea. A service could make sense later
-> for centralized policy, observability, or managing this across repositories.
+> This problem happens inside the engineering workflow, so I wanted the first version to live there
+> too. The commands and rules live in the repository, can use the local code and tools, and can be
+> reviewed like any other change. A separate application would add authentication, deployment, and
+> synchronization before I'd proven the main idea. A service could make sense later for centralized
+> policy, observability, or managing the workflow across repositories.
 
 ## 4. Why not copy all conventions into one comprehensive rule?
 
@@ -1034,11 +1034,11 @@ one sentence.
 > I wanted one obvious place for a new engineer to start, but that doesn't mean one autonomous step.
 > The first output is a plan, and the workflow stops until a person approves it. Splitting that into
 > two commands would add a context handoff and give the engineer another sequence to remember. I'd
-> split them if the customer needed separately persisted approvals for role separation or auditing,
-> but I don't think that complexity helps this first version.
+> split them if the customer needed a separate, durable approval record for auditing or separation of
+> duties, but I don't think that complexity helps this first version.
 
 > Cursor's native Plan Mode is useful for separating planning from execution. The custom workflow
-> adds the EF-specific contract I need here: cited repository rules, named projects and sibling
+> adds the EF-specific structure I need here: cited repository rules, named projects and sibling
 > patterns, an explicit test strategy and scope boundary, and a visible approval stop before code.
 
 ## 6. If `/first-contribution` generates the implementation and tests, why do you need `/pre-review`?
@@ -1072,8 +1072,8 @@ one sentence.
 > Not completely. In this prototype, part of the boundary is structural and part of it is policy.
 > The repository exclusions reduce what gets indexed or read, the command names the allowed sources,
 > and the fork limits where work can go. But that doesn't prove the model can never reach another
-> source. I call it a declared and observable boundary. If a customer needed hard enforcement, I'd
-> add tool permissions, network controls, or hooks.
+> source. So I describe the boundary as declared and observable, not fully enforced. If a customer
+> needed hard enforcement, I'd add tool permissions, network controls, or hooks.
 
 ## 9. Why SQLite only?
 
@@ -1088,7 +1088,7 @@ one sentence.
 
 ### Answer
 
-> It covers the path toward deployment, not deployment itself. We have bounded context, a reviewable
+> It covers the path toward deployment, not deployment itself. We have a clear scope, a reviewable
 > plan, tests, API compatibility, and a CI handoff. I deliberately didn't recreate EF Core's
 > packaging, signing, and publishing pipeline because those controls already exist downstream. For
 > a customer's private library, I'd connect this fast gate to their existing promotion stages rather
@@ -1098,10 +1098,10 @@ one sentence.
 
 ### Answer
 
-> That's a conscious MVP limitation. The filter matches this ByteArray scenario, which keeps the fork
-> loop fast and makes the live demo reliable. But it isn't the general solution. The next version
-> should derive the focused tests from the diff, a checked-in manifest, or validated PR metadata,
-> with the broader upstream suite still acting as the backstop.
+> That's a deliberate limitation in this first version. The filter matches this ByteArray scenario,
+> which keeps the fork loop fast and makes the live demo reliable. But it isn't the general solution.
+> The next version should derive the focused tests from the diff, a checked-in manifest, or validated
+> PR metadata, with the broader upstream suite still acting as the backstop.
 
 ## 12. What happens as EF Core changes?
 
@@ -1163,33 +1163,32 @@ one sentence.
 
 ### Answer
 
-> I'd start with discovery: talk to contributors and maintainers, review recent PR comments and CI
-> failures, map the architecture and permissions, and identify the real sources of truth. Then I'd
-> pilot one common contribution type, encode only the gaps that repeatedly create rework, connect it
-> to the customer's existing controls, and measure the result before expanding. Access to private
-> sources and networks would be enforced through the customer's identity and execution controls,
-> not just through prompt instructions.
+> I'd start by talking to contributors and maintainers, reviewing recent PR comments and CI failures,
+> mapping the architecture and permissions, and finding the real sources of truth. Then I'd pilot one
+> common contribution type and add guidance only where the same gaps repeatedly create rework. I'd
+> connect it to the customer's existing controls and measure the result before expanding. Access to
+> private sources and networks would be enforced through the customer's identity and execution
+> controls, not just through prompt instructions.
 
 ## 19. How does this become the final-round account scenario?
 
 ### Answer
 
-> The artifact already gives me the pieces for that conversation: the business baseline, the target
-> users, an adoption path, the control model, measurable outcomes, risks, and expansion choices. I'd
-> use pilot results to align with the account leader on value, be very clear with a skeptical
-> stakeholder about what's advisory and what's enforced, and recommend phased expansion based on
-> the review and CI costs we actually observe.
+> This gives me something concrete to take into that conversation: who the users are, what we're
+> trying to improve, how the controls work, how we'll measure it, and where the risks are. I'd use the
+> pilot results to align with the account leader on value, be clear with a skeptical stakeholder about
+> what's advisory and what's enforced, and expand only where the review and CI data support it.
 
 ## 20. Why didn't you use hooks, subagents, MCP, or cloud agents in the prototype?
 
 ### Answer
 
 > I wanted the first version to prove the customer workflow with the fewest moving parts. Each of
-> those capabilities can be valuable, but each also adds configuration, permissions, operational
-> surface, or another failure mode. The pilot tells me which problem is real: hooks when an approval
-> needs hard enforcement, a read-only subagent when independent review adds value, scoped MCP when
-> trusted external context is necessary, and cloud agents when reproducibility or parallel scale
-> becomes the constraint. That's a roadmap driven by evidence, not a checklist of features.
+> those capabilities can be valuable, but each also adds configuration, permissions, and another way
+> the workflow can fail. The pilot tells me which one we actually need: hooks when approval must be
+> enforced, a read-only subagent when independent review adds value, scoped MCP when trusted external
+> context is necessary, and cloud agents when we need reproducibility or parallel scale. That's a
+> roadmap driven by evidence, not a checklist of features.
 
 ## 21. Why are you presenting entirely inside Cursor?
 
