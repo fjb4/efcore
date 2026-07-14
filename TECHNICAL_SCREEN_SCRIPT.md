@@ -15,11 +15,11 @@ Target timing: **33 minutes of walkthrough and live demonstration, followed by 1
 
 ## Core narrative
 
-> The basic idea is to take a rough product request and guide it all the way to a well-scoped,
+> The primary workflow helps a new contributor take an approved issue to a reviewable,
 > CI-validated pull request. Along the way, a human approves the plan, the code and tests follow the
-> repository's conventions, and provider-specific problems get caught before review. It's one
-> workflow that helps product, engineering, QA, DevOps, and maintainers without replacing the tools
-> or controls they already trust.
+> repository's conventions, and provider-specific problems get caught before review. That engineer
+> path is the live centerpiece; the multi-role view shows how Product, QA, DevOps, and maintainers
+> connect to the same artifacts without replacing the tools or controls they already trust.
 
 ---
 
@@ -182,21 +182,21 @@ focused test, pre-review finding and fix, fork/CI evidence, or honest limitation
 
 ### Say
 
-> Thanks for having me. I approached this as an onboarding problem, not just a code-generation
-> problem. I wanted to shorten the gap between "we should change this" and "here's a contribution a
-> maintainer can actually review," without skipping the team's conventions, human decisions, or CI
-> controls.
+> Thanks for having me. I focused on one expensive engineering handoff: helping a new contributor
+> turn an approved EF Core issue into a reviewable, tested pull request. I'll show that path live,
+> from an evidence-backed plan through code, tests, review, and CI, without bypassing the team's
+> existing controls.
 
 > I chose Entity Framework Core for the scenario. EF Core is the object-relational mapper for .NET.
 > A developer can write a query in C# using LINQ, and EF Core translates it for a database such as
 > SQL Server or SQLite. It also handles change tracking, database updates, migrations, scaffolding,
 > and command-line tooling.
 
-> It's a good fit because it's a large, active project with well-established conventions. There are
-> thousands of source and test files, multiple database providers, a layered architecture, a
-> specialized test hierarchy, API checks, and a substantial CI matrix. A change can look completely
-> reasonable on its own and still be in the wrong project, miss a required test override, violate a
-> provider rule, or fail an API check.
+> It's a mature Microsoft and .NET Foundation project with roughly 15,000 GitHub stars and more than
+> 18,000 commits. It has thousands of source and test files, multiple database providers, a layered
+> architecture, a specialized test hierarchy, API checks, and a substantial CI matrix. A change can
+> look completely reasonable on its own and still be in the wrong project, miss a required test
+> override, violate a provider rule, or fail an API check.
 
 ### Do
 
@@ -258,15 +258,15 @@ first contributions difficult; resume on the customer problem.
 
 ### Show
 
-- The "Multi-audience doors" section in `.cursor/README.md` for no more than 20 seconds.
-- The single workflow shared by PM, engineering, QA, DevOps, and maintainers.
+- The first-contribution workflow and its approval, review, and CI boundaries in `.cursor/README.md`
+  for no more than 20 seconds.
 
 ### Present in Cursor
 
 - Stay in the **Editor layout** and use `Cmd+P` to open `.cursor/README.md` if it is not already
   active.
-- Expand the README tab while showing the multi-audience section, then contract it before moving
-  into the implementation files.
+- Expand the README tab while showing the first-contribution workflow, then contract it before
+  moving into the implementation files.
 - Keep the pointer still while speaking about metrics; the audience should be listening, not
   following incidental scrolling.
 
@@ -295,8 +295,8 @@ hypothesis; resume on how the Cursor integration was built.
 > deeper knowledge when a task needs it. And CI handles the checks that ought to be deterministic.
 
 > `/first-contribution` plans and scaffolds the candidate. `/pre-review` comes back to the diff with
-> a more skeptical job. And `/scope-issue` gives product and engineering a shared way to turn a
-> rough request into testable work.
+> a more skeptical job. Together, they support the engineer's path from approved issue to candidate
+> pull request.
 
 ### Do
 
@@ -405,9 +405,8 @@ Use these in order and stop as soon as the plan is ready.
 > stays together, and a new engineer has one place to start.
 
 > This wasn't the first version. I started with the repository map and test-placement rules, then
-> added the contribution and pre-review workflows. The context boundary came next. `/scope-issue`
-> came later, when I realized I had a good engineering entry point but not a good product entry
-> point.
+> added the contribution and pre-review workflows. The context boundary came next. I kept that core
+> engineer path narrow before adding the adjacent role surfaces I'll show later.
 
 > CI needed a few passes too. Plain `dotnet format` couldn't find `EFCore.slnx`, and the Ubuntu check
 > exposed a CRLF-versus-LF mismatch. The full upstream build was also too slow and service-dependent
@@ -453,15 +452,13 @@ plan is ready; resume on plan review, moving any unused material to Q&A.
 
 ### Continue
 
-> Product can start with `/scope-issue` and turn an idea into something testable.
-> `/first-contribution` gathers evidence, proposes a plan, and stops. After a person approves that
-> plan, it can create the code and tests. `/pre-review` checks the resulting diff, the fork PR runs
-> the deterministic checks, and the upstream pipeline still owns the larger provider matrix,
-> packaging, signing, and release.
+> The live path starts with an approved issue. `/first-contribution` gathers evidence, proposes a
+> plan, and stops. After a person approves that plan, it can create the code and tests. `/pre-review`
+> checks the resulting diff, the fork PR runs the deterministic checks, and the upstream pipeline
+> still owns the larger provider matrix, packaging, signing, and release.
 
 ```text
-PM request
-    -> /scope-issue
+approved issue
     -> /first-contribution
     -> evidence-backed plan
     -> HUMAN APPROVAL
@@ -850,15 +847,16 @@ close; resume on multi-role value.
 ### Say
 
 > This is one small slice of the software-factory idea: using Cursor to support shared work across
-> the SDLC, not just helping one developer type faster. It's one workflow, but each role gets value
-> from a different part of it.
+> the SDLC, not just helping one developer type faster. So far, I've shown the primary engineer path
+> starting from an approved issue. Now I'll show how the roles around that engineer connect to the
+> same artifacts.
 
 - **PM / Product:**
 
-  > Product can start with the behavior they want in plain language. I pre-ran that entrance to keep
-  > the live path focused on implementation. It classified and placed the work, assessed the
-  > first-contribution fit, drafted acceptance criteria, flagged the existing issue and PR, and
-  > stopped without opening or changing anything.
+  > Immediately upstream, Product can start with the behavior they want in plain language. I pre-ran
+  > that optional entrance because the live centerpiece begins with an approved issue. `/scope-issue`
+  > classified and placed the work, assessed the first-contribution fit, drafted acceptance criteria,
+  > flagged the existing issue and PR, and stopped without opening or changing anything.
 
   > Plan Mode is Cursor's native planning surface. `/scope-issue` adds the repository-specific issue
   > contract that Product and Engineering can share, even if the PM isn't the person running Cursor.
