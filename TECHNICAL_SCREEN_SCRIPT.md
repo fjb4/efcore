@@ -186,21 +186,21 @@ focused test, pre-review finding and fix, fork/CI evidence, or honest limitation
 > how do you help a new engineer make a useful first contribution without relying on tribal knowledge
 > or skipping the team's existing controls?
 
-> I built a Cursor workflow that starts with an approved EF Core issue and helps the engineer produce
-> an evidence-backed plan, implement and test the change, review the diff, and take it through CI.
-> That's the path I'll run live. Toward the end, I'll also show how the same artifacts support Product,
-> QA, DevOps, and maintainers.
-
-> I chose Entity Framework Core for the scenario. EF Core is the object-relational mapper for .NET.
-> A developer can write a query in C# using LINQ, and EF Core translates it for a database such as
-> SQL Server or SQLite. It also handles change tracking, database updates, migrations, scaffolding,
-> and command-line tooling.
+> For this scenario, I chose Entity Framework Core. EF Core is the object-relational mapper for .NET.
+> Developers write queries in C# using LINQ, and EF Core translates them for databases such as SQL
+> Server and SQLite. It also handles change tracking, database updates, migrations, scaffolding, and
+> command-line tooling.
 
 > It's a mature Microsoft and .NET Foundation project with roughly 15,000 GitHub stars and more than
 > 18,000 commits. It has thousands of source and test files, multiple database providers, a layered
 > architecture, a specialized test hierarchy, API checks, and a substantial CI matrix. A change can
 > look completely reasonable on its own and still be in the wrong project, miss a required test
 > override, violate a provider rule, or fail an API check.
+
+> I built a Cursor workflow that starts with an approved issue and helps the engineer produce an
+> evidence-backed plan, implement and test the change, review the diff, and take it through CI.
+> That's the path I'll run live. Toward the end, I'll also show how the same artifacts support Product,
+> QA, DevOps, and maintainers.
 
 ### Do
 
