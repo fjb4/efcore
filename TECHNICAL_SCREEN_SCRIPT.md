@@ -182,10 +182,14 @@ focused test, pre-review finding and fix, fork/CI evidence, or honest limitation
 
 ### Say
 
-> Thanks for having me. I focused on one expensive engineering handoff: helping a new contributor
-> turn an approved EF Core issue into a reviewable, tested pull request. I'll show that path live,
-> from an evidence-backed plan through code, tests, review, and CI, without bypassing the team's
-> existing controls.
+> Thanks for having me. I focused on a common challenge for teams with large, established codebases:
+> how do you help a new engineer make a useful first contribution without relying on tribal knowledge
+> or skipping the team's existing controls?
+
+> I built a Cursor workflow that starts with an approved EF Core issue and helps the engineer produce
+> an evidence-backed plan, implement and test the change, review the diff, and take it through CI.
+> That's the path I'll run live. Toward the end, I'll also show how the same artifacts support Product,
+> QA, DevOps, and maintainers.
 
 > I chose Entity Framework Core for the scenario. EF Core is the object-relational mapper for .NET.
 > A developer can write a query in C# using LINQ, and EF Core translates it for a database such as
