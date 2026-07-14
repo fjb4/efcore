@@ -290,8 +290,10 @@ hypothesis; resume on how the Cursor integration was built.
 
 > That gave me a simple design rule: point, don't copy. Copying all of those conventions into one
 > large Cursor prompt would create a second source of truth that could drift. So I kept this layer
-> thin. It points back to the repository's own guidance and adds only what's missing: a repository map,
-> scoped rules, the local SQLite constraint, the context boundary, and a few guided workflows.
+> thin. It points back to EF Core's existing guidance and adds only the operational pieces this
+> workflow needs: a quick map of where work belongs, rules that load only when they're relevant, the
+> limits of my local SQLite environment, a declared boundary around what the agent can use, and three
+> repeatable workflows for scoping, contributing, and reviewing.
 
 > In Cursor, those pieces have different jobs. Rules give the agent stable context for the work in
 > front of it. Commands are workflows that a person chooses to start. EF Core's existing skills add
@@ -342,19 +344,27 @@ rules/commands/skills/CI distinction; resume on the issue.
 
 ### Show
 
-- The issue title and its `good first issue` and `area-query` labels.
-- The active upstream draft PR signal without opening its files or solution.
+- The issue title, its empty description, and its `good first issue` and `area-query` labels.
+- The open upstream PR signal without opening its files or solution.
 - The local SQLite scope, fork boundary, and fact that the command stops at a plan.
 
 ### Say
 
-> For the live example, I chose issue #19287 and narrowed it to one overload I can verify with SQLite.
-> There are nearby repository patterns to follow, it doesn't require a public API change, and it
-> exposes a real mismatch between .NET's zero-based `IndexOf` and SQLite's one-based `instr`.
+> For the live example, I chose issue #19287. It's pretty bare: a title and a couple of labels, but no
+> description. It's asking EF Core to translate `Array.IndexOf` over a byte-array column into SQL.
 
-> There's already active work upstream, so I deliberately kept that implementation outside the
-> approved context. Everything today stays in my fork. The command will inspect the issue and the
-> local repository, produce a plan, and stop before it writes any code.
+> SQLite makes the mismatch easy to see. .NET returns a zero-based position, or `-1` when it doesn't
+> find the value. SQLite's `instr` returns a one-based position, or zero. Subtracting one makes the
+> two behave the same way.
+
+> The issue doesn't name the overload, files, or tests. Rather than quietly invent those details, the
+> agent has to show in the plan how the repository led it there. I narrowed the demo to the
+> two-argument SQLite behavior: I can test it locally, there are nearby patterns, and there's no
+> public API change.
+
+> There's also an open PR upstream. I'm excluding that implementation and staying in my fork. The
+> command will read the issue and local repository, show us its plan, and wait for approval before it
+> writes any code.
 
 ### Present in Cursor
 
@@ -365,7 +375,8 @@ rules/commands/skills/CI distinction; resume on the issue.
 
 ### If interrupted or behind
 
-Drop the label details and local-sibling preview. Do not cut the SQLite scope, active-upstream-work
+Say only what `Array.IndexOf` translation enables and the one-based-versus-zero-based mismatch. Drop
+the label details and local-pattern preview. Do not cut the SQLite scope, active-upstream-work
 exclusion, fork boundary, or statement that the command stops at a plan; resume by invoking it.
 
 ---
@@ -1200,6 +1211,16 @@ one sentence.
 > format doesn't depend on every network or model call finishing on cue. The one-window choice is a
 > way to make the customer journey concrete, not a claim that teams should abandon GitHub or their
 > existing delivery systems.
+
+## 22. How do you know what issue #19287 requires when the description is empty?
+
+### Answer
+
+> The title and labels give me the intent, but they don't give me a complete specification. The
+> overload, provider, placement, and test strategy are inferences from the repository. That's why the
+> first artifact is a cited plan: it makes those assumptions visible so a maintainer can correct them
+> before the workflow writes code. If the repository evidence wasn't strong enough, the right result
+> would be a clarifying question, not an invented requirement.
 
 ---
 
