@@ -32,23 +32,19 @@ public class SqliteByteArrayMethodTranslator(ISqlExpressionFactory sqlExpression
             && arguments is [var source, var item]
             && source.Type == typeof(byte[]))
         {
-            var value = item is SqlConstantExpression constantValue
-                ? sqlExpressionFactory.Constant(new[] { (byte)constantValue.Value! }, source.TypeMapping)
-                : sqlExpressionFactory.Function(
-                    "char",
-                    [item],
-                    nullable: false,
-                    argumentsPropagateNullability: Statics.FalseArrays[1],
-                    typeof(string));
-
             return sqlExpressionFactory.GreaterThan(
-                sqlExpressionFactory.Function(
-                    "instr",
-                    [source, value],
-                    nullable: true,
-                    argumentsPropagateNullability: Statics.TrueArrays[2],
-                    typeof(int)),
+                TranslateInstr(source, item),
                 sqlExpressionFactory.Constant(0));
+        }
+
+        if (method.DeclaringType == typeof(Array)
+            && method.Name == nameof(Array.IndexOf)
+            && arguments is [var indexOfSource, var indexOfItem]
+            && indexOfSource.Type == typeof(byte[]))
+        {
+            return sqlExpressionFactory.Subtract(
+                TranslateInstr(indexOfSource, indexOfItem),
+                sqlExpressionFactory.Constant(1));
         }
 
         if (method.IsGenericMethod
@@ -93,6 +89,25 @@ public class SqliteByteArrayMethodTranslator(ISqlExpressionFactory sqlExpression
         }
 
         return null;
+    }
+
+    private SqlExpression TranslateInstr(SqlExpression source, SqlExpression item)
+    {
+        var value = item is SqlConstantExpression constantValue
+            ? sqlExpressionFactory.Constant(new[] { (byte)constantValue.Value! }, source.TypeMapping)
+            : sqlExpressionFactory.Function(
+                "char",
+                [item],
+                nullable: false,
+                argumentsPropagateNullability: Statics.FalseArrays[1],
+                typeof(string));
+
+        return sqlExpressionFactory.Function(
+            "instr",
+            [source, value],
+            nullable: true,
+            argumentsPropagateNullability: Statics.TrueArrays[2],
+            typeof(int));
     }
 
     // See issue#16428
