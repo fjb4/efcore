@@ -34,6 +34,11 @@ nothing here to fall out of sync **except** the deltas, which is the one thing t
 | `commands/first-contribution.md` | `/first-contribution <issue>` — plan → scaffold → verify a first change. |
 | `commands/pre-review.md` | `/pre-review` — check a change against the rules before human review or CI. |
 | `commands/scope-issue.md` | `/scope-issue <request>` — turn a rough request into a convention-aware issue. |
+| `commands/start-onboarding-pilot.md` | `/start-onboarding-pilot <context>` — baseline, co-design, and hand off a measured pilot. |
+| `commands/renewal-evidence.md` | `/renewal-evidence [pilot path]` — audit outcome evidence without inventing missing data. |
+| `commands/update-rules.md` | `/update-rules [scope]` — drift check: diff this layer against its sources of truth (read-only). |
+| [`../tools/onboarding-metrics/`](../tools/onboarding-metrics/ramp_metrics.py) | Mines ramp metrics (time-to-first-PR, rework) from real PR history; feeds the evidence ledger. |
+| [`../.github/workflows/ramp-metrics.yml`](../.github/workflows/ramp-metrics.yml) | Scheduled/dispatch wrapper so the team owns the metrics refresh after handoff. |
 | [`../.cursorignore`](../.cursorignore) | Keeps agent context on the source of truth and off build noise / private docs. |
 | [`../.github/workflows/cursor-onboarding-checks.yml`](../.github/workflows/cursor-onboarding-checks.yml) | The fast SQLite guardrail CI. "Agent suggests, CI enforces." |
 
@@ -70,13 +75,18 @@ local; heavy provider/matrix coverage belongs in the upstream workflow, not here
 - **QA** → `/pre-review`'s test-gap analysis proposes the missing spec/functional tests; CI runs them.
 - **DevOps** → owns `cursor-onboarding-checks.yml` and `.cursorignore` (the enforcement + context
   boundary).
+- **Engineering manager / deployment lead** → `/start-onboarding-pilot` defines the outcome,
+  cohort, controls, and ownership before rollout.
+- **ADM / account leadership** → `/renewal-evidence` separates observed results from proxies,
+  hypotheses, and missing evidence.
 
 ## Keeping it honest (known limits)
 
 - **Delta drift.** The pointers self-heal when the source docs change, but the *deltas* (architecture
-  map, glob scoping, style deltas) are judgment calls that can age. Re-check them when the repo's
-  project layout or conventions shift — a lightweight `/update-rules` command that diffs this layer
-  against the current conventions doc is the intended next step.
+  map, glob scoping, style deltas) are judgment calls that can age. Run `/update-rules` (read-only
+  drift check) monthly or after any layout/conventions shift — it diffs this layer against the
+  current conventions doc, skills, and repo shape, and reports broken pointers and contradicted
+  deltas.
 - **Letter vs. intent.** Rules encode conventions the model can check mechanically; they don't
   replace reviewer judgment. `/pre-review` is advisory — CI and a human are still the gate.
 - **Local scope.** Verification here is SQLite-only by environment constraint; SQL Server / Cosmos
