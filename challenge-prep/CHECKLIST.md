@@ -9,8 +9,7 @@
 
 ## Timeline
 
-- [ ] **Now:** book the availability link + Ally's 15-min prep call (both action items
-      from her email; accept the extra Cursor credits)
+- [x] Availability submitted + Ally's 15-min prep call booked (done 2026-07-18)
 - [ ] Commit the new artifact assets to the demo branch (currently uncommitted)
 - [ ] Rehearse from `WORKING_SESSION_CARD.md` + `DEMO_RUN.md`; drill `Q_AND_A.md`
 - [ ] **Day before session:** send `ENGAGEMENT_EMAIL.md` to the HM with the confirmed
