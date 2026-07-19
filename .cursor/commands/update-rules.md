@@ -64,9 +64,9 @@ the rule adds beyond pointing):
   nothing that doesn't?
 - **Model-policy mirror:** do the subagent frontmatter fields still match the model-orchestration
   table in `.cursor/README.md` — planner and reviewer `model: inherit` + `readonly: true`,
-  implementer pinned to the fast-tier ID the table names? The pinned ID is a declared drift
-  surface: if it no longer exists, is no longer the sensible fast tier, or diverges from the
-  table, that is drift. So is a frontmatter edit that departs from the documented policy, or a
+  implementer pinned to the Composer ID the table names? The pinned ID is a declared drift
+  surface: if it no longer exists, is no longer the sensible cost-efficient choice, or diverges
+  from the table, that is drift. So is a frontmatter edit that departs from the documented policy, or a
   command that silently stops delegating to its subagent.
 
 ## Step 5 — Report

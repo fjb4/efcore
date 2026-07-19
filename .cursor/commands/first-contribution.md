@@ -19,12 +19,12 @@ Do not edit, create, or delete any files until the plan is confirmed.
 **Orchestration (the model policy as code):** delegate the steps to the repository subagents
 rather than running them inline:
 
-- **Step 1 →** the `contribution-planner` subagent (read-only; `model: inherit`, so planning stays
-  on the high-reasoning tier). Present its returned plan unchanged.
+- **Step 1 →** the `contribution-planner` subagent (read-only; `model: inherit`, so planning runs
+  on the main conversation's deliberately selected model). Present its returned plan unchanged.
 - **The approval gate runs here, in this conversation — never inside a subagent.** Stop and wait.
-- **Steps 2–3 →** the `contribution-implementer` subagent (pinned to a fast fit-for-purpose
-  model — bounded execution of a decided plan). Pass the approved plan **verbatim** and state that
-  it was approved.
+- **Steps 2–3 →** the `contribution-implementer` subagent (an explicit Composer binding — a
+  Cursor-native, cost-efficient model for bounded execution of a decided plan). Pass the approved
+  plan **verbatim** and state that it was approved.
 - Afterwards, suggest a fresh `/pre-review` (the `skeptical-reviewer` subagent). Do not review the
   implementation in this same conversation.
 

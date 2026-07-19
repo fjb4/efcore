@@ -38,10 +38,10 @@ nothing here to fall out of sync **except** the deltas, which is the one thing t
 | `commands/renewal-evidence.md` | `/renewal-evidence [pilot path]` — audit outcome evidence without inventing missing data. |
 | `commands/update-rules.md` | `/update-rules [scope]` — drift check: diff this layer against its sources of truth (read-only). |
 | `agents/contribution-planner.md` | Subagent for `/first-contribution` Step 1. `model: inherit`, `readonly` — planning gets the high-reasoning tier and cannot edit. |
-| `agents/contribution-implementer.md` | Subagent for `/first-contribution` Steps 2–3, after human approval. Pinned to the fast tier (`model: composer-2.5`) — bounded execution, not deep reasoning. |
+| `agents/contribution-implementer.md` | Subagent for `/first-contribution` Steps 2–3, after human approval. Explicit Composer binding (`model: composer-2.5`) — cost-efficient bounded execution, not maximum reasoning depth. |
 | `agents/skeptical-reviewer.md` | Subagent behind `/pre-review`. `model: inherit`, `readonly` — fresh context, strong model, cannot edit. |
 | [`../tools/onboarding-metrics/`](../tools/onboarding-metrics/ramp_metrics.py) | Mines ramp metrics (time-to-first-PR, rework) from real PR history; feeds the evidence ledger. |
-| [`../.github/workflows/ramp-metrics.yml`](../.github/workflows/ramp-metrics.yml) | Scheduled/dispatch wrapper so the team owns the metrics refresh after handoff. |
+| [`../.github/workflows/ramp-metrics.yml`](../.github/workflows/ramp-metrics.yml) | Dispatch-run wrapper so the team owns the metrics refresh after handoff (manual now; schedulable once the cohort is pinned). |
 | [`../.cursorignore`](../.cursorignore) | Keeps agent context on the source of truth and off build noise / private docs. |
 | [`../.github/workflows/cursor-onboarding-checks.yml`](../.github/workflows/cursor-onboarding-checks.yml) | The fast SQLite guardrail CI. "Agent suggests, CI enforces." |
 
@@ -58,12 +58,13 @@ Phase-appropriate models, expressed in versioned subagent frontmatter rather tha
 | Phase | Agent | Frontmatter | Why |
 |-------|-------|-------------|-----|
 | Plan / repository analysis | `contribution-planner` | `model: inherit`, `readonly: true` | High-context reasoning is spent where wrong-sibling errors start. |
-| Bounded implementation | `contribution-implementer` | `model: composer-2.5` | Executing an approved plan needs speed, not depth — pinned to the fast tier. |
+| Bounded implementation | `contribution-implementer` | `model: composer-2.5` | Executing an approved plan needs a capable, cost-efficient model, not maximum depth — an explicit Cursor-native binding. |
 | Skeptical review | `skeptical-reviewer` | `model: inherit`, `readonly: true` | Strong model, fresh unanchored context, cannot edit. |
 
 The policy is defined by **phase, capability, risk, and cost** — the frontmatter is just its
 current binding. `inherit` avoids naming a model wherever the phase should simply run at the main
-agent's reasoning level; the one **pinned ID** (the implementer's fast model) is a concrete name
+agent's deliberately selected level — it inherits the parent's selection rather than guaranteeing
+a reasoning tier; the one **pinned ID** (the implementer's Composer binding) is a concrete name
 because that is what the product's `model` field takes, and a concrete name goes stale — so it is a
 **declared drift surface**: `/update-rules` checks the frontmatter against this table on the
 maintainer's monthly cadence, and changing the pin is a one-line, reviewable git diff. This routing
