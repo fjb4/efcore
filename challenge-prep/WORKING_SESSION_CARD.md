@@ -3,6 +3,36 @@
 The interviewers are the internal Cursor team, not the customer. Get their names at the start,
 address them by name, and ask them to flex roles explicitly.
 
+## Board setup (prepare before the session — Excalidraw + Cursor)
+
+Two surfaces, deliberate transitions: **Excalidraw** shows discovery and alignment; **Cursor**
+shows implementation, governance, review, and evidence. Prepare one 16:9 Excalidraw canvas, all
+content in a single viewport (trim content to fit — no zooming or panning mid-session), simple
+rectangles/arrows, large text, background elements locked:
+
+1. **Decision board** — the four columns from this card: confirmed / changed / owner / next
+   action.
+2. **The Acme operating loop** — the named-people diagram from the 7:00–12:00 block below
+   (Ravi → new joiner → plan → approval → build → Nina → Marcus, David owns outcome, Priya
+   decides scale). Not a generic vendor loop: account names, not methodology stages.
+3. **Success measures** — the metrics table (metric / source / owner / renewal decision),
+   trimmed to fit. Weekly-active stays a supporting measure; the board must not re-promote it.
+
+Color legend, printed on-canvas in gray: **gray** prepared context · **blue** confirmed live ·
+**amber** changed assumption or risk · **green** action + owner.
+
+**Blanks are pre-mapped, not improvised** — leave 4–6 fields empty, each answered by a question
+this card already asks: the ADM's missed renewal risk (0:00 block), Finance's price-vs-
+standardization framing (2:00), the field engineer's blocking dependency (7:00), the ADM's most
+useful weekly artifact (12:00), the RD's evidence-threshold judgment (31:00), the expansion
+target (co-build). Empty blanks at minute 25 mean the questions need to land harder.
+
+Execution discipline: lead verbally and type yourself (3–6 word entries — the invariant is the
+content changing, not calligraphy); never ask interviewers to co-edit or open a link; share the
+**entire screen**, not a window, so the Excalidraw↔Cursor switch never touches the share dialog;
+keep a static screenshot/PDF backup. Do not over-polish — a slightly rough, visibly-being-edited
+board is the point; visible thinking is scored.
+
 ## 0:00-2:00 - Open and create the working contract
 
 Say:
@@ -23,8 +53,9 @@ Ask the ADM:
 > Before I lock that path: what is the most important renewal risk I have missed, and what would
 > Priya have to see to repeat this story herself?
 
-**Start the visible decision board now** (whiteboard or shared doc, four columns:
-**confirmed / changed / owner / next action**) and keep it updated all session. The board is the
+**Start the visible decision board now** (the prefilled Excalidraw canvas — see Board setup
+above; four columns: **confirmed / changed / owner / next action**) and keep it updated all
+session. The board is the
 proof this is a working session: at least one interviewer answer must visibly change the pilot
 plan on it — cohort, evidence threshold, expansion target, or a control. If nothing has changed
 by the co-build block, ask a question whose answer forces a change.

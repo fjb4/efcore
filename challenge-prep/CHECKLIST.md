@@ -86,5 +86,9 @@ workflow earns trust."
       (2026-07-19 drift check: all pointers resolve, README table matches the layer
       inventory, model-policy frontmatter matches the README table, sources of truth
       unchanged since the rules were written — layer is current)
-- [ ] Screen setup: Cursor + whiteboard + metrics sheet; notifications off
-- [ ] Full demo path timed twice; 8–10 min target, 12 hard cap
+- [ ] Screen setup: Cursor + the prefilled Excalidraw board (build it per the Board setup
+      section in `WORKING_SESSION_CARD.md`: three sections, color legend, 4–6 pre-mapped
+      blanks, background locked) + static screenshot/PDF backup; share the entire screen;
+      notifications off
+- [ ] Full demo path timed twice **with the board live** (board typing is the new failure
+      mode to time); 8–10 min target, 12 hard cap
