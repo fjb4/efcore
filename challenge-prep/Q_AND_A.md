@@ -12,7 +12,11 @@ Do not claim a universal model advantage. Acme's decision is whether Cursor can 
 govern a workflow that reaches planning, review, CI, and deployment, then prove the outcome in its
 own telemetry. Use the same task class, outcome definition, and quality gates for any comparison.
 The differentiator you are testing is repeatable workflow adoption and governance, not a cherry-
-picked code-generation result.
+picked code-generation result. The one product line worth landing here: Codex is OpenAI models
+and Claude Code is Anthropic models, while Cursor ships OpenAI, Anthropic, Gemini, and xAI
+models plus its own Composer line under one admin allowlist and one telemetry stream — so
+consolidation doesn't take anyone's preferred model away, it takes away the ungoverned surface
+(full map: README, "Differentiators vs Codex and Claude Code").
 
 ## "Leadership wants to consolidate on one tool — why should that be Cursor?"
 

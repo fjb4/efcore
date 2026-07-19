@@ -71,6 +71,14 @@ workflow earns trust."
       commands document the inline fallback — rehearse stating that honestly
 - [ ] The IndexOf chain reachable as the finished-first-contribution exhibit
       (issue → plan approval → diff/test/SQL → skeptical finding → fix → green CI)
-- [ ] Run `/update-rules` once before the session — fix or be ready to explain findings
+      — **2026-07-19: the branch rebuild had stacked two superseded IndexOf drafts;
+      the combination didn't compile and CI went red on `63e7e0f`/`0837d64`. Fixed by
+      restoring the verified-green translator + tests (from `c5b7f9ac9d`) as
+      `085459d409` (challenge-prep) / `e00500d439` (demo); branches remain
+      byte-identical; 12/12 focused tests pass locally; CI re-run confirmed green**
+- [x] Run `/update-rules` once before the session — fix or be ready to explain findings
+      (2026-07-19 drift check: all pointers resolve, README table matches the layer
+      inventory, model-policy frontmatter matches the README table, sources of truth
+      unchanged since the rules were written — layer is current)
 - [ ] Screen setup: Cursor + whiteboard + metrics sheet; notifications off
 - [ ] Full demo path timed twice; 8–10 min target, 12 hard cap

@@ -219,6 +219,42 @@ Use only the capabilities that serve the account:
 - **Cloud agents/automations** are a scale step after the foreground workflow has earned trust.
 - **Team rules and admin analytics** support organization-wide governance and adoption evidence.
 
+### Differentiators vs Codex and Claude Code (verified against cursor.com 2026-07-19)
+
+State these as the reasons the staged scale steps are shipping product, not promises. Each is
+verified; do not embellish beyond what is listed.
+
+- **Model plurality under one governed surface** — the sharpest line, and the fragmentation
+  reframe: Codex is OpenAI models; Claude Code is Anthropic models; Cursor ships OpenAI,
+  Anthropic, Gemini, and xAI models plus its own Composer line under one admin allowlist, one
+  telemetry stream, one set of usage limits. Consolidating on Cursor does not take Claude-loyal
+  engineers' models away — it takes away the ungoverned surface.
+- **Daily-driver IDE** — the only one of the three that is the editor engineers live in (Tab,
+  inline edit, agent in one surface). Value accrues in-flow, not per agent session — the lever on
+  38% weekly active. Adoption dashboards (usage patterns by team and individual) identify which
+  of the 18 teams are stalled from the account team's own data.
+- **Team Rules at org scale** — distributed from the dashboard on Team/Enterprise plans; merge
+  with project rules under documented precedence (Team → Project → User; earlier source wins on
+  conflict). The per-repo layer built for one 12-engineer team becomes the 18-team rollout
+  mechanism.
+- **Tool-side telemetry for the evidence ledger** (Enterprise plan): the Admin API, **AI Share of
+  Committed Code** (diff-signature attribution of AI-written code in commits), and Conversation
+  Insights (work classified by category/complexity). Pairs with the repo-side ramp miner — two
+  independent evidence sources — and gives the exec sponsor a dashboard to own.
+- **Enterprise governance inventory** — SSO/SCIM with local-login disable, org-wide Privacy Mode,
+  zero data retention, SOC 2 Type II, allowlists at the repo, model, and MCP-server level,
+  per-team and per-user usage limits. This is tier 3 (tool-policy) of the enforcement ladder,
+  named feature by feature.
+- **Bugbot as the independent-review tier** — PR review on GitHub, GitLab, and Bitbucket
+  (including self-hosted/Data Center; useful while Acme's SCM is unknown), governed at team
+  level (per-repo enable, org-wide rules, effort levels, autofix behavior). Honest detail to
+  state unprompted: its CI status is **neutral by default** — fail-on-unresolved-issues must be
+  explicitly enabled. Bugbot supplements human review; it does not replace it.
+
+Plan gating: the Admin API, Conversation Insights, and org-wide enforcement are
+Enterprise-plan-gated — a fit for a 1,200-seat account, but say "Enterprise plan" when citing
+them.
+
 Current official references:
 
 - [Rules](https://docs.cursor.com/context/rules)
