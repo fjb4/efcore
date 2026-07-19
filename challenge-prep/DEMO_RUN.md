@@ -14,22 +14,24 @@ has become an engagement system, not to repeat the implementation demo.
 ## Lead with the architecture (90 seconds, before any command)
 
 Screen-feedback correction: the rules' role was not clear last time. Before invoking anything,
-walk the capability map — rules (persistent scoped context, "point, don't copy"), commands
-(workflow orchestration), skills (packaged expertise on demand), subagents (phase isolation with
-pinned model tier and write access), hooks + CI (policy and deterministic enforcement), Bugbot
-(independent review), and custom modes / MCP / cloud agents as expansion surfaces staged for
-later. Then say the model policy out loud:
+walk the capability map **account-risk first** (the session card holds the four-line risk →
+response version); name the Cursor components — rules, commands, skills, subagents, hooks + CI,
+Bugbot, staged surfaces — only as the mechanism behind each business job. Then say the model
+policy out loud:
 
-> Planning and repository analysis run on a high-context reasoning model; bounded edits after plan
-> approval drop to a fast fit-for-purpose model; high-risk review gets an independent reviewer plus
-> the deterministic gates; Auto is the default where Cursor's router has fresher information than a
+> Planning and repository analysis inherit the deliberately selected main-conversation model and
+> run read-only; bounded edits after plan approval run on an explicit Composer binding —
+> Cursor-native and cost-efficient; high-risk review gets an independent reviewer plus the
+> deterministic gates; Auto is the default where Cursor's router has fresher information than a
 > static policy. The routing is policy-as-code in the subagent frontmatter; the enforced boundary
 > is the admin model allowlist.
 
 Then the one-line proof: open the three files under `.cursor/agents/` and point at the `model:`
 and `readonly:` lines — planner and reviewer `inherit` + read-only, implementer pinned to
-`composer-2.5` (Cursor's own fast model — the fast tier is where Cursor's model differentiates on
-cost); the approval gate stays in the main conversation. Say:
+`composer-2.5` (Cursor's own coding model, a cost-efficient native binding; do **not** call it
+"the fast tier" — Composer 2.5 has a separate Fast mode at 6x the price, and the dry-run
+confirms which variant the frontmatter selects); the approval gate stays in the main
+conversation. Say:
 
 > Maya changes the model pin in one line, the change is a git diff her team reviews, and
 > `/update-rules` flags it if it drifts from the documented policy — a pinned name going stale is
@@ -79,23 +81,24 @@ Then open `/renewal-evidence` and say:
 > This command cannot turn usage or a champion quote into productivity. It audits the ledger,
 > calculates only comparable observations, and recommends expand, iterate, or stop.
 
-Optional (~90 seconds, if timing is good) — mine a real baseline live:
+**The live miner stays out of the default demo** — do not spend main-flow minutes explaining why
+one open-source contributor is usable and another is truncated. It is Q&A evidence of measurement
+integrity: if evidence rigor is challenged, open the pre-generated `metrics/ramp-dashboard.md`
+(the committed output of a real run against this repository) and say:
+
+> One usable historical observation was 11 days, with a clickable PR; the second was suppressed
+> because the sample was incomplete. The tool refuses to state what the data can't support —
+> that discipline is what makes the renewal pack defensible.
+
+Never call an n=1 observation a cohort median aloud. Run it live only if directly asked to:
 
 ```text
 python3 tools/onboarding-metrics/ramp_metrics.py --repo dotnet/efcore \
   --authors JoasE,cincuranet --max-review-prs 5 --stdout
 ```
 
-State up front that this is historical open-source data standing in for Acme joiners. The
-tested result is the point: one author yields an **observed 11-day** time-to-first with a
-clickable PR; the other is suppressed as **TRUNCATED** because the sample cannot see their true
-first PR. Say:
-
-> The baseline comes from the customer's own history, and the tool refuses to state what the
-> data can't support — that discipline is what makes the renewal pack defensible.
-
-If it is slow or fails live, open the pre-generated `metrics/ramp-dashboard.md` instead and say
-that is the committed fallback output of the same run.
+— stating up front that this is historical open-source data standing in for Acme joiners, with
+the dashboard as the fallback if it is slow or fails.
 
 ## Proof and limitation
 

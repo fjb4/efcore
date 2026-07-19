@@ -23,6 +23,12 @@ Ask the ADM:
 > Before I lock that path: what is the most important renewal risk I have missed, and what would
 > Priya have to see to repeat this story herself?
 
+**Start the visible decision board now** (whiteboard or shared doc, four columns:
+**confirmed / changed / owner / next action**) and keep it updated all session. The board is the
+proof this is a working session: at least one interviewer answer must visibly change the pilot
+plan on it — cohort, evidence threshold, expansion target, or a control. If nothing has changed
+by the co-build block, ask a question whose answer forces a change.
+
 ## 2:00-7:00 - Align on decisions and assumptions
 
 Show the three-decision table:
@@ -66,29 +72,32 @@ Ask the field-engineer role:
 Do not repeat the technical screen. Use a short proof:
 
 1. **Lead with the capability map — 90 seconds, before any command runs** (a screen-feedback
-   correction; do not skip):
+   correction; do not skip). Frame it as Acme's risks, not a product taxonomy — name the Cursor
+   component only after the business job it performs:
 
    ```
-   rules        -> persistent, scoped repo context ("point, don't copy")
-   commands     -> repeatable workflow orchestration
-   skills       -> packaged area expertise, loaded on demand
-   subagents    -> phase isolation with pinned model tier + write access (the model policy as code)
-   hooks + CI   -> policy and deterministic enforcement
-   Bugbot       -> independent review
-   custom modes / MCP / cloud agents -> expansion surfaces, chosen per account need
+   Acme risk                Cursor response
+   fragmented tools      -> one governed model + workflow surface (rules, commands, admin policy)
+   one expert workflow   -> distributable package + repo-owned adaptation (skills, subagents,
+                            Marketplace plugin at scale)
+   unclear ROI           -> usage attribution + delivery-system outcomes (analytics + Git/CI data)
+   quality concern       -> independent review + human judgment + deterministic CI (Bugbot, gates)
    ```
 
    Say the selection was deliberate: every surface earns its place or stays out — custom modes,
    MCP, and cloud agents are consciously staged, not missing.
-2. **State the model policy in one breath:** high-reasoning model for planning and repository
-   analysis, fit-for-purpose model for bounded edits after approval, independent reviewer plus
-   deterministic gates for high-risk review, Auto where the router has fresher information. It is
-   not a slide — the routing lives in `.cursor/agents/` frontmatter (planner/reviewer
-   `inherit` + `readonly`, implementer pinned to Cursor's fast Composer model); open an agent file
-   if pressed. The admin model allowlist is the enforced boundary.
+2. **State the model policy in one breath:** planning and repository analysis inherit the
+   deliberately selected main-conversation model and run read-only; bounded edits after approval
+   run on an explicit Composer binding — Cursor-native and cost-efficient; high-risk review gets
+   an independent reviewer plus deterministic gates; Auto where the router has fresher
+   information. It is not a slide — the routing lives in `.cursor/agents/` frontmatter; open an
+   agent file if pressed. The admin model allowlist is the enforced boundary.
 3. Show `.cursor/README.md` as the on-disk proof of the map.
 4. Invoke `/start-onboarding-pilot` with the Acme assumptions.
-5. Review its baseline, cohort, stakeholder, and evidence plan. Stop at the approval gate.
+5. Review its baseline, cohort, stakeholder, and evidence plan **with the room, and revise it
+   live**: take the ADM's renewal-risk answer and the field engineer's blocking-dependency answer
+   from earlier and change the plan where they demand it — cohort definition, a control, the
+   evidence threshold. Update the decision board as it happens. Stop at the approval gate.
 6. Show `/first-contribution` and `/pre-review` as the already-proven engineer/QA path.
 7. Show `/renewal-evidence` and emphasize that missing evidence stays missing.
 8. Show the existing green SQL/test/CI evidence only if useful; do not tour the translator.
@@ -156,7 +165,8 @@ If the consolidation question lands ("pick one tool"), own the evaluation standa
 > Acme should standardize — on whichever tool clears this bar: governed workflow in version
 > control, measured ramp and rework on real backlog work, transferable ownership, and telemetry
 > leadership can audit. We built that bar, and we're happy to be judged by it. Cursor is the
-> candidate you can evaluate against it immediately — the pilot data already exists.
+> candidate Acme can evaluate immediately, because the governed workflow and evidence mechanisms
+> already exist — the pilot is how we earn the customer outcome data.
 
 ## 39:00-44:00 - Leadership asks and account-team commitments
 
@@ -185,6 +195,20 @@ Ask:
 > session with David and Maya, preceded by the data request and stakeholder confirmation.
 
 Stop. Invite Q&A and feedback.
+
+## Alternative run of show (reviewer-proposed — decide while rehearsing)
+
+A reviewer proposed re-timing the session to surface co-creation earlier; adopt it only if the
+timed rehearsals show the current flow reads as a compressed presentation:
+
+- 0:00–3:00 contract, thesis, decision board; 3:00–8:00 validate renewal risk / threshold /
+  cohort / buying decision; 8:00–18:00 run `/start-onboarding-pilot`, inspect and **revise** the
+  plan with the account team; 18:00–27:00 co-build sessions, controls, ownership; 27:00–34:00
+  three enterprise scale ideas; 34:00–40:00 renewal evidence + competitive standard; 40:00–44:00
+  leadership asks + named commitments; 44:00–45:00 close.
+
+Either way, the invariants hold: the decision board stays visible, at least one answer changes
+the plan, and the never-cut list below still applies.
 
 ## If time slips
 

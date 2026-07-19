@@ -103,9 +103,14 @@ Attendees: David, Maya, one new joiner, Nina, Marcus, Ravi.
 - Marcus validates CI and permission boundaries.
 - Maya and the new joiner adapt the existing rules and `/first-contribution` plan gate.
 - Capture the baseline cohort, data sources, owners, and confidence.
+- **Assign the owned artifacts** — every role leaves as a builder, not a reviewer: Ravi the task
+  rubric and `/scope-issue`; Nina the rework taxonomy and review acceptance criteria; Marcus the
+  CI policy and environment boundary; Maya the rules, commands, and drift maintenance; David the
+  charter and outcome definition. Session 1 also adapts the focused-test CI gate for Acme's task
+  class (today it is hard-coded to the proof contribution's tests — say so).
 
 Exit criteria: signed pilot charter, two or three comparable tasks, baseline accepted, controls
-approved, evidence ledger assigned.
+approved, evidence ledger assigned, artifact owners named.
 
 ### Session 2 - Paired pilot and observation (two 60-minute working blocks)
 
@@ -122,6 +127,9 @@ no hidden SA rescue.
 ### Session 3 - Handoff and scale decision (60 minutes)
 
 - Maya changes a rule or command without the SA and explains the maintenance model.
+- **Each artifact owner demonstrates one change they made without the SA** — Ravi to the task
+  rubric, Nina to the review criteria, Marcus to a CI or boundary policy — proving the builder
+  transfer, not just Maya's.
 - A second engineer runs the workflow from a fresh task.
 - David presents the speed/quality/reach readout.
 - Nina and Marcus confirm whether quality and CI controls held.
@@ -209,19 +217,22 @@ Use only the capabilities that serve the account:
 - **Commands** make the plan, contribution, review, and evidence workflows discoverable.
 - **Skills** provide deeper domain guidance on demand without bloating always-on context.
 - **Subagents** (built) separate the phases and carry the model policy as versioned frontmatter:
-  planner and skeptical reviewer run read-only on the inherited high-reasoning tier, the
-  implementer pinned to Cursor's fast Composer model; creation and review are separated by fresh
-  context.
+  planner and skeptical reviewer inherit the deliberately selected parent model and run read-only,
+  the implementer has an explicit Composer binding (Cursor-native, cost-efficient); creation and
+  review are separated by fresh context.
 - **Custom modes** can package a restricted new-joiner setup (plan-first, limited tools) — a
   staged option to name in the capability map, not a day-one need.
 - **Hooks** can add audit/measurement or block unsafe actions after Acme approves the design.
 - **MCP** can connect issue, PR, CI, and documentation systems after least-privilege review.
 - **Cloud agents/automations** are a scale step after the foreground workflow has earned trust —
-  and the gate is specific: cloud agents run in Cursor-managed VMs with read-write repo access,
-  managed secrets, and network access, behind admin-connected source control and spend limits
-  (Marcus's security review). The first automation in line is the monthly scheduled
-  `/update-rules` drift check, report-only, `Team Owned` visibility — the layer's maintenance
-  cadence stops depending on a human remembering.
+  and the gate is specific: cloud agents run in Cursor-managed **or self-hosted** environments
+  (self-hosted workers connect outbound-only, keeping code and execution in Acme's network) with
+  read-write repo access, managed secrets, and network access, behind admin-connected source
+  control and spend limits (Marcus's security review). Privilege must stay proportionate: during
+  the wedge, `/update-rules` remains human-triggered — a write-capable agent is more than a
+  report-only check needs. At expansion, a scheduled automation earns the job: drift detection
+  across the rolled-out repositories, restricted environment, scoped secrets/egress, Maya/Marcus
+  review.
 - **Team rules and admin analytics** support organization-wide governance and adoption evidence.
 
 ### Differentiators vs Codex and Claude Code (verified against cursor.com 2026-07-19)
@@ -254,8 +265,10 @@ depth, pulled only when a question earns it.
   skills, subagents, MCP servers, and hooks; admin install policy Default Off / Default On /
   Required) distributes the reusable workflow package; project rules carry repo-specific context,
   adapted and owned per team. Rules merge under documented precedence — Team → Project → User,
-  earlier source wins on conflict (source: cursor.com/docs/context/rules, verified 2026-07-19).
-  The wedge produces two layers: Acme-wide governance distributed centrally, repo-specific paved
+  earlier source wins on conflict (source, quoted verbatim: "Rules are applied in this order:
+  Team Rules → Project Rules → User Rules", cursor.com/docs/context/rules, verified 2026-07-19).
+  Cite the exact ordering only if asked — the two-layer design carries the spoken argument. The
+  wedge produces two layers: Acme-wide governance distributed centrally, repo-specific paved
   roads owned locally.
 - **Tool-side telemetry for the evidence ledger** (Enterprise plan): the Admin API, **AI Share of
   Committed Code** (diff-signature attribution of AI-written code in commits), and Conversation
@@ -306,12 +319,13 @@ Current official references:
 - [Subagents and skills](https://cursor.com/changelog/2-4)
 
 **Model orchestration** (a screen-feedback correction — state it proactively): a policy by phase,
-capability, risk, and cost, never hard-coded model names. High-context reasoning models for
-planning and unfamiliar-repository analysis; fast fit-for-purpose models for bounded edits after
-plan approval; an independent strong reviewer plus deterministic gates for high-risk review; Auto
-as the default where the router has fresher information. The routing is **policy-as-code**:
-subagent frontmatter under `.cursor/agents/` binds each phase (`inherit` for planning and review,
-a pinned fast-model ID for implementation — a declared drift surface) plus write access,
+capability, risk, and cost, never hard-coded model names. High-context reasoning for planning and
+unfamiliar-repository analysis; a capable, cost-efficient model for bounded edits after plan
+approval; an independent strong reviewer plus deterministic gates for high-risk review; Auto as
+the default where the router has fresher information. The routing is **policy-as-code**, stated
+precisely: the planner and reviewer **inherit the deliberately selected parent model** and run
+read-only (`inherit` inherits the selection — it does not itself guarantee a reasoning tier); the
+implementer has an **explicit Composer binding** — a declared drift surface — plus write access,
 `/update-rules` reports divergence from the documented policy as drift, and the admin
 dashboard's model allow/blocklist (provider- or model-level) is the enforced boundary that
 overrides frontmatter. Claim "paved-road default, bounded by the allowlist" — never "enforced per

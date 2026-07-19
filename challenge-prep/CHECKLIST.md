@@ -24,7 +24,7 @@
       (Staff Eng), David Park (EM), Priya Nair (Dir Eng), Nina Alvarez (QA), Marcus
       Webb (DevOps), Ravi Shah (PM)
 
-## Artifact build status (2026-07-18 — built and tested, uncommitted)
+## Artifact build status (committed and pushed on both branches; CI green as of 2026-07-19)
 
 - `/start-onboarding-pilot`, `/renewal-evidence` — the engagement commands (already existed).
 - `tools/onboarding-metrics/ramp_metrics.py` — mines real PR history via `gh`:
@@ -69,6 +69,12 @@ workflow earns trust."
       overclaim risk): `/first-contribution` should return a planner plan and stop for approval;
       `/pre-review` should delegate to `skeptical-reviewer`. If dispatch misbehaves, both
       commands document the inline fallback — rehearse stating that honestly
+- [ ] **In the dry-run, confirm which Composer variant `model: composer-2.5` executes** —
+      Composer 2.5 has Standard ($0.50/$2.50) and Fast ($3/$15) variants; until confirmed, say
+      "Cursor-native, cost-efficient," never "the fast model" (pack wording already corrected)
+- [ ] Rehearse the co-creation invariants: visible confirmed/changed/owner/next-action board;
+      at least one interviewer answer visibly changes the pilot plan; decide during timed
+      rehearsal whether to adopt the alternative run of show in WORKING_SESSION_CARD.md
 - [ ] The IndexOf chain reachable as the finished-first-contribution exhibit
       (issue → plan approval → diff/test/SQL → skeptical finding → fix → green CI)
       — **2026-07-19: the branch rebuild had stacked two superseded IndexOf drafts;

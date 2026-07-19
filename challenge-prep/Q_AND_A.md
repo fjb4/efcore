@@ -32,9 +32,10 @@ Tracking, model governance — that
 turns it into auditable evidence. Then offer the standard, not the vendor argument: "standardize on
 whichever tool clears this bar — governed workflow in version control, measured ramp and rework on
 real backlog work, transferable ownership, telemetry leadership can audit." Cursor is the candidate
-Acme can evaluate against that standard immediately — the pilot data already exists; any other
-tool has to earn its way through the same instrumented workflow. Before naming an expansion
-target, find out which tools the two stalled teams used and why they stalled.
+Acme can evaluate immediately, because the governed workflow and evidence mechanisms already
+exist — the pilot is how we earn the customer outcome data; any other tool has to stand up the
+same instrumented workflow first. Before naming an expansion target, find out which tools the two
+stalled teams used and why they stalled.
 
 ## "What's your model strategy?"
 
@@ -44,19 +45,22 @@ risk, and cost rather than a list of model names (names go stale; the policy sho
 - **Planning and unfamiliar-repository analysis** (`/first-contribution` plan step, `/scope-issue`
   grounding): a high-context, high-reasoning model — this is where plausible-but-wrong-sibling
   errors start.
-- **Bounded implementation and mechanical edits** after plan approval: a fast, fit-for-purpose
+- **Bounded implementation and mechanical edits** after plan approval: a capable, cost-efficient
   coding model.
 - **Skeptical review of high-risk changes** (`/pre-review`): an independent strong reviewer model
   plus the deterministic gates — creation and review stay separated.
 - **Auto**: the sane default where Cursor's router has fresher information than a static policy.
 
 This policy is **code, not a memo**: `/first-contribution` delegates planning to the
-`contribution-planner` subagent (`model: inherit`, `readonly`), implementation after human approval
-to `contribution-implementer` (pinned to the fast tier — currently `composer-2.5`, Cursor's own
-fast model, per its pricing table the cheapest agentic option), and `/pre-review` to
-`skeptical-reviewer` (`model: inherit`, `readonly`). The policy is defined by phase, capability,
-risk, and cost; `inherit` avoids naming a model where possible, and the one pinned ID is a
-**declared drift surface** — `/update-rules` checks it against the documented policy table on the
+`contribution-planner` subagent (`model: inherit`, `readonly` — it inherits the deliberately
+selected parent model rather than guaranteeing a reasoning tier), implementation after human
+approval to `contribution-implementer` (an explicit Composer binding — `composer-2.5`, Cursor's
+own coding model, a Cursor-native, cost-efficient choice; note Composer 2.5 has Standard and Fast
+variants at different prices — say "cost-efficient," not "the fast model," until the dry-run
+confirms which variant executes), and `/pre-review` to `skeptical-reviewer` (`model: inherit`,
+`readonly`). The policy is defined by phase, capability, risk, and cost; `inherit` avoids naming
+a model where possible, and the one pinned ID is a **declared drift surface** — `/update-rules`
+checks it against the documented policy table on the
 maintainer's monthly cadence. The approval gate stays in the main conversation, never inside a
 subagent.
 
@@ -166,9 +170,20 @@ repeatability would amplify support burden and weaken the renewal evidence.
 
 ## "Where do PM, QA, and DevOps actually participate?"
 
-Ravi provides a real, bounded outcome and validates design-to-delivery relevance. Nina defines the
-quality taxonomy and test gates. Marcus approves permissions, CI, and deployment evidence. Their
-artifacts are inputs and controls, not personas pasted into an engineering demo.
+As builders with owned artifacts, not reviewers of someone else's system — the handout asks for
+people across roles to become builders, and Maya must not be the only person who changes it:
+
+- **Ravi (PM)** co-maintains the task rubric and the `/scope-issue` workflow — his roadmap intent
+  is the workflow's input format, so he owns how it is expressed.
+- **Nina (QA)** owns the rework taxonomy, the review acceptance criteria, and (at scale) the
+  Bugbot rules.
+- **Marcus (DevOps)** owns the CI policy, the environment boundary, and the automation approval
+  model.
+- **Maya (Staff Eng)** owns the repository rules, commands, and drift maintenance.
+- **David (EM)** owns the charter and the outcome definition.
+
+These transfers are scheduled: Session 1 assigns them; Session 3 verifies each owner has changed
+their artifact at least once without the SA.
 
 ## "Why use rules, commands, skills, and a review agent?"
 
@@ -182,14 +197,19 @@ remain the actual gates.
 Not on day one by default. After security review, least-privilege MCP can pull issue, PR, review,
 and CI evidence without manual transcription. Cloud agents or automations can handle bounded,
 repeatable work once the foreground workflow, environment, permissions, and review gates are
-proven — and the staging is concrete, not hand-wavy: cloud agents run in Cursor-managed VMs with
-**read-write repository access**, managed secrets, and network access, and require an account
-admin to connect source control and set spend limits first. That privilege grant is Marcus's
-(DevOps) security-review gate, earned by the foreground workflow's evidence. First automation in
-line: the monthly `/update-rules` drift check (report-only). PR-review-at-scale is **not** an
-automation use case — that's Bugbot, the productized version. The ramp-metrics refresh stays on
-team-owned GitHub Actions: evidence leadership audits shouldn't be generated inside the vendor's
-own surface. Do not use automation to outrun governance.
+proven — and the staging is concrete, not hand-wavy: cloud agents run in Cursor-managed **or
+self-hosted** environments (self-hosted workers connect outbound-only, keeping code and tool
+execution inside Acme's network) with **read-write repository access**, managed secrets, and
+network access, and require an account admin to connect source control and set spend limits
+first. That privilege grant is Marcus's (DevOps) security-review gate, earned by the foreground
+workflow's evidence — and it must be **proportionate to the task**: during the wedge,
+`/update-rules` stays human-triggered, because a write-capable cloud agent for a report-only
+monthly check is more privilege than the job needs. The automation earns its place at expansion —
+drift detection across multiple repositories, preparing a report or draft remediation PR, in a
+restricted environment with scoped secrets and egress, gated on Maya/Marcus review.
+PR-review-at-scale is **not** an automation use case — that's Bugbot, the productized version.
+The ramp-metrics refresh stays on team-owned GitHub Actions: evidence leadership audits shouldn't
+be generated inside the vendor's own surface. Do not use automation to outrun governance.
 
 ## "How is this defensible to Finance?"
 
@@ -243,11 +263,12 @@ truth; only the deltas (repo geography, glob scoping) and the pinned model ID in
 subagent can drift, and `/update-rules` — a read-only drift check — diffs the layer against the
 current docs, repo shape, and model-policy table on the maintainer's monthly cadence. Model names
 change and new models ship; the pin is registered in the policy table precisely so its staleness
-is detected, not discovered. Owner: Maya, ratified as a team goal. The designed next step
-(verified product, not built here): a monthly **scheduled automation** — Cursor automations run
-cloud agents on a cron schedule — executes `/update-rules` report-only with `Team Owned`
-visibility, so the cadence stops depending on a human remembering; Maya reviews the report
-instead of producing it.
+is detected, not discovered. Owner: Maya, ratified as a team goal — human-triggered during the
+wedge, deliberately: a write-capable cloud agent is more privilege than a report-only monthly
+check needs. At expansion, a scheduled Cursor automation earns the job — drift detection across
+the rolled-out repositories, restricted environment, scoped secrets and egress, Maya/Marcus
+review — so the cadence stops depending on a human remembering exactly when the surface area
+outgrows one human.
 
 ## "Show me it working on something you didn't rehearse."
 
@@ -259,7 +280,11 @@ show the plan responds.
 
 Deliberate scope: the guardrail's job is a fast (<10 min) pre-review signal for new joiners; the
 maintainers' full provider matrix stays the merge gate. Fast local feedback plus heavyweight
-upstream CI is the design, not a shortcut.
+upstream CI is the design, not a shortcut. Be equally honest about the focused-test gate: its
+test filter is hard-coded to **this contribution's** tests — it is the verified guardrail for
+this contribution, not yet a general per-joiner gate. Session 1 adapts the focused-test selection
+for Acme's task class (parameterizing the filter or a small task manifest is the team's call, and
+the team's change to own).
 
 ## "What breaks? Where does the agent get it wrong?"
 

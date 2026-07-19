@@ -11,10 +11,12 @@ direct email says "Solution"; the draft follows the newer instruction.
 Hey [ADM name],
 
 Thanks for the context. Here's how I'll run this so you can stay at eleven-account
-altitude: I'll own the engagement end-to-end and bring you evidence, not work.
+altitude: I'll own the engagement end-to-end and bring you decisions, evidence,
+risks, and precise asks.
 
-**The plan: a 30-day, team-owned onboarding pilot** on the high-adoption 12-person
-team — the wedge for the renewal. Target: time-to-first-meaningful-PR from ~6 weeks
+**The plan: a 30-day, team-owned build-and-pilot phase** on the high-adoption
+12-person team — beginning once the cohort and tasks are confirmed, within the
+90-day renewal engagement. The wedge for the renewal. Target: time-to-first-meaningful-PR from ~6 weeks
 toward 2, **with no increase in ramp rework**, and proof the workflow reaches design,
 review, CI, and deploy. 3x is the target we test, not a result I'll promise.
 
