@@ -181,8 +181,9 @@ decision grounded in evidence.
 1. **Stakeholder choreography:** secure David and Maya as named owners, a 20-minute baseline
    alignment with Nina/Marcus/Ravi, and two Priya checkpoints (evidence threshold and midpoint
    readout).
-2. **Account evidence:** provide segmented Cursor telemetry, identify the two stalled teams and
-   their failure modes, and clarify the commercial/competitive decision process.
+2. **Account evidence:** provide segmented Cursor telemetry, identify the two stalled teams —
+   which tools they tried and why they stalled — and clarify whether Finance is running a price
+   comparison or a consolidation decision.
 3. **Renewal partnership:** maintain the decision log, pressure-test what is executive-worthy, and
    package the evidence with the AE while the SA runs the technical engagement.
 
@@ -207,7 +208,12 @@ Use only the capabilities that serve the account:
 - **Project rules** carry the library's conventions in version control.
 - **Commands** make the plan, contribution, review, and evidence workflows discoverable.
 - **Skills** provide deeper domain guidance on demand without bloating always-on context.
-- **A skeptical review agent/subagent** separates creation from review.
+- **Subagents** (built) separate the phases and carry the model policy as versioned frontmatter:
+  planner and skeptical reviewer run read-only on the inherited high-reasoning tier, the
+  implementer pinned to Cursor's fast Composer model; creation and review are separated by fresh
+  context.
+- **Custom modes** can package a restricted new-joiner setup (plan-first, limited tools) — a
+  staged option to name in the capability map, not a day-one need.
 - **Hooks** can add audit/measurement or block unsafe actions after Acme approves the design.
 - **MCP** can connect issue, PR, CI, and documentation systems after least-privilege review.
 - **Cloud agents/automations** are a scale step after the foreground workflow has earned trust.
@@ -223,6 +229,18 @@ Current official references:
 - [AI Code Tracking API](https://docs.cursor.com/en/account/teams/ai-code-tracking-api)
 - [Enterprise hooks, team rules, analytics, and sandbox](https://cursor.com/blog/enterprise)
 - [Subagents and skills](https://cursor.com/changelog/2-4)
+
+**Model orchestration** (a screen-feedback correction — state it proactively): a policy by phase,
+capability, risk, and cost, never hard-coded model names. High-context reasoning models for
+planning and unfamiliar-repository analysis; fast fit-for-purpose models for bounded edits after
+plan approval; an independent strong reviewer plus deterministic gates for high-risk review; Auto
+as the default where the router has fresher information. The routing is **policy-as-code**:
+subagent frontmatter under `.cursor/agents/` binds each phase (`inherit` for planning and review,
+a pinned fast-model ID for implementation — a declared drift surface) plus write access,
+`/update-rules` reports divergence from the documented policy as drift, and the admin
+dashboard's model allow/blocklist (provider- or model-level) is the enforced boundary that
+overrides frontmatter. Claim "paved-road default, bounded by the allowlist" — never "enforced per
+phase," which overclaims the product.
 
 Do not imply that rules are security controls. Repository permissions, sandbox/policy, human
 approval, CI, and audit are the stronger protections.

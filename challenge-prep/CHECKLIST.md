@@ -10,8 +10,14 @@
 ## Timeline
 
 - [x] Availability submitted + Ally's 15-min prep call booked (done 2026-07-18)
-- [ ] Commit the new artifact assets to the demo branch (currently uncommitted)
+- [x] Commit the new artifact assets to the demo branch (verified 2026-07-19: assets are
+      byte-identical on `demo-19287-sqlite-indexof` and `challenge-prep`)
+- [x] Decision 2026-07-19: prep materials stay on the fork (`challenge-prep` branch) —
+      visible-thinking is a scored criterion; the demo branch stays clean of them
 - [ ] Rehearse from `WORKING_SESSION_CARD.md` + `DEMO_RUN.md`; drill `Q_AND_A.md`
+- [ ] Rehearse the screen-gap corrections until automatic: capability map first, the
+      one-breath model policy, and the five-tier enforcement ladder (both interviewers
+      raised model strategy in the screen — assume it returns)
 - [ ] **Day before session:** send `ENGAGEMENT_EMAIL.md` to the HM with the confirmed
       subject line
 - [ ] Keep the Scenario Pack names visible in-session: ADM (unnamed — ask), Maya Chen
@@ -38,6 +44,13 @@
   drift-ownership answer: "how she keeps the layer honest after I'm gone — monthly,
   five minutes."
 - `.cursor/README.md` — updated table + honest-limits section.
+- `.cursor/agents/` (added 2026-07-19, **untested in-product — dry-run before the session**):
+  `contribution-planner` (`inherit` + `readonly`), `contribution-implementer` (`composer-2.5` —
+  a real model ID; the docs' `model` field takes `inherit` or a concrete ID, no `fast` tier),
+  `skeptical-reviewer` (`inherit` + `readonly`) — the model policy as versioned frontmatter.
+  `/first-contribution` and `/pre-review` now orchestrate them; the human approval gate stays in
+  the main conversation; both commands document an inline fallback if dispatch is unavailable.
+  `/update-rules` gained a model-policy drift check against the README policy table.
 
 Still **positioning-only** (per the staging in `README.md` — not build items): GitHub
 MCP, hooks, team rules, cloud agents/Bugbot — "least-privilege scale steps after the
@@ -52,6 +65,10 @@ workflow earns trust."
       pre-generated dashboard as fallback) — the demo cohort is **historical
       open-source data standing in for Acme joiners; say so out loud**
 - [ ] One unrehearsed-input dry run of `/scope-issue`
+- [ ] **Dry-run the subagent dispatch in a fresh window** (docs-vs-product gaps are exactly the
+      overclaim risk): `/first-contribution` should return a planner plan and stop for approval;
+      `/pre-review` should delegate to `skeptical-reviewer`. If dispatch misbehaves, both
+      commands document the inline fallback — rehearse stating that honestly
 - [ ] The IndexOf chain reachable as the finished-first-contribution exhibit
       (issue → plan approval → diff/test/SQL → skeptical finding → fix → green CI)
 - [ ] Run `/update-rules` once before the session — fix or be ready to explain findings

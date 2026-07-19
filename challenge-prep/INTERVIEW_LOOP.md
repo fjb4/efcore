@@ -57,6 +57,10 @@ They're evaluating: judgment, altitude, and whether you scale beyond one account
 
 - Re-read your tech-screen session notes: anything an interviewer challenged there
   will come back ("we already saw your depth" means they remember the gaps too).
+- The four screen gaps and their corrections, now baked into the pack: architecture
+  foregrounded (capability map in `DEMO_RUN.md`/session card), model-orchestration
+  policy (`Q_AND_A.md`), the five-tier enforcement ladder (`Q_AND_A.md`), and the
+  matched-cohort evidence design (already strong in `README.md`).
 - Rehearse the 3-minute and 30-second versions of the Acme plan.
 - Day before: send the email (confirmed subject line), verify the demo from a fresh
   Cursor window, sleep.

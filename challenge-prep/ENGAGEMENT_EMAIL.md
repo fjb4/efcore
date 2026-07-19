@@ -8,8 +8,6 @@ direct email says "Solution"; the draft follows the newer instruction.
 
 ---
 
-Subject: Acme — engagement plan ahead of our working session
-
 Hey [ADM name],
 
 Thanks for the context. Here's how I'll run this so you can stay at eleven-account
@@ -45,9 +43,10 @@ proxy, or hypothesis — so what you take into the renewal survives scrutiny.
 
 1. Warm intros and named commitment from **David** and **Maya**, plus two **Priya**
    checkpoints (evidence-threshold alignment early; midpoint readout ~day 55–60).
-2. Segmented usage telemetry for the account, the two stalled teams' context, and
-   clarity on how finance is running the competitive comparison — so the readout lands
-   before their decision, not after.
+2. Segmented usage telemetry for the account, the two stalled teams' context (which
+   tools they tried and why they stalled), and clarity on whether Finance is running a
+   price comparison or a consolidation decision — so the readout lands before their
+   decision, not after.
 3. A weekly 20-minute evidence/renewal sync: I run the technical work and keep the
    decision log; you and the AE shape the commercial narrative.
 

@@ -65,12 +65,33 @@ Ask the field-engineer role:
 
 Do not repeat the technical screen. Use a short proof:
 
-1. Show `.cursor/README.md`: rules, commands, skills, CI; "point, don't copy."
-2. Invoke `/start-onboarding-pilot` with the Acme assumptions.
-3. Review its baseline, cohort, stakeholder, and evidence plan. Stop at the approval gate.
-4. Show `/first-contribution` and `/pre-review` as the already-proven engineer/QA path.
-5. Show `/renewal-evidence` and emphasize that missing evidence stays missing.
-6. Show the existing green SQL/test/CI evidence only if useful; do not tour the translator.
+1. **Lead with the capability map — 90 seconds, before any command runs** (a screen-feedback
+   correction; do not skip):
+
+   ```
+   rules        -> persistent, scoped repo context ("point, don't copy")
+   commands     -> repeatable workflow orchestration
+   skills       -> packaged area expertise, loaded on demand
+   subagents    -> phase isolation with pinned model tier + write access (the model policy as code)
+   hooks + CI   -> policy and deterministic enforcement
+   Bugbot       -> independent review
+   custom modes / MCP / cloud agents -> expansion surfaces, chosen per account need
+   ```
+
+   Say the selection was deliberate: every surface earns its place or stays out — custom modes,
+   MCP, and cloud agents are consciously staged, not missing.
+2. **State the model policy in one breath:** high-reasoning model for planning and repository
+   analysis, fit-for-purpose model for bounded edits after approval, independent reviewer plus
+   deterministic gates for high-risk review, Auto where the router has fresher information. It is
+   not a slide — the routing lives in `.cursor/agents/` frontmatter (planner/reviewer
+   `inherit` + `readonly`, implementer pinned to Cursor's fast Composer model); open an agent file
+   if pressed. The admin model allowlist is the enforced boundary.
+3. Show `.cursor/README.md` as the on-disk proof of the map.
+4. Invoke `/start-onboarding-pilot` with the Acme assumptions.
+5. Review its baseline, cohort, stakeholder, and evidence plan. Stop at the approval gate.
+6. Show `/first-contribution` and `/pre-review` as the already-proven engineer/QA path.
+7. Show `/renewal-evidence` and emphasize that missing evidence stays missing.
+8. Show the existing green SQL/test/CI evidence only if useful; do not tour the translator.
 
 Say:
 
@@ -130,6 +151,13 @@ Competitive response:
 > outcome of Acme's standardized Cursor workflow against today's fragmented baseline—or against a
 > controlled alternative if they require it.
 
+If the consolidation question lands ("pick one tool"), own the evaluation standard:
+
+> Acme should standardize — on whichever tool clears this bar: governed workflow in version
+> control, measured ramp and rework on real backlog work, transferable ownership, and telemetry
+> leadership can audit. We built that bar, and we're happy to be judged by it. Cursor will be the
+> only candidate that arrives with data.
+
 ## 39:00-44:00 - Leadership asks and account-team commitments
 
 Name:
@@ -169,6 +197,7 @@ Cut:
 
 Never cut:
 
+- The capability map and the one-breath model policy (screen-feedback corrections).
 - Assumptions.
 - Champion ladder.
 - Metric definitions and quality guardrail.

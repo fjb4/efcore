@@ -11,6 +11,30 @@ has become an engagement system, not to repeat the implementation demo.
 - Keep the existing PR/green test available as supporting evidence, not the main path.
 - Do not create or present fictional pilot results.
 
+## Lead with the architecture (90 seconds, before any command)
+
+Screen-feedback correction: the rules' role was not clear last time. Before invoking anything,
+walk the capability map — rules (persistent scoped context, "point, don't copy"), commands
+(workflow orchestration), skills (packaged expertise on demand), subagents (phase isolation with
+pinned model tier and write access), hooks + CI (policy and deterministic enforcement), Bugbot
+(independent review), and custom modes / MCP / cloud agents as expansion surfaces staged for
+later. Then say the model policy out loud:
+
+> Planning and repository analysis run on a high-context reasoning model; bounded edits after plan
+> approval drop to a fast fit-for-purpose model; high-risk review gets an independent reviewer plus
+> the deterministic gates; Auto is the default where Cursor's router has fresher information than a
+> static policy. The routing is policy-as-code in the subagent frontmatter; the enforced boundary
+> is the admin model allowlist.
+
+Then the one-line proof: open the three files under `.cursor/agents/` and point at the `model:`
+and `readonly:` lines — planner and reviewer `inherit` + read-only, implementer pinned to
+`composer-2.5` (Cursor's own fast model — the fast tier is where Cursor's model differentiates on
+cost); the approval gate stays in the main conversation. Say:
+
+> Maya changes the model pin in one line, the change is a git diff her team reviews, and
+> `/update-rules` flags it if it drifts from the documented policy — a pinned name going stale is
+> a managed drift surface with an owner and a cadence, not a surprise.
+
 ## Exact command
 
 Run:

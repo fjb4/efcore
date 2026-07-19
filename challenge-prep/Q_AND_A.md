@@ -14,6 +14,69 @@ own telemetry. Use the same task class, outcome definition, and quality gates fo
 The differentiator you are testing is repeatable workflow adoption and governance, not a cherry-
 picked code-generation result.
 
+## "Leadership wants to consolidate on one tool — why should that be Cursor?"
+
+Concede the portability up front: the workflow layer is markdown in the customer's repo, and that is
+a feature — Acme owns it. What is not portable is where the consolidation decision actually lives:
+distribution, governance, and measurement at 1,200 seats. Three uncoordinated tools are *why* ROI is
+unclear — nobody can attribute outcomes across ad-hoc workflows. The pilot gives Acme its first
+instrumented workflow (baseline, evidence ledger, named owners, QA/DevOps sign-off) plus the
+enterprise layer — team-rule rollout, admin analytics, AI Code Tracking, model governance — that
+turns it into auditable evidence. Then offer the standard, not the vendor argument: "standardize on
+whichever tool clears this bar — governed workflow in version control, measured ramp and rework on
+real backlog work, transferable ownership, telemetry leadership can audit." Cursor will be the only
+candidate that arrives with data. Before naming an expansion target, find out which tools the two
+stalled teams used and why they stalled.
+
+## "What's your model strategy?"
+
+Both screen interviewers returned to this — answer proactively, as a policy by phase, capability,
+risk, and cost rather than a list of model names (names go stale; the policy shouldn't):
+
+- **Planning and unfamiliar-repository analysis** (`/first-contribution` plan step, `/scope-issue`
+  grounding): a high-context, high-reasoning model — this is where plausible-but-wrong-sibling
+  errors start.
+- **Bounded implementation and mechanical edits** after plan approval: a fast, fit-for-purpose
+  coding model.
+- **Skeptical review of high-risk changes** (`/pre-review`): an independent strong reviewer model
+  plus the deterministic gates — creation and review stay separated.
+- **Auto**: the sane default where Cursor's router has fresher information than a static policy.
+
+This policy is **code, not a memo**: `/first-contribution` delegates planning to the
+`contribution-planner` subagent (`model: inherit`, `readonly`), implementation after human approval
+to `contribution-implementer` (pinned to the fast tier — currently `composer-2.5`, Cursor's own
+fast model, per its pricing table the cheapest agentic option), and `/pre-review` to
+`skeptical-reviewer` (`model: inherit`, `readonly`). The policy is defined by phase, capability,
+risk, and cost; `inherit` avoids naming a model where possible, and the one pinned ID is a
+**declared drift surface** — `/update-rules` checks it against the documented policy table on the
+maintainer's monthly cadence. The approval gate stays in the main conversation, never inside a
+subagent.
+
+Keep the enforcement claim precise: the frontmatter is a **paved-road default** — bypassable, but a
+bypass is a visible git diff and `/update-rules` reports divergence from the documented policy as
+drift. The technically enforced boundary is the admin dashboard's model allow/blocklist, which
+overrides frontmatter (with silent fallback to a compatible model). For Finance: the policy is a
+governed cost lever — expensive reasoning is spent only where it buys correctness.
+
+## "Which of these controls are actually enforced?"
+
+Answer as a placement exercise on a five-tier ladder — agentic review and deterministic CI are not
+interchangeable:
+
+1. **Assistive, voluntary** — rules and skills: context the agent uses; nothing stops an engineer
+   working without them.
+2. **Team standard, bypassable** — the commands (`/first-contribution`, `/pre-review`) and the
+   subagent model/`readonly` frontmatter: the paved road, adopted because it is the easiest correct
+   path, not because it is forced — and any bypass is a visible git diff.
+3. **Policy-enforced in the tool** — hooks, sandbox, admin allowlists (models, MCP): positioned
+   scale steps, enabled after Acme approves the design.
+4. **Deterministically enforced in CI** — the fork gates: format, analyzers, API baseline, focused
+   tests. Non-negotiable.
+5. **Independently reviewed** — Bugbot plus human maintainer review: authoritative judgment.
+
+Speed comes from tiers 1–2; trust comes from tiers 4–5; tier 3 is where enterprise governance grows
+once the workflow earns it. Never present tier 1–2 assets as security controls.
+
 ## "Why not make Maya the primary champion?"
 
 Maya is the essential technical champion and co-builder, but she has limited executive reach and
@@ -35,9 +98,13 @@ PR, rework, and design-to-deploy connect usage to speed, quality, and delivered 
 
 ## "Why not senior-engineer interrupts?"
 
-It is directionally valuable but usually depends on self-reporting and can be distorted by task
-difficulty or team culture. Track it as supporting evidence if Acme already has a credible method.
-Do not displace a more auditable primary metric during a short pilot.
+Treat this as a deliberate demotion, not an oversight — senior capacity reclaimed is the most direct
+bridge to business value and carried the technical-screen story. But it usually depends on
+self-reporting and is distorted by task difficulty and team culture, so in a short pilot it should
+not displace a timestamp-auditable primary metric. It stays a named supporting measure (the
+dashboard has a weekly interrupt-pulse table). If David's or Priya's decision hinges on senior
+capacity, elevate it to primary and demote design-to-deploy — the ledger design supports either;
+say the trade out loud.
 
 ## "What is a meaningful PR?"
 
@@ -154,9 +221,11 @@ Priya a defensible early curve, labeled exactly that — not a completed cohort 
 ## "Rules drift as the library evolves — who maintains this in six months?"
 
 The pointer design: rules cite the team's own conventions docs, so those stay the single source of
-truth; only the deltas (repo geography, glob scoping) can drift, and `/update-rules` — a read-only
-drift check — diffs the layer against the current docs on the maintainer's monthly cadence. Owner:
-Maya, ratified as a team goal.
+truth; only the deltas (repo geography, glob scoping) and the pinned model ID in the implementer
+subagent can drift, and `/update-rules` — a read-only drift check — diffs the layer against the
+current docs, repo shape, and model-policy table on the maintainer's monthly cadence. Model names
+change and new models ship; the pin is registered in the policy table precisely so its staleness
+is detected, not discovered. Owner: Maya, ratified as a team goal.
 
 ## "Show me it working on something you didn't rehearse."
 
