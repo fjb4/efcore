@@ -29,7 +29,7 @@ Three moves:
    and rework taxonomy, Marcus (DevOps) the CI and permission boundaries, Ravi (PM)
    the task rubric — owned artifacts, not sign-offs, and each proves a change to
    their piece before handoff. That's the seed of the software factory you described:
-   builders across roles, and a paved road expansion can scale.
+   builders across roles and a governed paved road the next team can adopt.
 2. **Paired pilot (weeks 2–3).** A small cohort ships real changes through the
    workflow: scoped issue → grounded plan with human approval → build → skeptical
    pre-review → CI. We capture timestamps, review cycles, interventions, and
