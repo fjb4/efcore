@@ -37,7 +37,7 @@ nothing here to fall out of sync **except** the deltas, which is the one thing t
 | `commands/start-onboarding-pilot.md` | `/start-onboarding-pilot <context>` — baseline, co-design, and hand off a measured pilot. |
 | `commands/renewal-evidence.md` | `/renewal-evidence [pilot path]` — audit outcome evidence without inventing missing data. |
 | `commands/update-rules.md` | `/update-rules [scope]` — drift check: diff this layer against its sources of truth (read-only). |
-| `agents/contribution-planner.md` | Subagent for `/first-contribution` Step 1. `model: inherit`, `readonly` — planning gets the high-reasoning tier and cannot edit. |
+| `agents/contribution-planner.md` | Subagent for `/first-contribution` Step 1. `model: inherit`, `readonly` — planning inherits the deliberately selected parent model and cannot edit. |
 | `agents/contribution-implementer.md` | Subagent for `/first-contribution` Steps 2–3, after human approval. Explicit Composer binding (`model: composer-2.5`) — cost-efficient bounded execution, not maximum reasoning depth. |
 | `agents/skeptical-reviewer.md` | Subagent behind `/pre-review`. `model: inherit`, `readonly` — fresh context, strong model, cannot edit. |
 | [`../tools/onboarding-metrics/`](../tools/onboarding-metrics/ramp_metrics.py) | Mines ramp metrics (time-to-first-PR, rework) from real PR history; feeds the evidence ledger. |
