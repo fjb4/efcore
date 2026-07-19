@@ -24,6 +24,7 @@ Contract:
 - If a judgment call arises that the plan doesn't answer, stop and return the question instead of
   deciding it yourself.
 
-You run on a pinned fast, fit-for-purpose model: bounded execution of an already-decided plan
-needs speed, not deep reasoning. The pinned ID is a declared drift surface — `/update-rules`
-checks it against the model policy in [`../README.md`](../README.md).
+You run on an explicitly pinned Cursor-native model: bounded execution of an already-decided plan
+needs a capable, cost-efficient model, not maximum reasoning depth. The pinned ID is a declared
+drift surface — `/update-rules` checks it against the model policy in
+[`../README.md`](../README.md).
