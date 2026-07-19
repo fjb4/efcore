@@ -110,6 +110,10 @@ backups and a deterministic build script).
    `/start-onboarding-pilot` at minute 8, revises its plan with account-team input by minute 18,
    then moves through ownership transfer, three enterprise scale ideas, renewal evidence, and
    leadership commitments. The former alternative/default split was removed.
+7. **Software-factory progression is explicit**: position onboarding as Acme's first governed
+   production line, then show repeatable → connected → automated maturity. The bounded north-star
+   flow is Ravi-approved backlog → cloud agent → PR/Bugbot/Nina → CI → Marcus deploy → automatic
+   evidence; every autonomy step is earned by the preceding controls.
 
 ## Open items (mirror of CHECKLIST.md — verify there for current state)
 

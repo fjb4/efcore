@@ -165,16 +165,41 @@ Pull the interviewers in:
 Decision to land: Acme owns every operating artifact, the SA has a planned exit, and expansion
 requires a successful second-user run.
 
-## 27:00-34:00 - Show how the wedge becomes an enterprise operating model
+## 27:00-34:00 - Show the software-factory progression
 
-Lead with only three enterprise ideas:
+Say:
 
-1. **Govern the fragmentation** — preserve model choice while consolidating access controls, spend
-   policy, and telemetry in one surface.
-2. **Scale the paved road** — universal controls live centrally; repo-specific workflows remain
-   versioned and team-owned, distributed through a Team Marketplace plugin.
-3. **Connect adoption to outcomes** — Cursor telemetry proves exposure and workflow usage;
-   Git/review/CI/deploy evidence proves whether ramp, quality, and delivery improved.
+> We are not proposing an autonomous factory on day one. This pilot creates Acme's first governed
+> production line: plan, approve, build, review, test, and deploy with named owners and evidence.
+> Once that line proves safe, we connect it to Acme's systems, distribute it across teams, and
+> delegate bounded work to cloud agents without removing the human, CI, or deployment controls.
+
+Walk the progression:
+
+| Stage | Operating model | Control that must hold |
+|---|---|---|
+| **Pilot: repeatable** | Human-gated commands, repository rules, subagents, CI, evidence capture | Approved plan, human review, deterministic CI |
+| **Connected: governed** | MCP supplies issue/PR/CI context; hooks capture or block; Bugbot reviews; Team Marketplace distributes | Least privilege, admin policy, Nina/Marcus approval |
+| **Scaled: automated** | Cloud agents execute bounded approved work; scheduled automation checks drift and refreshes evidence | Scoped environment/secrets, PR review, CI, Marcus-controlled deploy |
+
+Make the north-star factory job concrete:
+
+```text
+Ravi-approved backlog item
+        ↓
+bounded cloud-agent execution
+        ↓
+PR + Bugbot/Nina review
+        ↓
+deterministic CI
+        ↓
+Marcus-controlled deployment
+        ↓
+automatic evidence capture
+```
+
+This progression does three enterprise jobs: govern Acme's fragmented tool usage, scale a
+team-owned paved road, and connect Cursor adoption to delivery outcomes.
 
 Ask the field-engineer role:
 

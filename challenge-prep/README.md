@@ -211,6 +211,38 @@ decisions, evidence, risks, and the next specific ask.
 
 ## Cursor-specific positioning
 
+### Software-factory progression
+
+The onboarding wedge is Acme's **first governed production line**, not the final factory. Make the
+automation path explicit:
+
+| Stage | Operating model | Control that must hold |
+|---|---|---|
+| **Pilot: repeatable** | Human-gated commands, repository rules, subagents, CI, evidence capture | Approved plan, human review, deterministic CI |
+| **Connected: governed** | MCP supplies issue/PR/CI context; hooks capture or block; Bugbot reviews; Team Marketplace distributes | Least privilege, admin policy, Nina/Marcus approval |
+| **Scaled: automated** | Cloud agents execute bounded approved work; scheduled automation checks drift and refreshes evidence | Scoped environment/secrets, PR review, CI, Marcus-controlled deploy |
+
+The bounded future-state job is:
+
+```text
+Ravi-approved backlog item
+        ↓
+bounded cloud-agent execution
+        ↓
+PR + Bugbot/Nina review
+        ↓
+deterministic CI
+        ↓
+Marcus-controlled deployment
+        ↓
+automatic evidence capture
+```
+
+Automation increases only after the prior stage proves safe and team-owned. Do not imply that
+Cursor bypasses the customer's issue authority, human review, CI, or deployment controls.
+
+### Capability choices
+
 Use only the capabilities that serve the account:
 
 - **Project rules** carry the library's conventions in version control.

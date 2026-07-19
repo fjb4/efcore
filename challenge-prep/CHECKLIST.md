@@ -18,6 +18,9 @@
 - [ ] Rehearse the screen-gap corrections until automatic: capability map first, the
       one-breath model policy, and the five-tier enforcement ladder (both interviewers
       raised model strategy in the screen — assume it returns)
+- [ ] Rehearse the software-factory progression in under 3 minutes: repeatable → connected →
+      automated; land the bounded backlog-item → cloud agent → review → CI → deploy → evidence
+      flow without implying that Cursor bypasses customer controls
 - [ ] **Day before session:** send `ENGAGEMENT_EMAIL.md` to the HM with the confirmed
       subject line
 - [ ] Keep the Scenario Pack names visible in-session: ADM (unnamed — ask), Maya Chen

@@ -26,6 +26,12 @@ policy out loud:
 > static policy. The routing is policy-as-code in the subagent frontmatter; the enforced boundary
 > is the admin model allowlist.
 
+Close the architecture setup with:
+
+> This is Acme's first governed production line, not the whole software factory. The foreground
+> workflow proves the line; connected systems, team distribution, and bounded cloud execution are
+> earned scale stages after its controls hold.
+
 Then the one-line proof: open the three files under `.cursor/agents/` and point at the `model:`
 and `readonly:` lines — planner and reviewer `inherit` + read-only, implementer pinned to
 `composer-2.5` (Cursor's own coding model, a cost-efficient native binding; do **not** call it
@@ -127,4 +133,3 @@ If Cursor does not discover the new commands:
 - Start a fresh Agent conversation or reload the window.
 - Open the command file directly and ask Agent to follow it with the same Acme input.
 - State that fallback honestly; do not pretend slash-command discovery worked.
-
