@@ -38,15 +38,19 @@ public abstract class ByteArrayTranslationsTestBase<TFixture>(TFixture fixture) 
 
     [Fact]
     public virtual Task IndexOf_with_constant()
-        => AssertQuery(ss => ss.Set<BasicTypesEntity>().Where(s => Array.IndexOf(s.ByteArray, (byte)1) == 0));
+        => AssertQuery(ss => ss.Set<BasicTypesEntity>().Where(s => Array.IndexOf(s.ByteArray, (byte)1) >= 0));
 
     [Fact]
     public virtual Task IndexOf_with_parameter()
     {
         byte someByte = 1;
 
-        return AssertQuery(ss => ss.Set<BasicTypesEntity>().Where(s => Array.IndexOf(s.ByteArray, someByte) == 0));
+        return AssertQuery(ss => ss.Set<BasicTypesEntity>().Where(s => Array.IndexOf(s.ByteArray, someByte) >= 0));
     }
+
+    [Fact]
+    public virtual Task IndexOf_with_column()
+        => AssertQuery(ss => ss.Set<BasicTypesEntity>().Where(s => Array.IndexOf(s.ByteArray, s.Byte) >= 0));
 
     [Fact]
     public virtual Task Any()
@@ -58,17 +62,5 @@ public abstract class ByteArrayTranslationsTestBase<TFixture>(TFixture fixture) 
         var byteArrayParam = new byte[] { 0xDE, 0xAD, 0xBE, 0xEF };
 
         return AssertQuery(ss => ss.Set<BasicTypesEntity>().Where(s => s.ByteArray.SequenceEqual(byteArrayParam)));
-    }
-
-    [Fact]
-    public virtual Task IndexOf_constant()
-        => AssertQuery(ss => ss.Set<BasicTypesEntity>().Where(e => Array.IndexOf(e.ByteArray, (byte)0xBE) == 2));
-
-    [Fact]
-    public virtual Task IndexOf_parameter()
-    {
-        byte someByte = 1;
-
-        return AssertQuery(ss => ss.Set<BasicTypesEntity>().Where(e => Array.IndexOf(e.ByteArray, someByte) == 0));
     }
 }

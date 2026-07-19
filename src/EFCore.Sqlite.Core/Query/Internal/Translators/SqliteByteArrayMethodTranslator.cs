@@ -32,19 +32,23 @@ public class SqliteByteArrayMethodTranslator(ISqlExpressionFactory sqlExpression
             && arguments is [var source, var item]
             && source.Type == typeof(byte[]))
         {
-            return sqlExpressionFactory.GreaterThan(
-                TranslateInstr(source, item),
-                sqlExpressionFactory.Constant(0));
-        }
+            var value = item is SqlConstantExpression constantValue
+                ? sqlExpressionFactory.Constant(new[] { (byte)constantValue.Value! }, source.TypeMapping)
+                : sqlExpressionFactory.Function(
+                    "char",
+                    [item],
+                    nullable: false,
+                    argumentsPropagateNullability: Statics.FalseArrays[1],
+                    typeof(string));
 
-        if (method.DeclaringType == typeof(Array)
-            && method.Name == nameof(Array.IndexOf)
-            && arguments is [var indexOfSource, var indexOfItem]
-            && indexOfSource.Type == typeof(byte[]))
-        {
-            return sqlExpressionFactory.Subtract(
-                TranslateInstr(indexOfSource, indexOfItem),
-                sqlExpressionFactory.Constant(1));
+            return sqlExpressionFactory.GreaterThan(
+                sqlExpressionFactory.Function(
+                    "instr",
+                    [source, value],
+                    nullable: true,
+                    argumentsPropagateNullability: Statics.TrueArrays[2],
+                    typeof(int)),
+                sqlExpressionFactory.Constant(0));
         }
 
         if (method.IsGenericMethod
@@ -63,11 +67,11 @@ public class SqliteByteArrayMethodTranslator(ISqlExpressionFactory sqlExpression
                 sqlExpressionFactory.Constant(0));
         }
 
-        if (method.IsGenericMethod
-            && method.DeclaringType == typeof(Array)
+        if (method.DeclaringType == typeof(Array)
             && method.Name == nameof(Array.IndexOf)
             && arguments is [var indexOfSource, var indexOfItem]
-            && indexOfSource.Type == typeof(byte[]))
+            && indexOfSource.Type == typeof(byte[])
+            && indexOfItem.Type == typeof(byte))
         {
             var value = indexOfItem is SqlConstantExpression constantValue
                 ? sqlExpressionFactory.Constant(new[] { (byte)constantValue.Value! }, indexOfSource.TypeMapping)
@@ -89,25 +93,6 @@ public class SqliteByteArrayMethodTranslator(ISqlExpressionFactory sqlExpression
         }
 
         return null;
-    }
-
-    private SqlExpression TranslateInstr(SqlExpression source, SqlExpression item)
-    {
-        var value = item is SqlConstantExpression constantValue
-            ? sqlExpressionFactory.Constant(new[] { (byte)constantValue.Value! }, source.TypeMapping)
-            : sqlExpressionFactory.Function(
-                "char",
-                [item],
-                nullable: false,
-                argumentsPropagateNullability: Statics.FalseArrays[1],
-                typeof(string));
-
-        return sqlExpressionFactory.Function(
-            "instr",
-            [source, value],
-            nullable: true,
-            argumentsPropagateNullability: Statics.TrueArrays[2],
-            typeof(int));
     }
 
     // See issue#16428
