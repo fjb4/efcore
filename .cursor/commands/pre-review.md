@@ -16,6 +16,13 @@ text after this command is the argument — a file list, path glob, or diff rang
 `/pre-review src/EFCore.Sqlite.Core/` or `/pre-review abc123..def456`). When present, review that
 instead of the default change set.
 
+**Orchestration (independent review):** delegate the review to the `skeptical-reviewer` subagent —
+it starts with fresh context (no anchoring from the conversation that produced the change), runs
+`readonly: true` (it cannot edit), and inherits a strong model per the model policy in
+`.cursor/README.md`. Pass any scope argument through unchanged and relay its report without
+softening it. If subagent dispatch is unavailable, run the steps below in a **new** conversation
+and say so.
+
 ## Step 1 — Gather the diff
 
 List the changed files, grouped by project, and note which layer each belongs to (per

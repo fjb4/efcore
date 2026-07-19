@@ -5,7 +5,8 @@ description: Diff the Cursor onboarding layer against its sources of truth and r
 
 # Update rules (drift check)
 
-Check the onboarding layer (`.cursor/rules/`, `.cursor/commands/`, `.cursor/README.md`) against
+Check the onboarding layer (`.cursor/rules/`, `.cursor/commands/`, `.cursor/agents/`,
+`.cursor/README.md`) against
 the sources of truth it points at, and report where the layer has drifted. The layer's design is
 *point, don't copy* — so the only things that can rot are the pointers and the deltas. This
 command finds both. Produce a report — **do not edit, create, or delete any files** unless
@@ -18,7 +19,8 @@ check the whole layer.
 
 ## Step 1 — Inventory the layer
 
-List every rule (with its frontmatter: `alwaysApply` or `globs`) and every command in scope, plus
+List every rule (with its frontmatter: `alwaysApply` or `globs`), every command, and every
+subagent under `.cursor/agents/` (with its frontmatter: `model`, `readonly`) in scope, plus
 the `.cursor/README.md` table. Note which sources of truth each one points at — the maintainer
 conventions doc (`.github/copilot-instructions.md`), the area skills (`.agents/skills/`),
 `.github/CONTRIBUTING.md`, and the issue templates.
@@ -56,14 +58,22 @@ the rule adds beyond pointing):
   tests)? A gate added to one side but not the other breaks "agent suggests, CI enforces".
 - **Command wiring:** do commands that hand off to each other (`/scope-issue` →
   `/first-contribution` → `/pre-review`; `/start-onboarding-pilot` → `/renewal-evidence`) still
-  describe each other's inputs and outputs accurately? Does the README table list every command
-  and rule that exists — and nothing that doesn't?
+  describe each other's inputs and outputs accurately? Do commands delegate only to subagents that
+  exist under `.cursor/agents/`, and does every agent's pointer to the command steps it executes
+  still resolve? Does the README table list every command, rule, and agent that exists — and
+  nothing that doesn't?
+- **Model-policy mirror:** do the subagent frontmatter fields still match the model-orchestration
+  table in `.cursor/README.md` — planner and reviewer `model: inherit` + `readonly: true`,
+  implementer pinned to the fast-tier ID the table names? The pinned ID is a declared drift
+  surface: if it no longer exists, is no longer the sensible fast tier, or diverges from the
+  table, that is drift. So is a frontmatter edit that departs from the documented policy, or a
+  command that silently stops delegating to its subagent.
 
 ## Step 5 — Report
 
 Output findings grouped by severity, most serious first, each with the file, the kind of drift
 (**broken pointer / contradicted delta / duplicated delta / stale glob / stale map / CI-mirror
-gap / wiring gap**), the evidence (what the source or repo says now), and the minimal proposed
+gap / wiring gap / model-policy gap**), the evidence (what the source or repo says now), and the minimal proposed
 fix:
 
 - **Blocking** — broken pointers and contradicted deltas: the layer is actively giving wrong

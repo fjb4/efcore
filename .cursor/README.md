@@ -37,14 +37,39 @@ nothing here to fall out of sync **except** the deltas, which is the one thing t
 | `commands/start-onboarding-pilot.md` | `/start-onboarding-pilot <context>` — baseline, co-design, and hand off a measured pilot. |
 | `commands/renewal-evidence.md` | `/renewal-evidence [pilot path]` — audit outcome evidence without inventing missing data. |
 | `commands/update-rules.md` | `/update-rules [scope]` — drift check: diff this layer against its sources of truth (read-only). |
+| `agents/contribution-planner.md` | Subagent for `/first-contribution` Step 1. `model: inherit`, `readonly` — planning gets the high-reasoning tier and cannot edit. |
+| `agents/contribution-implementer.md` | Subagent for `/first-contribution` Steps 2–3, after human approval. Pinned to the fast tier (`model: composer-2.5`) — bounded execution, not deep reasoning. |
+| `agents/skeptical-reviewer.md` | Subagent behind `/pre-review`. `model: inherit`, `readonly` — fresh context, strong model, cannot edit. |
 | [`../tools/onboarding-metrics/`](../tools/onboarding-metrics/ramp_metrics.py) | Mines ramp metrics (time-to-first-PR, rework) from real PR history; feeds the evidence ledger. |
 | [`../.github/workflows/ramp-metrics.yml`](../.github/workflows/ramp-metrics.yml) | Scheduled/dispatch wrapper so the team owns the metrics refresh after handoff. |
 | [`../.cursorignore`](../.cursorignore) | Keeps agent context on the source of truth and off build noise / private docs. |
 | [`../.github/workflows/cursor-onboarding-checks.yml`](../.github/workflows/cursor-onboarding-checks.yml) | The fast SQLite guardrail CI. "Agent suggests, CI enforces." |
 
 **How they fit:** rules are the always-available context; commands are the workflows that cite those
-rules by name; CI is the enforcement backstop. `/pre-review` is deliberately the *local mirror* of
-the four CI gates, so problems surface before the push, not after.
+rules by name; the subagents under `agents/` are the model policy as code — commands delegate each
+phase to an agent whose frontmatter pins the model tier and write access, while the human approval
+gate stays in the main conversation; CI is the enforcement backstop. `/pre-review` is deliberately
+the *local mirror* of the four CI gates, so problems surface before the push, not after.
+
+## Model orchestration (policy as code)
+
+Phase-appropriate models, expressed in versioned subagent frontmatter rather than a memo:
+
+| Phase | Agent | Frontmatter | Why |
+|-------|-------|-------------|-----|
+| Plan / repository analysis | `contribution-planner` | `model: inherit`, `readonly: true` | High-context reasoning is spent where wrong-sibling errors start. |
+| Bounded implementation | `contribution-implementer` | `model: composer-2.5` | Executing an approved plan needs speed, not depth — pinned to the fast tier. |
+| Skeptical review | `skeptical-reviewer` | `model: inherit`, `readonly: true` | Strong model, fresh unanchored context, cannot edit. |
+
+The policy is defined by **phase, capability, risk, and cost** — the frontmatter is just its
+current binding. `inherit` avoids naming a model wherever the phase should simply run at the main
+agent's reasoning level; the one **pinned ID** (the implementer's fast model) is a concrete name
+because that is what the product's `model` field takes, and a concrete name goes stale — so it is a
+**declared drift surface**: `/update-rules` checks the frontmatter against this table on the
+maintainer's monthly cadence, and changing the pin is a one-line, reviewable git diff. This routing
+is a **paved-road default, not an enforcement claim**: the enforced boundary is the team admin's
+model allow/blocklist, which overrides frontmatter (Cursor falls back to a compatible model when a
+requested one is blocked or unavailable). Deterministic enforcement remains CI's job.
 
 ## Extending it
 
@@ -63,6 +88,14 @@ the four CI gates, so problems surface before the push, not after.
 the steps, **cite the applicable rules by name** (don't re-derive conventions), stop for approval
 before editing when the command writes code, and end with a **Guardrails** block (approved context,
 fork-only, draft-vs-act). Reference the matching skill instead of restating it.
+
+**Add a subagent** (`agents/*.md`): only when a phase needs different context isolation, write
+access, or model tier than the conversation it runs in — otherwise a command is enough. The
+frontmatter carries the policy (`model`, `readonly`); the body should *point* at the command steps
+it executes, never restate them. If you pin a concrete model ID, **add it to the
+[model-orchestration table](#model-orchestration-policy-as-code)** — that table is the registry of
+pins `/update-rules` checks, so a pinned name gets adjusted when models change or better-fit ones
+ship, instead of silently rotting in frontmatter nobody rereads.
 
 **Change the CI:** `cursor-onboarding-checks.yml` is intentionally SQLite-only and single-runner to
 stay under ~10 minutes — it is *not* the maintainers' full `Build.yml`. Keep new gates fast and
@@ -89,5 +122,9 @@ local; heavy provider/matrix coverage belongs in the upstream workflow, not here
   deltas.
 - **Letter vs. intent.** Rules encode conventions the model can check mechanically; they don't
   replace reviewer judgment. `/pre-review` is advisory — CI and a human are still the gate.
+- **Routing is a default, not a lock.** Subagent `model:` frontmatter is a paved-road choice —
+  editable (visibly, in git) and subject to silent fallback when the admin allowlist blocks a
+  model. The allowlist is the boundary and CI the enforcement; never present the routing itself as
+  a control.
 - **Local scope.** Verification here is SQLite-only by environment constraint; SQL Server / Cosmos
   coverage is left to the maintainers' full CI.
