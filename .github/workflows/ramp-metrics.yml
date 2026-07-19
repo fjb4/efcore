@@ -1,0 +1,42 @@
+name: Ramp metrics
+
+# Refreshes the onboarding-pilot ramp dashboard from real PR history.
+# Owned by the team after handoff (see /start-onboarding-pilot, /renewal-evidence).
+# Once the pilot cohort is fixed, pin the logins below and enable the weekly schedule.
+
+on:
+  workflow_dispatch:
+    inputs:
+      authors:
+        description: Comma-separated GitHub logins (the pilot cohort)
+        required: true
+      ramp_days:
+        description: Ramp window in days
+        default: "90"
+  # schedule:
+  #   - cron: "0 6 * * 1"  # requires pinned cohort logins instead of inputs
+
+permissions:
+  contents: read
+
+jobs:
+  ramp-metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate dashboard
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 tools/onboarding-metrics/ramp_metrics.py \
+            --repo "$GITHUB_REPOSITORY" \
+            --authors "${{ inputs.authors }}" \
+            --ramp-days "${{ inputs.ramp_days }}" \
+            --out metrics/ramp-dashboard.md
+
+      - name: Upload dashboard
+        uses: actions/upload-artifact@v4
+        with:
+          name: ramp-dashboard
+          path: metrics/ramp-dashboard.md

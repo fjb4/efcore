@@ -67,6 +67,31 @@ public class SqliteByteArrayMethodTranslator(ISqlExpressionFactory sqlExpression
                 sqlExpressionFactory.Constant(0));
         }
 
+        if (method.DeclaringType == typeof(Array)
+            && method.Name == nameof(Array.IndexOf)
+            && arguments is [var indexOfSource, var indexOfItem]
+            && indexOfSource.Type == typeof(byte[])
+            && indexOfItem.Type == typeof(byte))
+        {
+            var value = indexOfItem is SqlConstantExpression constantValue
+                ? sqlExpressionFactory.Constant(new[] { (byte)constantValue.Value! }, indexOfSource.TypeMapping)
+                : sqlExpressionFactory.Function(
+                    "char",
+                    [indexOfItem],
+                    nullable: false,
+                    argumentsPropagateNullability: Statics.FalseArrays[1],
+                    typeof(string));
+
+            return sqlExpressionFactory.Subtract(
+                sqlExpressionFactory.Function(
+                    "instr",
+                    [indexOfSource, value],
+                    nullable: true,
+                    argumentsPropagateNullability: Statics.TrueArrays[2],
+                    typeof(int)),
+                sqlExpressionFactory.Constant(1));
+        }
+
         return null;
     }
 

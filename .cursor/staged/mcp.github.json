@@ -1,0 +1,25 @@
+{
+  "_staged": "NOT ENABLED. This file is inert here — Cursor only loads .cursor/mcp.json. It becomes live only after Marcus's security review, by copying it to .cursor/mcp.json with a real token supplied at enable time. See .cursor/staged/README.md.",
+  "_design": {
+    "job": "Pull issue, PR, review, and CI evidence into /scope-issue, /first-contribution, and /renewal-evidence without manual transcription.",
+    "privilege": "Read-only by design: GITHUB_READ_ONLY=1 plus a fine-grained personal access token scoped to this repository with read-only permissions. No write path to issues, PRs, or code.",
+    "token_handling": "The token is never committed. It is injected from the environment at enable time by the person who owns the credential.",
+    "toolsets": "Restricted to issues, pull_requests, and actions — the three surfaces the evidence ledger reads. Everything else stays off until a workflow earns it.",
+    "review_gate": "Marcus (DevOps/platform) approves scopes, token custody, and egress before this leaves staged/."
+  },
+  "mcpServers": {
+    "github-readonly": {
+      "command": "docker",
+      "args": [
+        "run", "-i", "--rm",
+        "-e", "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "-e", "GITHUB_READ_ONLY=1",
+        "-e", "GITHUB_TOOLSETS=issues,pull_requests,actions",
+        "ghcr.io/github/github-mcp-server"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "<injected at enable time: fine-grained PAT, read-only, this repository only>"
+      }
+    }
+  }
+}
