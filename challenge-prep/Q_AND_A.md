@@ -175,7 +175,14 @@ remain the actual gates.
 Not on day one by default. After security review, least-privilege MCP can pull issue, PR, review,
 and CI evidence without manual transcription. Cloud agents or automations can handle bounded,
 repeatable work once the foreground workflow, environment, permissions, and review gates are
-proven. Do not use automation to outrun governance.
+proven — and the staging is concrete, not hand-wavy: cloud agents run in Cursor-managed VMs with
+**read-write repository access**, managed secrets, and network access, and require an account
+admin to connect source control and set spend limits first. That privilege grant is Marcus's
+(DevOps) security-review gate, earned by the foreground workflow's evidence. First automation in
+line: the monthly `/update-rules` drift check (report-only). PR-review-at-scale is **not** an
+automation use case — that's Bugbot, the productized version. The ramp-metrics refresh stays on
+team-owned GitHub Actions: evidence leadership audits shouldn't be generated inside the vendor's
+own surface. Do not use automation to outrun governance.
 
 ## "How is this defensible to Finance?"
 
@@ -229,7 +236,11 @@ truth; only the deltas (repo geography, glob scoping) and the pinned model ID in
 subagent can drift, and `/update-rules` — a read-only drift check — diffs the layer against the
 current docs, repo shape, and model-policy table on the maintainer's monthly cadence. Model names
 change and new models ship; the pin is registered in the policy table precisely so its staleness
-is detected, not discovered. Owner: Maya, ratified as a team goal.
+is detected, not discovered. Owner: Maya, ratified as a team goal. The designed next step
+(verified product, not built here): a monthly **scheduled automation** — Cursor automations run
+cloud agents on a cron schedule — executes `/update-rules` report-only with `Team Owned`
+visibility, so the cadence stops depending on a human remembering; Maya reviews the report
+instead of producing it.
 
 ## "Show me it working on something you didn't rehearse."
 

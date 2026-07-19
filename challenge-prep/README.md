@@ -216,7 +216,12 @@ Use only the capabilities that serve the account:
   staged option to name in the capability map, not a day-one need.
 - **Hooks** can add audit/measurement or block unsafe actions after Acme approves the design.
 - **MCP** can connect issue, PR, CI, and documentation systems after least-privilege review.
-- **Cloud agents/automations** are a scale step after the foreground workflow has earned trust.
+- **Cloud agents/automations** are a scale step after the foreground workflow has earned trust —
+  and the gate is specific: cloud agents run in Cursor-managed VMs with read-write repo access,
+  managed secrets, and network access, behind admin-connected source control and spend limits
+  (Marcus's security review). The first automation in line is the monthly scheduled
+  `/update-rules` drift check, report-only, `Team Owned` visibility — the layer's maintenance
+  cadence stops depending on a human remembering.
 - **Team rules and admin analytics** support organization-wide governance and adoption evidence.
 
 ### Differentiators vs Codex and Claude Code (verified against cursor.com 2026-07-19)
@@ -249,7 +254,10 @@ verified; do not embellish beyond what is listed.
   (including self-hosted/Data Center; useful while Acme's SCM is unknown), governed at team
   level (per-repo enable, org-wide rules, effort levels, autofix behavior). Honest detail to
   state unprompted: its CI status is **neutral by default** — fail-on-unresolved-issues must be
-  explicitly enabled. Bugbot supplements human review; it does not replace it.
+  explicitly enabled. Bugbot supplements human review; it does not replace it. Boundary line:
+  PR-event **automations** that re-run a reviewer would be hand-rolling Bugbot — use the product
+  for PR review at scale; automations are for the workflows Bugbot doesn't cover (e.g. the
+  scheduled drift check).
 
 Plan gating: the Admin API, Conversation Insights, and org-wide enforcement are
 Enterprise-plan-gated — a fit for a 1,200-seat account, but say "Enterprise plan" when citing
