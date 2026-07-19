@@ -6,26 +6,33 @@ address them by name, and ask them to flex roles explicitly.
 ## Board setup (prepare before the session — Excalidraw + Cursor)
 
 Two surfaces, deliberate transitions: **Excalidraw** shows discovery and alignment; **Cursor**
-shows implementation, governance, review, and evidence. Prepare one 16:9 Excalidraw canvas, all
-content in a single viewport (trim content to fit — no zooming or panning mid-session), simple
-rectangles/arrows, large text, background elements locked:
+shows implementation, governance, review, and evidence. The prepared board is
+`ACME_WORKING_SESSION_BOARD.excalidraw`; `ACME_WORKING_SESSION_BOARD.png` and
+`ACME_WORKING_SESSION_BOARD.svg` are static fallbacks. Its source and SVG can be regenerated with
+`node challenge-prep/build_excalidraw_board.mjs`. Open the `.excalidraw` file for native editable
+objects; the PNG and SVG are intentionally static.
 
-1. **Decision board** — the four columns from this card: confirmed / changed / owner / next
-   action.
-2. **The Acme operating loop** — the named-people diagram from the 7:00–12:00 block below
+Use the one 16:9 canvas with all content in a single viewport (no zooming or panning mid-session),
+simple rectangles/arrows, and large text. All prepared content is natively editable; only the
+outer canvas boundary is locked.
+
+1. **Live decisions** — four large editable cards: renewal proof / pilot change / owner / next
+   move.
+2. **The Acme operating loop** — the named-people diagram from the 18:00–27:00 block below
    (Ravi → new joiner → plan → approval → build → Nina → Marcus, David owns outcome, Priya
    decides scale). Not a generic vendor loop: account names, not methodology stages.
-3. **Success measures** — the metrics table (metric / source / owner / renewal decision),
-   trimmed to fit. Weekly-active stays a supporting measure; the board must not re-promote it.
+3. **Success-measure anchors** — only the three metric names and owners. Definitions, sources, and
+   decisions stay in the session card rather than crowding the canvas. Weekly-active remains a
+   supporting measure.
 
 Color legend, printed on-canvas in gray: **gray** prepared context · **blue** confirmed live ·
 **amber** changed assumption or risk · **green** action + owner.
 
-**Blanks are pre-mapped, not improvised** — leave 4–6 fields empty, each answered by a question
-this card already asks: the ADM's missed renewal risk (0:00 block), Finance's price-vs-
-standardization framing (2:00), the field engineer's blocking dependency (7:00), the ADM's most
-useful weekly artifact (12:00), the RD's evidence-threshold judgment (31:00), the expansion
-target (co-build). Empty blanks at minute 25 mean the questions need to land harder.
+**The four blanks are pre-mapped, not improvised:** renewal proof captures the ADM's missed risk
+and Priya's threshold; pilot change captures the Finance framing or blocking dependency that
+changes the design; owner captures the ADM's preferred weekly artifact and owner; next move
+captures the evidence bar and expansion target. Empty blanks at minute 18 mean the questions need
+to land harder.
 
 Execution discipline: lead verbally and type yourself (3–6 word entries — the invariant is the
 content changing, not calligraphy); never ask interviewers to co-edit or open a link; share the
@@ -33,7 +40,7 @@ content changing, not calligraphy); never ask interviewers to co-edit or open a 
 keep a static screenshot/PDF backup. Do not over-polish — a slightly rough, visibly-being-edited
 board is the point; visible thinking is scored.
 
-## 0:00-2:00 - Open and create the working contract
+## 0:00-3:00 - Open and create the working contract
 
 Say:
 
@@ -54,13 +61,13 @@ Ask the ADM:
 > Priya have to see to repeat this story herself?
 
 **Start the visible decision board now** (the prefilled Excalidraw canvas — see Board setup
-above; four columns: **confirmed / changed / owner / next action**) and keep it updated all
+above; four cards: **renewal proof / pilot change / owner / next move**) and keep it updated all
 session. The board is the
 proof this is a working session: at least one interviewer answer must visibly change the pilot
 plan on it — cohort, evidence threshold, expansion target, or a control. If nothing has changed
 by the co-build block, ask a question whose answer forces a change.
 
-## 2:00-7:00 - Align on decisions and assumptions
+## 3:00-8:00 - Validate decisions and surface blockers
 
 Show the three-decision table:
 
@@ -75,30 +82,11 @@ State the five assumptions from the prep memo. Ask the AE/RD:
 
 Decision to land: one team, one cohort, one agreed outcome definition.
 
-## 7:00-12:00 - Map the customer system
-
-Draw or show:
-
-```
-Ravi: scoped outcome
-        |
-new joiner -> plan -> HUMAN APPROVAL -> build -> Nina review -> Marcus CI/deploy
-                   Maya co-builds                 |
-                         David owns outcome -------+
-                                      |
-                               Priya scale decision
-```
-
-Say:
-
-> The artifact is not the solution by itself. The solution is this operating loop, with named
-> owners and evidence at each handoff.
-
 Ask the field-engineer role:
 
 > Which data or access dependency is most likely to block this in Acme's environment?
 
-## 12:00-22:00 - Use the artifact as a co-build surface
+## 8:00-18:00 - Use the artifact as a co-build surface
 
 Do not repeat the technical screen. Use a short proof:
 
@@ -143,7 +131,24 @@ Then ask the ADM:
 > Which of these artifacts would help you most in the weekly account update: the evidence ledger,
 > the risk/decision log, or the champion quote capture?
 
-## 22:00-31:00 - Co-build and ownership transfer
+## 18:00-27:00 - Co-build, controls, and ownership transfer
+
+Use the operating-loop section of the board:
+
+```
+Ravi: scoped outcome
+        |
+new joiner -> plan -> HUMAN APPROVAL -> build -> Nina review -> Marcus CI/deploy
+                   Maya co-builds                 |
+                         David owns outcome -------+
+                                      |
+                               Priya scale decision
+```
+
+Say:
+
+> The artifact is not the solution by itself. The solution is this operating loop, with named
+> owners and evidence at each handoff.
 
 Walk the three sessions:
 
@@ -155,16 +160,37 @@ Pull the interviewers in:
 
 > As ADM, where would you want a checkpoint rather than a status report?
 
-> As field engineer, what would you require before enabling MCP or a cloud agent?
-
 > As RD, what makes this repeatable enough to matter commercially?
+
+Decision to land: Acme owns every operating artifact, the SA has a planned exit, and expansion
+requires a successful second-user run.
+
+## 27:00-34:00 - Show how the wedge becomes an enterprise operating model
+
+Lead with only three enterprise ideas:
+
+1. **Govern the fragmentation** — preserve model choice while consolidating access controls, spend
+   policy, and telemetry in one surface.
+2. **Scale the paved road** — universal controls live centrally; repo-specific workflows remain
+   versioned and team-owned, distributed through a Team Marketplace plugin.
+3. **Connect adoption to outcomes** — Cursor telemetry proves exposure and workflow usage;
+   Git/review/CI/deploy evidence proves whether ramp, quality, and delivery improved.
+
+Ask the field-engineer role:
+
+> What would you require before enabling MCP, hooks, Bugbot, or a cloud agent for this workflow?
 
 Land:
 
 > Foreground, human-gated work is the pilot. MCP, hooks, team rules, and cloud automation are scale
 > steps after the workflow earns trust.
 
-## 31:00-39:00 - Renewal-defense readout
+Ask the RD:
+
+> Which of these scale steps makes the wedge commercially repeatable, and which would you hold
+> until the second-team result?
+
+## 34:00-40:00 - Renewal-defense readout
 
 Present each metric with definition, source, owner, and decision:
 
@@ -199,7 +225,7 @@ If the consolidation question lands ("pick one tool"), own the evaluation standa
 > candidate Acme can evaluate immediately, because the governed workflow and evidence mechanisms
 > already exist — the pilot is how we earn the customer outcome data.
 
-## 39:00-44:00 - Leadership asks and account-team commitments
+## 40:00-44:00 - Leadership asks and account-team commitments
 
 Name:
 
@@ -227,20 +253,6 @@ Ask:
 
 Stop. Invite Q&A and feedback.
 
-## Alternative run of show (reviewer-proposed — decide while rehearsing)
-
-A reviewer proposed re-timing the session to surface co-creation earlier; adopt it only if the
-timed rehearsals show the current flow reads as a compressed presentation:
-
-- 0:00–3:00 contract, thesis, decision board; 3:00–8:00 validate renewal risk / threshold /
-  cohort / buying decision; 8:00–18:00 run `/start-onboarding-pilot`, inspect and **revise** the
-  plan with the account team; 18:00–27:00 co-build sessions, controls, ownership; 27:00–34:00
-  three enterprise scale ideas; 34:00–40:00 renewal evidence + competitive standard; 40:00–44:00
-  leadership asks + named commitments; 44:00–45:00 close.
-
-Either way, the invariants hold: the decision board stays visible, at least one answer changes
-the plan, and the never-cut list below still applies.
-
 ## If time slips
 
 Cut:
@@ -259,4 +271,3 @@ Never cut:
 - Teach-back/handoff.
 - Internal team asks and owners.
 - Honest evidence labels.
-

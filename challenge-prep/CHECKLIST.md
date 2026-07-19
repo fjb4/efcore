@@ -73,8 +73,8 @@ workflow earns trust."
       Composer 2.5 has Standard ($0.50/$2.50) and Fast ($3/$15) variants; until confirmed, say
       "Cursor-native, cost-efficient," never "the fast model" (pack wording already corrected)
 - [ ] Rehearse the co-creation invariants: visible confirmed/changed/owner/next-action board;
-      at least one interviewer answer visibly changes the pilot plan; decide during timed
-      rehearsal whether to adopt the alternative run of show in WORKING_SESSION_CARD.md
+      at least one interviewer answer visibly changes the pilot plan; follow the adopted
+      early-co-creation run of show in `WORKING_SESSION_CARD.md`
 - [ ] The IndexOf chain reachable as the finished-first-contribution exhibit
       (issue → plan approval → diff/test/SQL → skeptical finding → fix → green CI)
       — **2026-07-19: the branch rebuild had stacked two superseded IndexOf drafts;
@@ -86,9 +86,10 @@ workflow earns trust."
       (2026-07-19 drift check: all pointers resolve, README table matches the layer
       inventory, model-policy frontmatter matches the README table, sources of truth
       unchanged since the rules were written — layer is current)
-- [ ] Screen setup: Cursor + the prefilled Excalidraw board (build it per the Board setup
-      section in `WORKING_SESSION_CARD.md`: three sections, color legend, 4–6 pre-mapped
-      blanks, background locked) + static screenshot/PDF backup; share the entire screen;
-      notifications off
+- [x] Excalidraw board built: `ACME_WORKING_SESSION_BOARD.excalidraw`, with three sections,
+      color legend, native editable rectangles/text/arrows, four pre-mapped live blanks, only
+      the outer boundary locked, and static PNG/SVG backups (2026-07-19)
+- [ ] Screen setup: open Cursor + the board; verify the 1600x900 board is readable at the
+      meeting system's shared-screen resolution; share the entire screen; notifications off
 - [ ] Full demo path timed twice **with the board live** (board typing is the new failure
       mode to time); 8–10 min target, 12 hard cap

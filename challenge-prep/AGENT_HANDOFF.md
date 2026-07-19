@@ -76,7 +76,9 @@ shape, evidence design, asks), `WORKING_SESSION_CARD.md` (minute-by-minute run o
 `DEMO_RUN.md` (8–10 min demo script + recovery paths), `Q_AND_A.md` (objection drills),
 `ENGAGEMENT_EMAIL.md` (send-ahead draft; HM name/subject line pending Ally),
 `INTERVIEW_LOOP.md` (Ally-call questions + the two 30-min interviews), `CHECKLIST.md`
-(**the live to-do list — read it first**).
+(**the live to-do list — read it first**), and `ACME_WORKING_SESSION_BOARD.excalidraw`
+(the native editable 16:9 working board; only its outer boundary is locked, with PNG/SVG static
+backups and a deterministic build script).
 
 ## Key decisions this session (with rationale — don't relitigate)
 
@@ -104,6 +106,10 @@ shape, evidence design, asks), `WORKING_SESSION_CARD.md` (minute-by-minute run o
    fallback to a compatible model) — sources: cursor.com/docs/enterprise/llm-safety-and-controls,
    cursor.com/docs/subagents.md, cursor.com/docs/models. Per-phase routing is a paved-road
    default, never "enforced."
+6. **Early co-creation run of show adopted**: the session now reaches
+   `/start-onboarding-pilot` at minute 8, revises its plan with account-team input by minute 18,
+   then moves through ownership transfer, three enterprise scale ideas, renewal evidence, and
+   leadership commitments. The former alternative/default split was removed.
 
 ## Open items (mirror of CHECKLIST.md — verify there for current state)
 
