@@ -10,9 +10,9 @@
       executes** (Standard $0.50/$2.50 vs Fast $3/$15 — until confirmed, say "Cursor-native,
       cost-efficient," never "the fast model"). If dispatch misbehaves, rehearse the documented
       inline fallback honestly — then lock the wording everywhere else.
-- [ ] **Sync `.cursor/staged/` (+ the README table row) to `demo-19287-sqlite-indexof`** —
-      the staged MCP config, new-joiner mode spec, and drift-automation spec were added
-      2026-07-19 on `challenge-prep`; branches must stay byte-identical on artifact paths.
+- [x] **Sync `.cursor/staged/` (+ the README table row) to `demo-19287-sqlite-indexof`** —
+      done 2026-07-19: cherry-picked as `987813de0d`; `git diff` confirms `.cursor/` is
+      byte-identical across the two branches. Both branches pushed.
 
 ## Blockers (resolve on the Ally call — see INTERVIEW_LOOP.md for the full question list)
 
