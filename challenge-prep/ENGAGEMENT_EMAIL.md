@@ -25,8 +25,9 @@ Three moves:
 1. **Baseline and co-design (week 1).** David defines "meaningful PR" and accepts the
    baseline (pulled from their own repo history before we change anything). Maya
    co-builds the rules and contribution workflows — she already wrote Cursor rules for
-   the library, so we build on her work, not over it. Nina (QA) sets the quality gates,
-   Marcus (DevOps) the CI/permission boundaries, Ravi (PM) supplies real bounded tasks.
+   the library, so we build on her work, not over it. Nina (QA) owns the quality gates
+   and rework taxonomy, Marcus (DevOps) the CI policy and permission boundaries, Ravi
+   (PM) the task rubric and real bounded tasks — owned artifacts, not sign-offs.
 2. **Paired pilot (weeks 2–3).** A small cohort ships real changes through the
    workflow: scoped issue → grounded plan with human approval → build → skeptical
    pre-review → CI. We capture timestamps, review cycles, interventions, and
@@ -36,6 +37,11 @@ Three moves:
    engagement's midpoint readout (~day 55–60, after the pilot closes) — it answers
    the question she's already asking her staff. Only then do we recommend expansion
    to one of the stalled teams.
+
+This is also the first step toward the software factory you want to seed: Nina, Marcus,
+and Ravi each leave Session 1 owning a piece of the workflow, and each proves a change to
+their piece before handoff — so the wedge produces builders across roles, not just faster
+engineers. One team's governed paved road is the pattern the expansion step scales.
 
 **Renewal evidence:** three measures — time-to-first-meaningful-PR, ramp PR
 rework/rejection rate, and design→deploy cycle time. Weekly-active seats stays a

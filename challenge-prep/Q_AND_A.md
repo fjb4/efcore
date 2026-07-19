@@ -194,6 +194,11 @@ remain the actual gates.
 
 ## "Where do MCP and cloud agents fit?"
 
+The staged designs are committed and openable — `.cursor/staged/` holds the read-only GitHub MCP
+config, the new-joiner custom-mode spec, and the drift-automation spec, each labeled with its
+review gate and owner. "Not enabled" is a decision with a design attached: Marcus reviews a
+concrete artifact, not a slide. Open one if pressed.
+
 Not on day one by default. After security review, least-privilege MCP can pull issue, PR, review,
 and CI evidence without manual transcription. Cloud agents or automations can handle bounded,
 repeatable work once the foreground workflow, environment, permissions, and review gates are
@@ -220,8 +225,11 @@ that the result can reach enough users to matter.
 
 If the RD demands a number anyway, have one ready and label it: hires/yr × ramp-weeks recovered ×
 loaded weekly cost — illustratively ~6 hires/yr × ~4 wks × ~$4k/wk ≈ **$90–100k/yr for this one
-team**, a hypothesis until Acme validates the inputs; across 18 teams the playbook is a 7-figure
-lever against the seat spend Finance is comparing line-by-line.
+team — which is why the playbook, not the pilot, is the unit of value: reproduced across even
+half the 18 teams it is a 7-figure lever against the seat spend Finance is comparing
+line-by-line.** Say both halves in one breath — the one-team number left standing alone invites
+the room to divide it into the contract price. The inputs stay a labeled hypothesis until Acme
+validates them.
 
 ## "What do you need from the ADM if you are running point?"
 
@@ -255,6 +263,26 @@ moves the ramp goal he already owns.
 The baseline comes from history in week 1; the cohort (real joiners or a labeled proxy) starts
 inside 30 days; rework and cycle-time decomposition show signal within weeks. The midpoint gives
 Priya a defensible early curve, labeled exactly that — not a completed cohort study.
+
+## "What actually exists on renewal day?"
+
+The RD-grade version of the timing objection: Finance decides on the whole 1,200-seat contract,
+and the evidence is one team's ramp — possibly a labeled proxy, possibly n≤3. Say the worst-case
+inventory unprompted (in the 34:00–40:00 block if nobody raises it) so the evidence honesty reads
+as strength, not as a concession extracted under pressure. At day 86 the defensible inventory is:
+
+1. **A historical baseline** from Acme's own repo history — not vendor telemetry.
+2. **An observed pilot curve** with honest labels: every observation shown, sample size named,
+   proxy labeled proxy.
+3. **A governed, instrumented, customer-owned workflow** — baseline, evidence ledger, named
+   owners, QA/DevOps sign-off — that no competing tool has stood up at Acme.
+4. **A repeatability test in flight** on a second team, with a pass bar defined before its
+   results exist.
+
+The renewal ask is: extend on the strength of a measured, owned system and a pre-agreed decision
+standard — not "extend because the study is complete." A multi-year commitment is being asked to
+fund the expansion of a working pattern, and the evidence contract tells leadership exactly what
+they will know by each future checkpoint.
 
 ## "Rules drift as the library evolves — who maintains this in six months?"
 

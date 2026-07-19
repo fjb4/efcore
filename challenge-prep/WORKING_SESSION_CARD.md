@@ -278,6 +278,11 @@ Ask:
 
 Stop. Invite Q&A and feedback.
 
+**Receiving the ~15-minute feedback block (evaluated behavior, even if unscored):** take notes
+visibly, ask one clarifying question about the most critical piece of feedback, and do not
+rebut — "that's fair, here's how I'd adjust" beats defending the plan. A customer-facing role is
+being watched for how coaching lands.
+
 ## If time slips
 
 Cut:

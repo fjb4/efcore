@@ -1,5 +1,19 @@
 # Checklist, timeline, and build status
 
+## Do first — this gates all rehearsal
+
+- [ ] **Dry-run the subagent dispatch in a fresh Cursor window before rehearsing any wording.**
+      The one-breath model policy, the policy-as-code proof, the Composer cost-efficiency
+      framing, and the drift-check story all depend on the outcome: confirm
+      `/first-contribution` returns a planner plan and stops for approval, `/pre-review`
+      delegates to `skeptical-reviewer`, `composer-2.5` resolves, and **which Composer variant
+      executes** (Standard $0.50/$2.50 vs Fast $3/$15 — until confirmed, say "Cursor-native,
+      cost-efficient," never "the fast model"). If dispatch misbehaves, rehearse the documented
+      inline fallback honestly — then lock the wording everywhere else.
+- [ ] **Sync `.cursor/staged/` (+ the README table row) to `demo-19287-sqlite-indexof`** —
+      the staged MCP config, new-joiner mode spec, and drift-automation spec were added
+      2026-07-19 on `challenge-prep`; branches must stay byte-identical on artifact paths.
+
 ## Blockers (resolve on the Ally call — see INTERVIEW_LOOP.md for the full question list)
 
 - [ ] **HM name + email** — Ally's email says to send the plan to "the HM (insert name +
@@ -21,6 +35,10 @@
 - [ ] Rehearse the software-factory progression in under 3 minutes: repeatable → connected →
       automated; land the bounded backlog-item → cloud agent → review → CI → deploy → evidence
       flow without implying that Cursor bypasses customer controls
+- [ ] **One compressed 25-minute run of the full session from the three-decision skeleton
+      only — no card text visible.** The card is prep, not a teleprompter; role-play pushback
+      can halve airtime, and visible thinking beats recited prose. Keep only the block intents
+      and the invariants (board changes live, capability map before commands, honest labels)
 - [ ] **Day before session:** send `ENGAGEMENT_EMAIL.md` to the HM with the confirmed
       subject line
 - [ ] Keep the Scenario Pack names visible in-session: ADM (unnamed — ask), Maya Chen
@@ -55,9 +73,12 @@
   the main conversation; both commands document an inline fallback if dispatch is unavailable.
   `/update-rules` gained a model-policy drift check against the README policy table.
 
-Still **positioning-only** (per the staging in `README.md` — not build items): GitHub
-MCP, hooks, team rules, cloud agents/Bugbot — "least-privilege scale steps after the
-workflow earns trust."
+Staging upgrade (2026-07-19): `.cursor/staged/` now holds **gate-ready, inert designs** for
+three of the staged surfaces — read-only GitHub MCP config, new-joiner custom-mode spec, and
+the drift-automation spec — each labeled with its review gate and owner, openable on screen
+when the room asks why MCP/modes/cloud agents aren't live ("not enabled is a decision with a
+design attached"). Hooks, team rules, and Bugbot-at-scale remain **positioning-only** (per the
+staging in `README.md`): "least-privilege scale steps after the workflow earns trust."
 
 ## Demo hygiene
 
@@ -68,13 +89,8 @@ workflow earns trust."
       pre-generated dashboard as fallback) — the demo cohort is **historical
       open-source data standing in for Acme joiners; say so out loud**
 - [ ] One unrehearsed-input dry run of `/scope-issue`
-- [ ] **Dry-run the subagent dispatch in a fresh window** (docs-vs-product gaps are exactly the
-      overclaim risk): `/first-contribution` should return a planner plan and stop for approval;
-      `/pre-review` should delegate to `skeptical-reviewer`. If dispatch misbehaves, both
-      commands document the inline fallback — rehearse stating that honestly
-- [ ] **In the dry-run, confirm which Composer variant `model: composer-2.5` executes** —
-      Composer 2.5 has Standard ($0.50/$2.50) and Fast ($3/$15) variants; until confirmed, say
-      "Cursor-native, cost-efficient," never "the fast model" (pack wording already corrected)
+- [ ] Subagent dispatch + Composer-variant dry-run — **moved to "Do first" at the top of this
+      file**; it gates all wording rehearsal
 - [ ] Rehearse the co-creation invariants: visible confirmed/changed/owner/next-action board;
       at least one interviewer answer visibly changes the pilot plan; follow the adopted
       early-co-creation run of show in `WORKING_SESSION_CARD.md`

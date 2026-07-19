@@ -66,8 +66,12 @@ source of truth) and **agent suggests, CI enforces**.
   committed fallback output; `.github/workflows/ramp-metrics.yml` is the team-owned refresh.
 - Fork CI: `cursor-onboarding-checks.yml` — fast SQLite-only gates (format, analyzers, API
   baseline, focused tests); `/pre-review` is its deliberate local mirror.
-- Staged (positioning-only, not built): MCP, hooks, team rules, custom modes, cloud
-  agents/Bugbot-at-scale — "least-privilege scale steps after the workflow earns trust."
+- Staged surfaces: `.cursor/staged/` (added 2026-07-19) holds gate-ready **inert** designs —
+  read-only GitHub MCP config, new-joiner custom-mode spec, drift-automation spec — each named
+  with its review gate/owner; openable in-session to blunt "we wanted to see MCP/modes/cloud
+  agents." Hooks, team rules, and Bugbot-at-scale remain positioning-only — "least-privilege
+  scale steps after the workflow earns trust." **Sync `.cursor/staged/` + the README table row
+  to the demo branch** (byte-identical invariant; see CHECKLIST "Do first").
 
 ## Prep pack (this directory — the session materials)
 

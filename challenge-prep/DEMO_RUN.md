@@ -3,6 +3,12 @@
 Keep this portion to about 8-10 minutes. The purpose is to prove that the technical-screen artifact
 has become an engagement system, not to repeat the implementation demo.
 
+**Bailout rule (session clock, not demo clock): at minute 16, stop wherever the demo stands.**
+Name the remaining commands in one line each and move to the operating loop. The demo's job is
+done the moment the pilot plan has been revised live with the room's input — everything after
+that is optional depth. Interruptions are the format working, not the demo failing; never buy
+demo minutes back by talking faster.
+
 ## Cursor setup
 
 - Open the repository on `demo-19287-sqlite-indexof`.
@@ -25,6 +31,11 @@ policy out loud:
 > deterministic gates; Auto is the default where Cursor's router has fresher information than a
 > static policy. The routing is policy-as-code in the subagent frontmatter; the enforced boundary
 > is the admin model allowlist.
+
+If pressed on the staged surfaces (MCP, custom modes, cloud agents): open `.cursor/staged/` —
+the read-only GitHub MCP config, new-joiner mode spec, and drift-automation spec are committed,
+inert, and labeled with their review gates. The line: "not enabled is a decision with a design
+attached — this is the artifact Marcus's security review would approve."
 
 Close the architecture setup with:
 
