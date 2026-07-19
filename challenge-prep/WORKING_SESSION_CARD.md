@@ -155,8 +155,8 @@ If the consolidation question lands ("pick one tool"), own the evaluation standa
 
 > Acme should standardize — on whichever tool clears this bar: governed workflow in version
 > control, measured ramp and rework on real backlog work, transferable ownership, and telemetry
-> leadership can audit. We built that bar, and we're happy to be judged by it. Cursor will be the
-> only candidate that arrives with data.
+> leadership can audit. We built that bar, and we're happy to be judged by it. Cursor is the
+> candidate you can evaluate against it immediately — the pilot data already exists.
 
 ## 39:00-44:00 - Leadership asks and account-team commitments
 

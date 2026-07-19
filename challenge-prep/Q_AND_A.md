@@ -13,10 +13,12 @@ govern a workflow that reaches planning, review, CI, and deployment, then prove 
 own telemetry. Use the same task class, outcome definition, and quality gates for any comparison.
 The differentiator you are testing is repeatable workflow adoption and governance, not a cherry-
 picked code-generation result. The one product line worth landing here: Codex is OpenAI models
-and Claude Code is Anthropic models, while Cursor ships OpenAI, Anthropic, Gemini, and xAI
-models plus its own Composer line under one admin allowlist and one telemetry stream — so
-consolidation doesn't take anyone's preferred model away, it takes away the ungoverned surface
-(full map: README, "Differentiators vs Codex and Claude Code").
+and Claude Code is Anthropic models, while standardizing on Cursor preserves access to OpenAI,
+Anthropic, Gemini, and xAI models plus Cursor's own Composer line — while consolidating
+governance, spend controls, and telemetry into one surface. Frame it as access preservation, not
+tool equivalence: Claude Code users may value that harness, not just the model — that is the
+portability concession, made up front (full map: README, "Differentiators vs Codex and Claude
+Code").
 
 ## "Leadership wants to consolidate on one tool — why should that be Cursor?"
 
@@ -25,12 +27,14 @@ a feature — Acme owns it. What is not portable is where the consolidation deci
 distribution, governance, and measurement at 1,200 seats. Three uncoordinated tools are *why* ROI is
 unclear — nobody can attribute outcomes across ad-hoc workflows. The pilot gives Acme its first
 instrumented workflow (baseline, evidence ledger, named owners, QA/DevOps sign-off) plus the
-enterprise layer — team-rule rollout, admin analytics, AI Code Tracking, model governance — that
+enterprise layer — Team Rules plus Marketplace-plugin distribution, admin analytics, AI Code
+Tracking, model governance — that
 turns it into auditable evidence. Then offer the standard, not the vendor argument: "standardize on
 whichever tool clears this bar — governed workflow in version control, measured ramp and rework on
-real backlog work, transferable ownership, telemetry leadership can audit." Cursor will be the only
-candidate that arrives with data. Before naming an expansion target, find out which tools the two
-stalled teams used and why they stalled.
+real backlog work, transferable ownership, telemetry leadership can audit." Cursor is the candidate
+Acme can evaluate against that standard immediately — the pilot data already exists; any other
+tool has to earn its way through the same instrumented workflow. Before naming an expansion
+target, find out which tools the two stalled teams used and why they stalled.
 
 ## "What's your model strategy?"
 
@@ -76,7 +80,10 @@ interchangeable:
    scale steps, enabled after Acme approves the design.
 4. **Deterministically enforced in CI** — the fork gates: format, analyzers, API baseline, focused
    tests. Non-negotiable.
-5. **Independently reviewed** — Bugbot plus human maintainer review: authoritative judgment.
+5. **Independently reviewed** — three distinct authorities, not one: Bugbot adds an
+   independent-from-author agentic pass (advisory by default; making unresolved findings block
+   merges is an explicit policy choice after Nina and Marcus approve it); the human maintainer
+   holds authoritative judgment; CI (tier 4) remains the deterministic gate.
 
 Speed comes from tiers 1–2; trust comes from tiers 4–5; tier 3 is where enterprise governance grows
 once the workflow earns it. Never present tier 1–2 assets as security controls.

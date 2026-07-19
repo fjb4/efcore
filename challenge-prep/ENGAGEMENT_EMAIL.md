@@ -30,16 +30,18 @@ Three moves:
    pre-review → CI. We capture timestamps, review cycles, interventions, and
    before/after artifacts as we go.
 3. **Ownership transfer (week 3+).** Maya maintains the workflow, a second engineer
-   runs it without me, and **David presents the outcome to Priya** at the midpoint —
-   it answers the question she's already asking her staff. Only then do we recommend
-   expansion to one of the stalled teams.
+   runs it without me, and **David presents the outcome to Priya** at the 90-day
+   engagement's midpoint readout (~day 55–60, after the pilot closes) — it answers
+   the question she's already asking her staff. Only then do we recommend expansion
+   to one of the stalled teams.
 
 **Renewal evidence:** three measures — time-to-first-meaningful-PR, ramp PR
 rework/rejection rate, and design→deploy cycle time. Weekly-active seats stays a
 supporting adoption measure. Every claim gets a label: observed, historical baseline,
 proxy, or hypothesis — so what you take into the renewal survives scrutiny.
 
-**What I need from you** (light-touch, ~2 hrs total over 90 days):
+**What I need from you** (light-touch: the intros and two checkpoints, plus a weekly
+20-minute sync — roughly five hours across the 90 days):
 
 1. Warm intros and named commitment from **David** and **Maya**, plus two **Priya**
    checkpoints (evidence-threshold alignment early; midpoint readout ~day 55–60).

@@ -229,35 +229,66 @@ Use only the capabilities that serve the account:
 State these as the reasons the staged scale steps are shipping product, not promises. Each is
 verified; do not embellish beyond what is listed.
 
-- **Model plurality under one governed surface** — the sharpest line, and the fragmentation
-  reframe: Codex is OpenAI models; Claude Code is Anthropic models; Cursor ships OpenAI,
-  Anthropic, Gemini, and xAI models plus its own Composer line under one admin allowlist, one
-  telemetry stream, one set of usage limits. Consolidating on Cursor does not take Claude-loyal
-  engineers' models away — it takes away the ungoverned surface.
-- **Daily-driver IDE** — the only one of the three that is the editor engineers live in (Tab,
-  inline edit, agent in one surface). Value accrues in-flow, not per agent session — the lever on
-  38% weekly active. Adoption dashboards (usage patterns by team and individual) identify which
-  of the 18 teams are stalled from the account team's own data.
-- **Team Rules at org scale** — distributed from the dashboard on Team/Enterprise plans; merge
-  with project rules under documented precedence (Team → Project → User; earlier source wins on
-  conflict). The per-repo layer built for one 12-engineer team becomes the 18-team rollout
-  mechanism.
+**Live-session discipline: lead with only three enterprise ideas.** (1) *Govern the
+fragmentation* — preserve model choice while consolidating access controls, spend policy, and
+telemetry. (2) *Scale the paved road* — universal controls live centrally; repo-specific
+workflows stay versioned and team-owned, distributed through a Team Marketplace plugin. (3)
+*Connect adoption to outcomes* — Cursor telemetry says who used what; Git/review/CI/deploy data
+says whether ramp, quality, and delivery improved. Everything below is objection-resolution
+depth, pulled only when a question earns it.
+
+- **Model plurality under one governed surface** — the fragmentation reframe, stated as access
+  preservation, not tool equivalence: Codex is OpenAI models; Claude Code is Anthropic models;
+  standardizing on Cursor preserves access to OpenAI, Anthropic, Gemini, and xAI models plus
+  Cursor's own Composer line while consolidating governance, spend controls, and telemetry into
+  one surface. Do not claim engineers lose nothing — Claude Code users may value that harness's
+  workflow, not just the model; that is the portability concession, already made elsewhere.
+- **AI-native editor as one product surface** — Tab, inline edit, foreground agents, cloud
+  agents, rules, governance, and analytics share a single product surface. (Not "the only IDE" —
+  Codex ships a VS Code-family extension; don't hand the room an easy rebuttal.) Value accrues
+  in-flow, not per agent session — the lever on 38% weekly active. Adoption dashboards (usage
+  patterns by team and individual) identify which of the 18 teams are stalled from the account
+  team's own data.
+- **Two-layer distribution at org scale** — Team Rules (dashboard-distributed, Team/Enterprise
+  plans) carry genuinely universal governance; a **Team Marketplace plugin** (bundles rules,
+  skills, subagents, MCP servers, and hooks; admin install policy Default Off / Default On /
+  Required) distributes the reusable workflow package; project rules carry repo-specific context,
+  adapted and owned per team. Rules merge under documented precedence — Team → Project → User,
+  earlier source wins on conflict (source: cursor.com/docs/context/rules, verified 2026-07-19).
+  The wedge produces two layers: Acme-wide governance distributed centrally, repo-specific paved
+  roads owned locally.
 - **Tool-side telemetry for the evidence ledger** (Enterprise plan): the Admin API, **AI Share of
   Committed Code** (diff-signature attribution of AI-written code in commits), and Conversation
-  Insights (work classified by category/complexity). Pairs with the repo-side ramp miner — two
-  independent evidence sources — and gives the exec sponsor a dashboard to own.
-- **Enterprise governance inventory** — SSO/SCIM with local-login disable, org-wide Privacy Mode,
-  zero data retention, SOC 2 Type II, allowlists at the repo, model, and MCP-server level,
-  per-team and per-user usage limits. This is tier 3 (tool-policy) of the enforcement ladder,
-  named feature by feature.
-- **Bugbot as the independent-review tier** — PR review on GitHub, GitLab, and Bitbucket
+  Insights (work classified by category/complexity). Position precisely: Cursor telemetry proves
+  **exposure, adoption, and workflow usage**; the repo-side miner and delivery systems prove
+  **ramp, quality, and cycle-time outcomes**; matching the two tests whether governed adoption is
+  associated with the observed result. Attribution data is not outcome evidence on its own.
+- **Enterprise governance inventory** — SSO/SCIM with local-login disable, SOC 2 Type II,
+  allowlists at the repo, model, and MCP-server level, per-team and per-user usage limits. State
+  the privacy claim conditionally: **with Privacy Mode enabled org-wide, Cursor maintains
+  zero-data-retention agreements with its model providers** (some models are non-ZDR and need
+  explicit admin opt-in). This is tier 3 (tool-policy) of the enforcement ladder, named feature
+  by feature.
+- **Bugbot as the independent review pass** — PR review on GitHub, GitLab, and Bitbucket
   (including self-hosted/Data Center; useful while Acme's SCM is unknown), governed at team
-  level (per-repo enable, org-wide rules, effort levels, autofix behavior). Honest detail to
-  state unprompted: its CI status is **neutral by default** — fail-on-unresolved-issues must be
-  explicitly enabled. Bugbot supplements human review; it does not replace it. Boundary line:
-  PR-event **automations** that re-run a reviewer would be hand-rolling Bugbot — use the product
-  for PR review at scale; automations are for the workflows Bugbot doesn't cover (e.g. the
-  scheduled drift check).
+  level (per-repo enable, org-wide rules, effort levels, autofix behavior). Main-flow line:
+  "Bugbot adds an independent-from-author review pass; human review and CI remain
+  authoritative." Q&A depth only (do not state unprompted): its CI status is neutral by default —
+  if Acme wants unresolved findings to affect mergeability, that policy is explicitly configured
+  after Nina and Marcus approve it. Boundary line: PR-event **automations** that re-run a
+  reviewer would be hand-rolling Bugbot — use the product for PR review at scale; automations are
+  for the workflows Bugbot doesn't cover (e.g. the scheduled drift check).
+
+Every named capability must have an account job — resolve one Acme risk, change one
+stakeholder's behavior, or strengthen one piece of renewal evidence:
+
+| Acme problem | Enterprise capability | What it proves or enables |
+|---|---|---|
+| Three fragmented tools | Model/access/spend governance | Controlled consolidation |
+| One expert-built workflow | Team Marketplace + project ownership | Repeatable distribution |
+| Unclear ROI | Cursor usage + repository outcomes | Attribution without overclaiming |
+| QA distrust | Bugbot + human review + CI | Layered quality control |
+| Dormant teams | Team-level analytics | Where to investigate next |
 
 Plan gating: the Admin API, Conversation Insights, and org-wide enforcement are
 Enterprise-plan-gated — a fit for a 1,200-seat account, but say "Enterprise plan" when citing
