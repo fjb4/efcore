@@ -1,7 +1,8 @@
 # Final-challenge demo run
 
-Keep this portion to about 8-10 minutes. The purpose is to prove that the technical-screen artifact
-has become an engagement system, not to repeat the implementation demo.
+Prepare a seven-minute path; allow it to reach 8-10 minutes only through useful account-team
+interaction. The purpose is to prove that the technical-screen artifact has become an engagement
+system, not to repeat the implementation demo.
 
 **Bailout rule (session clock, not demo clock): at minute 16, stop wherever the demo stands.**
 Name the remaining commands in one line each and move to the operating loop. The demo's job is
@@ -11,8 +12,12 @@ demo minutes back by talking faster.
 
 ## Cursor setup
 
-- Open the repository on `demo-19287-sqlite-indexof`.
-- Start from `.cursor/README.md`.
+- Open the repository on `challenge-prep` for the final session; do not change branches while
+  sharing. This branch contains the complete runnable artifact and the live board. Do not depend
+  on `demo-19287-sqlite-indexof` unless the checklist's branch-sync verification has passed.
+- Pin `challenge-prep/LIVE_SESSION_BOARD.md`, `.cursor/README.md`,
+  `.cursor/commands/start-onboarding-pilot.md`, and `metrics/ramp-dashboard.md` in that order.
+- Start the demo block by moving from the live board to `.cursor/README.md`.
 - Use a fresh Agent conversation.
 - Keep the existing PR/green test available as supporting evidence, not the main path.
 - Do not create or present fictional pilot results.

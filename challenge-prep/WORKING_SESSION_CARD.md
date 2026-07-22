@@ -3,44 +3,42 @@
 The interviewers are the internal Cursor team, not the customer. Get their names at the start,
 address them by name, and ask them to flex roles explicitly.
 
-## Board setup (prepare before the session — Excalidraw + Cursor)
+The blocks below contain about **28 minutes of prepared airtime**. Interviewer questions and
+decisions expand them across the 45-minute working session. Interruptions are the format working;
+do not protect the outline by talking faster or deferring account-team input to the end.
 
-Two surfaces, deliberate transitions: **Excalidraw** shows discovery and alignment; **Cursor**
-shows implementation, governance, review, and evidence. The prepared board is
-`ACME_WORKING_SESSION_BOARD.excalidraw`; `ACME_WORKING_SESSION_BOARD.png` and
-`ACME_WORKING_SESSION_BOARD.svg` are static fallbacks. Its source and SVG can be regenerated with
-`node challenge-prep/build_excalidraw_board.mjs`. Open the `.excalidraw` file for native editable
-objects; the PNG and SVG are intentionally static.
+## Board setup (prepare before the session - Cursor only)
 
-Use the one 16:9 canvas with all content in a single viewport (no zooming or panning mid-session),
-simple rectangles/arrows, and large text. All prepared content is natively editable; only the
-outer canvas boundary is locked.
+Use one shared control surface, `LIVE_SESSION_BOARD.md`, plus the actual repository artifacts.
+The Markdown file is not a presentation or a teleprompter; it is the internal account team's live,
+version-controlled decision record.
 
-1. **Live decisions** — four large editable cards: renewal proof / pilot change / owner / next
-   move.
-2. **The Acme operating loop** — the named-people diagram from the 18:00–27:00 block below
-   (Ravi → new joiner → plan → approval → build → Nina → Marcus, David owns outcome, Priya
-   decides scale). Not a generic vendor loop: account names, not methodology stages.
-3. **Success-measure anchors** — only the three metric names and owners. Definitions, sources, and
-   decisions stay in the session card rather than crowding the canvas. Weekly-active remains a
-   supporting measure.
+Pin these tabs in order:
 
-Color legend, printed on-canvas in gray: **gray** prepared context · **blue** confirmed live ·
-**amber** changed assumption or risk · **green** action + owner.
+1. `challenge-prep/LIVE_SESSION_BOARD.md` - alignment, live decisions, operating loop, metrics,
+   commitments.
+2. `.cursor/README.md` - the repository capability map.
+3. `.cursor/commands/start-onboarding-pilot.md` - the live plan contract and approval gate.
+4. `metrics/ramp-dashboard.md` - historical evidence fallback, opened only if useful.
+
+Keep the Markdown board in source view while capturing decisions. Hide the sidebar and minimap,
+turn on word wrap, increase editor zoom, and use heading navigation rather than hunting by scroll.
+Prepared tables are for reading; edit only the short `LIVE` entries, decision checkboxes, and any
+assumption that changes. Use strikethrough to preserve the changed assumption visibly.
 
 **The four blanks are pre-mapped, not improvised:** renewal proof captures the ADM's missed risk
 and Priya's threshold; pilot change captures the Finance framing or blocking dependency that
-changes the design; owner captures the ADM's preferred weekly artifact and owner; next move
-captures the evidence bar and expansion target. Empty blanks at minute 18 mean the questions need
-to land harder.
+changes the design; operating owner captures the ADM's preferred weekly artifact and owner; next
+move captures the evidence bar and expansion target. Empty blanks after the co-build mean the
+questions need to land harder.
 
-Execution discipline: lead verbally and type yourself (3–6 word entries — the invariant is the
-content changing, not calligraphy); never ask interviewers to co-edit or open a link; share the
-**entire screen**, not a window, so the Excalidraw↔Cursor switch never touches the share dialog;
-keep a static screenshot/PDF backup. Do not over-polish — a slightly rough, visibly-being-edited
-board is the point; visible thinking is scored.
+Execution discipline: lead verbally and type yourself (3-8 word entries); never ask interviewers
+to co-edit or open a link; share the **entire screen** so all Cursor transitions stay visible. The
+invariant is that at least one interviewer answer visibly changes the plan. Keep
+`ACME_WORKING_SESSION_BOARD.png` as the static visual fallback; do not open Excalidraw in the
+normal path.
 
-## 0:00-3:00 - Open and create the working contract
+## Block 1 - Open and create the working contract (3 minutes prepared)
 
 Say:
 
@@ -60,14 +58,13 @@ Ask the ADM:
 > Before I lock that path: what is the most important renewal risk I have missed, and what would
 > Priya have to see to repeat this story herself?
 
-**Start the visible decision board now** (the prefilled Excalidraw canvas — see Board setup
-above; four cards: **renewal proof / pilot change / owner / next move**) and keep it updated all
-session. The board is the
+**Start the visible decision board now** (`LIVE_SESSION_BOARD.md`; four entries: **renewal proof /
+pilot change / operating owner / next move**) and keep it updated all session. The board is the
 proof this is a working session: at least one interviewer answer must visibly change the pilot
 plan on it — cohort, evidence threshold, expansion target, or a control. If nothing has changed
 by the co-build block, ask a question whose answer forces a change.
 
-## 3:00-8:00 - Validate decisions and surface blockers
+## Block 2 - Validate decisions and surface blockers (4 minutes prepared)
 
 Show the three-decision table:
 
@@ -86,7 +83,7 @@ Ask the field-engineer role:
 
 > Which data or access dependency is most likely to block this in Acme's environment?
 
-## 8:00-18:00 - Use the artifact as a co-build surface
+## Block 3 - Use the artifact as a co-build surface (7 minutes prepared)
 
 Do not repeat the technical screen. Use a short proof:
 
@@ -116,7 +113,8 @@ Do not repeat the technical screen. Use a short proof:
 5. Review its baseline, cohort, stakeholder, and evidence plan **with the room, and revise it
    live**: take the ADM's renewal-risk answer and the field engineer's blocking-dependency answer
    from earlier and change the plan where they demand it — cohort definition, a control, the
-   evidence threshold. Update the decision board as it happens. Stop at the approval gate.
+   evidence threshold. Update the Markdown decision board as it happens. Stop at the approval
+   gate.
 6. Show `/first-contribution` and `/pre-review` as the already-proven engineer/QA path.
 7. Show `/renewal-evidence` and emphasize that missing evidence stays missing.
 8. Show the existing green SQL/test/CI evidence only if useful; do not tour the translator.
@@ -131,9 +129,9 @@ Then ask the ADM:
 > Which of these artifacts would help you most in the weekly account update: the evidence ledger,
 > the risk/decision log, or the champion quote capture?
 
-## 18:00-27:00 - Co-build, controls, and ownership transfer
+## Block 4 - Co-build, controls, and ownership transfer (5 minutes prepared)
 
-Use the operating-loop section of the board:
+Use the customer-owned operating-loop section of the Markdown board:
 
 ```
 Ravi: scoped outcome
@@ -165,7 +163,7 @@ Pull the interviewers in:
 Decision to land: Acme owns every operating artifact, the SA has a planned exit, and expansion
 requires a successful second-user run.
 
-## 27:00-34:00 - Show the software-factory progression
+## Block 5 - Show the software-factory progression (3 minutes prepared)
 
 Say:
 
@@ -215,7 +213,7 @@ Ask the RD:
 > Which of these scale steps makes the wedge commercially repeatable, and which would you hold
 > until the second-team result?
 
-## 34:00-40:00 - Renewal-defense readout
+## Block 6 - Renewal-defense readout (4 minutes prepared)
 
 Present each metric with definition, source, owner, and decision:
 
@@ -250,7 +248,7 @@ If the consolidation question lands ("pick one tool"), own the evaluation standa
 > candidate Acme can evaluate immediately, because the governed workflow and evidence mechanisms
 > already exist — the pilot is how we earn the customer outcome data.
 
-## 40:00-44:00 - Leadership asks and account-team commitments
+## Block 7 - Leadership asks, commitments, and close (2 minutes prepared)
 
 Name:
 
@@ -269,7 +267,7 @@ Ask:
 
 > What would each of you change before we take this plan to Acme?
 
-## 44:00-45:00 - Close
+### Close
 
 > We are not promising that Cursor makes onboarding 3x faster. We are proposing a controlled way to
 > find out, with speed, quality, and production reach measured; Acme ownership built in; and Priya

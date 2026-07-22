@@ -29,11 +29,13 @@ and role context.
 
 ## Repo state (github.com/fjb4/efcore — John's public fork of dotnet/efcore)
 
-- **`challenge-prep`** (branch): the prep pack (this directory) + the full artifact. Pushed.
-  Tip: `007c0e3184`.
+- **`challenge-prep`** (branch): the prep pack (this directory) + the full artifact. Base tip before
+  the Markdown-board working changes: `c663e218d0`. Final-session working branch: the board and
+  runnable artifact share one Cursor surface.
 - **`demo-19287-sqlite-indexof`** (branch): the demo branch — artifact only, deliberately free of
-  prep files. Pushed. Tip: `0837d64c5c` (cherry-pick of the artifact commit; artifact paths are
-  byte-identical across the two branches — keep them that way).
+  prep files. The local ref is behind the complete `challenge-prep` artifact as of 2026-07-22;
+  agents and staged designs are missing. Do not call it byte-identical or use it as the fallback
+  until the CHECKLIST sync verification passes.
 - The handout PDF is committed on `challenge-prep` and **John explicitly chose to keep it in the
   public remote** — do not re-flag it or the public prep pack; visible thinking is a scored
   criterion. `.DS_Store` is handled by John's global git ignore (`~/.config/git/ignore`), not the
@@ -71,18 +73,18 @@ source of truth) and **agent suggests, CI enforces**.
   with its review gate/owner; openable in-session to blunt "we wanted to see MCP/modes/cloud
   agents." Hooks, team rules, and Bugbot-at-scale remain positioning-only — "least-privilege
   scale steps after the workflow earns trust." **Sync `.cursor/staged/` + the README table row
-  to the demo branch** (byte-identical invariant; see CHECKLIST "Do first").
+  to the demo branch before treating it as a fallback** (see CHECKLIST "Do first").
 
 ## Prep pack (this directory — the session materials)
 
 `README.md` (strategy: diagnosis, three decisions, champion ladder, 3-session co-build, 90-day
-shape, evidence design, asks), `WORKING_SESSION_CARD.md` (minute-by-minute run of show),
-`DEMO_RUN.md` (8–10 min demo script + recovery paths), `Q_AND_A.md` (objection drills),
+shape, evidence design, asks), `LIVE_SESSION_BOARD.md` (the shared Cursor-native decision record),
+`WORKING_SESSION_CARD.md` (28-minute prepared spine that expands through role-play),
+`DEMO_RUN.md` (7-minute prepared demo path + recovery), `Q_AND_A.md` (objection drills),
 `ENGAGEMENT_EMAIL.md` (send-ahead draft; HM name/subject line pending Ally),
 `INTERVIEW_LOOP.md` (Ally-call questions + the two 30-min interviews), `CHECKLIST.md`
-(**the live to-do list — read it first**), and `ACME_WORKING_SESSION_BOARD.excalidraw`
-(the native editable 16:9 working board; only its outer boundary is locked, with PNG/SVG static
-backups and a deterministic build script).
+(**the live to-do list — read it first**). The former `ACME_WORKING_SESSION_BOARD.excalidraw`
+and its PNG/SVG exports remain fallback assets only; Excalidraw is not in the normal run path.
 
 ## Key decisions this session (with rationale — don't relitigate)
 
@@ -110,10 +112,12 @@ backups and a deterministic build script).
    fallback to a compatible model) — sources: cursor.com/docs/enterprise/llm-safety-and-controls,
    cursor.com/docs/subagents.md, cursor.com/docs/models. Per-phase routing is a paved-road
    default, never "enforced."
-6. **Early co-creation run of show adopted**: the session now reaches
-   `/start-onboarding-pilot` at minute 8, revises its plan with account-team input by minute 18,
-   then moves through ownership transfer, three enterprise scale ideas, renewal evidence, and
-   leadership commitments. The former alternative/default split was removed.
+6. **Cursor-first working-session format adopted**: one `LIVE_SESSION_BOARD.md` holds the four
+   live decisions, named operating loop, scale path, renewal measures, and commitments. The actual
+   `.cursor` assets remain the demo. The uninterrupted prepared spine is 28 minutes; interviewer
+   challenges expand it across 45. At least one account-team answer must visibly change the board
+   and the pilot plan. The final session runs from `challenge-prep` to avoid branch or application
+   switching while sharing; the clean demo branch is only a fallback after its artifact is synced.
 7. **Software-factory progression is explicit**: position onboarding as Acme's first governed
    production line, then show repeatable → connected → automated maturity. The bounded north-star
    flow is Ravi-approved backlog → cloud agent → PR/Bugbot/Nina → CI → Marcus deploy → automatic
@@ -128,8 +132,9 @@ backups and a deterministic build script).
 2. Ally call: get HM name/email + confirm subject line (`John <Last> - Challenge - Solution` per
    her email vs `...Solution Plan` per handout; draft follows her email).
 3. Send `ENGAGEMENT_EMAIL.md` the day before the session.
-4. Rehearse: capability map → model policy → enforcement ladder without prompting; timed demo
-   (8–10 min, 12 cap); one unrehearsed `/scope-issue` run; run `/update-rules` once pre-session.
+4. Rehearse: capability map → model policy → enforcement ladder without prompting; seven-minute
+   prepared demo path (8–10 only through useful interaction, session-minute-16 hard bailout); one
+   unrehearsed `/scope-issue` run; run `/update-rules` once pre-session.
 
 ## Evidence versus interpretation
 

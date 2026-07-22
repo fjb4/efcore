@@ -6,6 +6,15 @@ Use the high-adoption 12-person team as a measured wedge: Maya co-builds a maint
 workflow, David owns the operating outcome, Priya sees credible speed-and-quality evidence, and the
 ADM gets a repeatable renewal story rather than a one-off demo.
 
+## Final-session delivery
+
+- Lead from [`LIVE_SESSION_BOARD.md`](LIVE_SESSION_BOARD.md), the shared Cursor-native decision
+  record. Update its four live decisions as the internal account team changes the plan.
+- Use [`WORKING_SESSION_CARD.md`](WORKING_SESSION_CARD.md) for rehearsal only; it is a 28-minute
+  prepared spine, not an on-screen script.
+- Transition from the board into the actual `.cursor` commands and evidence artifacts. Excalidraw
+  is fallback only.
+
 ## The three decisions to lead with
 
 | Decision | Choice | Why |

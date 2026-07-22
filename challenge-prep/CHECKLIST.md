@@ -1,6 +1,6 @@
 # Checklist, timeline, and build status
 
-## Do first — this gates all rehearsal
+## Do first
 
 - [ ] **Dry-run the subagent dispatch in a fresh Cursor window before rehearsing any wording.**
       The one-breath model policy, the policy-as-code proof, the Composer cost-efficiency
@@ -10,9 +10,11 @@
       executes** (Standard $0.50/$2.50 vs Fast $3/$15 — until confirmed, say "Cursor-native,
       cost-efficient," never "the fast model"). If dispatch misbehaves, rehearse the documented
       inline fallback honestly — then lock the wording everywhere else.
-- [x] **Sync `.cursor/staged/` (+ the README table row) to `demo-19287-sqlite-indexof`** —
-      done 2026-07-19: cherry-picked as `987813de0d`; `git diff` confirms `.cursor/` is
-      byte-identical across the two branches. Both branches pushed.
+- [ ] **Re-sync and verify the complete `.cursor/` layer on `demo-19287-sqlite-indexof` if keeping
+      it as a clean fallback.** A 2026-07-22 local-ref comparison found it behind `challenge-prep`
+      (agents and staged designs are missing there). The final session no longer depends on this
+      branch; do not call it byte-identical until `git diff --quiet challenge-prep
+      demo-19287-sqlite-indexof -- .cursor` passes.
 
 ## Blockers (resolve on the Ally call — see INTERVIEW_LOOP.md for the full question list)
 
@@ -24,10 +26,13 @@
 ## Timeline
 
 - [x] Availability submitted + Ally's 15-min prep call booked (done 2026-07-18)
-- [x] Commit the new artifact assets to the demo branch (verified 2026-07-19: assets are
-      byte-identical on `demo-19287-sqlite-indexof` and `challenge-prep`)
+- [ ] Re-verify the artifact-only demo branch after syncing; the historical 2026-07-19
+      byte-identical check is stale as of the 2026-07-22 local-ref comparison
 - [x] Decision 2026-07-19: prep materials stay on the fork (`challenge-prep` branch) —
-      visible-thinking is a scored criterion; the demo branch stays clean of them
+      visible-thinking is a scored criterion; the demo branch stays clean of them. Final-session
+      update 2026-07-22: run the session from `challenge-prep` in one Cursor window so the live
+      Markdown board and the complete runnable artifact share one surface; the clean demo branch
+      becomes a fallback only after the sync check above passes.
 - [ ] Rehearse from `WORKING_SESSION_CARD.md` + `DEMO_RUN.md`; drill `Q_AND_A.md`
 - [ ] Rehearse the screen-gap corrections until automatic: capability map first, the
       one-breath model policy, and the five-tier enforcement ladder (both interviewers
@@ -35,10 +40,11 @@
 - [ ] Rehearse the software-factory progression in under 3 minutes: repeatable → connected →
       automated; land the bounded backlog-item → cloud agent → review → CI → deploy → evidence
       flow without implying that Cursor bypasses customer controls
-- [ ] **One compressed 25-minute run of the full session from the three-decision skeleton
+- [ ] **One compressed 28-minute run of the full session from the decision skeleton
       only — no card text visible.** The card is prep, not a teleprompter; role-play pushback
       can halve airtime, and visible thinking beats recited prose. Keep only the block intents
-      and the invariants (board changes live, capability map before commands, honest labels)
+      and the invariants (Markdown board changes live, capability map before commands, honest
+      labels). Interviewer challenges expand the spine across 45 minutes.
 - [ ] **Day before session:** send `ENGAGEMENT_EMAIL.md` to the HM with the confirmed
       subject line
 - [ ] Keep the Scenario Pack names visible in-session: ADM (unnamed — ask), Maya Chen
@@ -91,7 +97,8 @@ staging in `README.md`): "least-privilege scale steps after the workflow earns t
 - [ ] One unrehearsed-input dry run of `/scope-issue`
 - [ ] Subagent dispatch + Composer-variant dry-run — **moved to "Do first" at the top of this
       file**; it gates all wording rehearsal
-- [ ] Rehearse the co-creation invariants: visible confirmed/changed/owner/next-action board;
+- [ ] Rehearse the co-creation invariants: visible renewal-proof/pilot-change/owner/next-action
+      entries in `LIVE_SESSION_BOARD.md`;
       at least one interviewer answer visibly changes the pilot plan; follow the adopted
       early-co-creation run of show in `WORKING_SESSION_CARD.md`
 - [ ] The IndexOf chain reachable as the finished-first-contribution exhibit
@@ -105,10 +112,14 @@ staging in `README.md`): "least-privilege scale steps after the workflow earns t
       (2026-07-19 drift check: all pointers resolve, README table matches the layer
       inventory, model-policy frontmatter matches the README table, sources of truth
       unchanged since the rules were written — layer is current)
-- [x] Excalidraw board built: `ACME_WORKING_SESSION_BOARD.excalidraw`, with three sections,
-      color legend, native editable rectangles/text/arrows, four pre-mapped live blanks, only
-      the outer boundary locked, and static PNG/SVG backups (2026-07-19)
-- [ ] Screen setup: open Cursor + the board; verify the 1600x900 board is readable at the
-      meeting system's shared-screen resolution; share the entire screen; notifications off
-- [ ] Full demo path timed twice **with the board live** (board typing is the new failure
-      mode to time); 8–10 min target, 12 hard cap
+- [x] Cursor-first Markdown board built: `LIVE_SESSION_BOARD.md`, with six lightweight sections,
+      four pre-mapped live decisions, direct links to the real artifacts, the named operating loop,
+      metrics, scale path, commitments, and feedback capture (2026-07-22)
+- [x] Excalidraw board retained as fallback only: `ACME_WORKING_SESSION_BOARD.png` is the static
+      visual backup; the `.excalidraw` and SVG sources remain available (2026-07-22)
+- [ ] Screen setup: open `challenge-prep` in Cursor; pin the board, capability map, pilot command,
+      and evidence fallback; use source view, word wrap, hidden sidebar/minimap, readable zoom;
+      share the entire screen; notifications off
+- [ ] Full demo path timed twice **with the Markdown board live** (short source edits and tab
+      transitions are the new failure modes to time); 7-minute prepared target, session-minute-16
+      hard bailout

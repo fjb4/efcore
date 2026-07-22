@@ -268,7 +268,7 @@ Priya a defensible early curve, labeled exactly that — not a completed cohort 
 
 The RD-grade version of the timing objection: Finance decides on the whole 1,200-seat contract,
 and the evidence is one team's ramp — possibly a labeled proxy, possibly n≤3. Say the worst-case
-inventory unprompted (in the 34:00–40:00 block if nobody raises it) so the evidence honesty reads
+inventory unprompted (in the renewal-defense block if nobody raises it) so the evidence honesty reads
 as strength, not as a concession extracted under pressure. At day 86 the defensible inventory is:
 
 1. **A historical baseline** from Acme's own repo history — not vendor telemetry.
@@ -324,4 +324,3 @@ which is what `/update-rules` reports.
 ## Questions for Ally's prep call
 
 Moved to `INTERVIEW_LOOP.md`, together with prep for the two 30-minute interviews.
-
