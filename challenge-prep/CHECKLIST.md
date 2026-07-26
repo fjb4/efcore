@@ -57,7 +57,7 @@
       can halve airtime, and visible thinking beats recited prose. Keep only the block intents
       and the invariants (Markdown board changes live, capability map before commands, honest
       labels). Interviewer challenges expand the spine across 45 minutes.
-- [ ] **Day before session:** send `ENGAGEMENT_EMAIL.md` to Frank, copying Ally
+- [x] **Day before session:** sent `ENGAGEMENT_EMAIL.md` to Frank, copying Ally (2026-07-26)
 - [ ] Keep the Scenario Pack names visible in-session: ADM (unnamed — ask), Maya Chen
       (Staff Eng), David Park (EM), Priya Nair (Dir Eng), Nina Alvarez (QA), Marcus
       Webb (DevOps), Ravi Shah (PM)
