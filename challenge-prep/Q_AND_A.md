@@ -156,6 +156,35 @@ That is why ramp rework is a co-primary metric and Nina owns its taxonomy. A spe
 not count if material rework, defects, or bypassed gates increase. `/pre-review` is advisory; human
 review and CI remain authoritative.
 
+## "Where does 3x come from? Why is two weeks achievable?"
+
+**3x is Acme's number, not ours** — it is the team's own question in the handout ("Can Cursor 3x
+how fast new engineers become productive contributors"), and 42 ÷ 3 = 14. Say that plainly first;
+it reframes the question from a promise being defended to a hypothesis being tested.
+
+Then give the honest evidence position. The only quantitative signal anywhere in the account is
+**Maya's 2x** — "cut my own ramp on the new module in half" — which is self-reported, n=1, with no
+baseline definition, and it measures something narrower than new-hire ramp: a staff engineer
+already fluent in the codebase and its conventions, learning one new module. A new joiner's six
+weeks also contains environment setup, access, domain knowledge, product context, and learning who
+to ask. Rules and commands do not touch most of that.
+
+**The ceiling argument (state the reasoning, never name the principle).** No improvement to the
+code path can move total ramp by more than the code path's share of it. If context discovery is
+70% of ramp, perfect tooling gets 42 days to ~13 — 3x is live. If it is 40%, the same perfect
+tooling gets 42 to ~25 — 1.7x, and 3x was never reachable by any tool, from any vendor.
+
+That turns the target into a diagnosis rather than a debate:
+
+> 3x is your number and I am happy to test it. What decides whether it is reachable isn't Cursor,
+> it's what share of those six weeks is actually context and code discovery. Nobody has measured
+> that. Week one decomposes the baseline, and then we will both know whether we are chasing 3x, 2x,
+> or a different problem entirely.
+
+If the decomposition says the target is unreachable, that lands at day 10 with David's own data,
+not at day 86 in front of Priya. Being the person who said so early is a stronger position than
+hitting the number would have been.
+
 ## "What if the pilot misses the 3x target?"
 
 Do not hide it. Decompose design-to-deploy time to identify whether context discovery, coding,
