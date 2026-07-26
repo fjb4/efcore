@@ -117,11 +117,23 @@ new joiner + Maya -> plan -> HUMAN APPROVAL -> build -> Nina review -> Marcus CI
 
 ### Software-factory path
 
+The line is plan -> approve -> build -> review -> test -> deploy -> evidence. The pilot builds it
+with humans at every stage; automation is added one stage at a time, behind a gate.
+
 | Stage | Operating model | Control that must hold |
 |---|---|---|
 | **Repeatable** | Human-gated commands, repository rules, agents, CI, evidence capture | Approved plan, human review, deterministic CI |
-| **Connected** | MCP context, hooks, Bugbot, and team distribution | Least privilege, admin policy, Nina/Marcus approval |
-| **Automated** | Bounded cloud-agent execution and scheduled evidence/drift work | Scoped secrets and egress, PR review, CI, Marcus-controlled deploy |
+| **Connected** | MCP context, restricted modes, Bugbot, and team distribution | Least privilege, admin policy, Nina/Marcus approval |
+| **Automated** | Labeled issue -> draft PR, scheduled drift and evidence work | Human-applied label, draft-only output, provenance policy, CI, Marcus-controlled deploy |
+
+**Never automated:** plan approval, merge, deploy, and what the evidence means.
+
+Open [the software-factory map](../.cursor/staged/SOFTWARE_FACTORY.md) for the stage-by-stage
+version: live today, staged next, and the gate owner for each step. Every staged design is a
+committed, reviewable artifact, and none of it is enabled.
+
+**Ask the field engineer:** What would you require before enabling connected context or bounded
+cloud execution here?
 
 **Capture now:** Update **Next move** above with the agreed scale gate.
 

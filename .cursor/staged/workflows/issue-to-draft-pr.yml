@@ -1,0 +1,106 @@
+# STAGED — NOT ENABLED. GitHub only runs workflows from `.github/workflows/`; this file is inert
+# where it sits. It is here so Marcus can review a concrete artifact instead of a description.
+#
+# WHAT IT IS: Path B of `.cursor/staged/issue-to-draft-pr.md` — the Acme-triggered variant. A human
+# adds the `agent-ready` label to an issue; this workflow asks the Cursor Cloud Agents API to run
+# this repository's own `/first-contribution` contract against it and open a DRAFT pull request.
+# Path A (a Cursor Automation on the "Issue label changed" trigger) does the same thing with no
+# workflow to maintain. Acme picks one at the enable gate; this exists for the case where the
+# trigger logic must live in Acme's CI and audit log.
+#
+# PRECONDITIONS (all of them, before this moves to .github/workflows/):
+#   1. `.cursor/staged/agent-pr-policy.md` adopted, and `agent-pr-guardrails.yml` enabled and
+#      required by branch protection. Never enable the producer before the enforcer.
+#   2. The issue's change class is on Nina's in-class list.
+#   3. `CURSOR_API_KEY` provisioned by Marcus as a repository secret, scoped to this repository.
+#   4. Team spend limit set.
+#
+# NOT VERIFIED END-TO-END: the API shape below (POST https://api.cursor.com/v1/agents with
+# prompt.text / repos[].url / repos[].startingRef / model.id / autoCreatePR) was checked against
+# Cursor's docs on 2026-07-26 and never run here — no key, and enabling it is Acme's decision, not
+# a demo's. Re-verify the request and response shape at enable time; treat it as a declared drift
+# surface like the pinned model IDs in `.cursor/README.md`.
+
+name: Issue to draft PR (staged — not enabled)
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: read
+  issues: write # one status comment on the issue; nothing else
+
+jobs:
+  request-draft:
+    # Fork-only, label-only. Never issue-opened, never comment-triggered.
+    if: >-
+      github.event.label.name == 'agent-ready' &&
+      github.repository_owner != 'dotnet'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: agent-draft-${{ github.event.issue.number }}
+      cancel-in-progress: false
+    steps:
+      - name: Refuse if too many agent drafts are already open
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # The queue must not outrun review. Cap is a policy number, not a technical limit.
+          open=$(gh pr list --repo "$GITHUB_REPOSITORY" --label agent-authored --state open \
+                   --json isDraft --jq '[.[] | select(.isDraft)] | length')
+          if [ "$open" -ge 3 ]; then
+            echo "::error::$open agent drafts already open; review those before drafting more."
+            exit 1
+          fi
+
+      - name: Launch cloud agent
+        id: launch
+        env:
+          CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+        run: |
+          set -euo pipefail
+          # The prompt does not restate the workflow — it points at the versioned command contract,
+          # exactly as the subagents under .cursor/agents/ do. The rules the agent loads are the
+          # rules a human gets, which is the whole reason this layer is in the repository.
+          prompt="Follow .cursor/commands/first-contribution.md for issue #${ISSUE_NUMBER}:
+          ${ISSUE_TITLE} (${ISSUE_URL}).
+
+          You have no human to approve the plan mid-run, so the plan is the deliverable that gets
+          reviewed alongside the diff:
+          - Put the full plan in the pull request description, above the change summary, followed
+            by the verification you actually ran and its output.
+          - Open the pull request as a DRAFT, titled '[agent-draft] ${ISSUE_TITLE}', labeled
+            'agent-authored', and record the .cursor/ commit SHA you ran against.
+          - Read .cursor/staged/agent-pr-policy.md first. If this issue is out of class,
+            underspecified, or would touch the public API surface or the API baseline, open no
+            pull request: state what is missing and stop.
+          - Do not merge, do not modify CI, do not touch .cursor/ itself."
+          jq -n \
+            --arg prompt "$prompt" \
+            --arg repo "${{ github.event.repository.html_url }}" \
+            '{prompt: {text: $prompt},
+              repos: [{url: $repo, startingRef: "main"}],
+              model: {id: "composer-2.5"},
+              autoCreatePR: true}' > request.json
+
+          curl --fail-with-body --silent --show-error \
+            --request POST https://api.cursor.com/v1/agents \
+            --user "${CURSOR_API_KEY}:" \
+            --header 'Content-Type: application/json' \
+            --data @request.json > response.json
+
+          echo "agent_id=$(jq -r '.id // "unknown"' response.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Comment the run on the issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue comment "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" --body \
+            "Cloud agent \`${{ steps.launch.outputs.agent_id }}\` is drafting a change for this
+            issue. It will open a **draft** PR carrying its plan. A human reviews the plan and the
+            diff together; nothing merges automatically. Remove the \`agent-ready\` label to stop
+            using this path."

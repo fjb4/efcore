@@ -38,10 +38,10 @@ policy out loud:
 > static policy. The routing is policy-as-code in the subagent frontmatter; the enforced boundary
 > is the admin model allowlist.
 
-The staged surfaces (MCP, custom modes, cloud agents) are **not** in this block. The
-`.cursor/staged/` walk is a planned beat in session-card Block 5, where the connected and
-automated stages name those exact capabilities. Here, one sentence only: those three are
-consciously staged, not missing. If the room presses early, go to the Block 5 walk rather than
+The staged surfaces (MCP, custom modes, cloud agents and automations) are **not** in this block.
+The `.cursor/staged/` walk — the software-factory map and the labeled-issue → draft-PR design — is
+a planned beat in session-card Block 5, where the connected and automated stages name those exact
+capabilities. Here, one sentence only: they are consciously staged, not missing. If the room presses early, go to the Block 5 walk rather than
 expanding the architecture lead-in.
 
 Close the architecture setup with:

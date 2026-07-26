@@ -1,0 +1,87 @@
+# STAGED — NOT ENABLED (inert outside `.github/workflows/`). Enforcement half of
+# `.cursor/staged/agent-pr-policy.md`. This is the file that makes the policy load-bearing:
+# labels and titles are declarations, a required status check is a control.
+#
+# ENABLE THIS BEFORE ANY AUTOMATION THAT PRODUCES PULL REQUESTS, and make it required in branch
+# protection. Enabling the producer first would mean the first agent-authored PR is reviewed under
+# a policy nothing checks.
+#
+# It deliberately does NOT re-run the four onboarding gates — `cursor-onboarding-checks.yml`
+# already does that, for agent and human PRs alike. Agent-authored PRs get the same gates as
+# everyone else plus these provenance rules; they do not get a softer bar or a separate pipeline.
+
+name: Agent PR guardrails (staged — not enabled)
+
+# `pull_request_target` on purpose: it runs the workflow definition from the BASE branch, so a PR
+# cannot weaken the check that judges it. Nothing here checks out or executes PR code, and the
+# token is read-only — the combination that makes this trigger safe.
+on:
+  pull_request_target:
+    types: [opened, edited, synchronize, labeled, unlabeled, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  guardrails:
+    if: contains(github.event.pull_request.labels.*.name, 'agent-authored')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Provenance — the plan must be reviewable
+        env:
+          BODY: ${{ github.event.pull_request.body }}
+          TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          fail=0
+          # A reviewer must be able to judge the reasoning, not just the diff.
+          grep -qi '^#\{1,3\} *plan' <<<"$BODY" || {
+            echo "::error::PR body has no Plan section. Agent-authored PRs carry the plan they followed."
+            fail=1; }
+          grep -qiE '\.cursor/? *(commit|sha|@) *[0-9a-f]{7,40}' <<<"$BODY" || {
+            echo "::error::PR body does not record the .cursor/ commit SHA the agent ran against."
+            fail=1; }
+          [[ "$TITLE" == \[agent-draft\]* ]] || {
+            echo "::error::Agent-authored PR titles are prefixed [agent-draft]."
+            fail=1; }
+          exit $fail
+
+      - name: Draft conversion is a human act
+        if: github.event.action == 'ready_for_review'
+        env:
+          ACTOR_TYPE: ${{ github.event.sender.type }}
+          ACTOR: ${{ github.event.sender.login }}
+        run: |
+          # The agent opens drafts. A person converting the draft is the moment someone takes
+          # ownership of the change — so the actor must be a human account, not the automation's.
+          if [ "$ACTOR_TYPE" != "User" ] || [[ "$ACTOR" == *"[bot]"* ]]; then
+            echo "::error::Draft was converted by $ACTOR ($ACTOR_TYPE). A human converts agent drafts."
+            exit 1
+          fi
+          echo "Converted by $ACTOR — human ownership recorded."
+
+      - name: Out-of-class paths
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Permanently out of class per agent-pr-policy.md. The API baseline is also covered by
+          # gate 3 of cursor-onboarding-checks.yml; this fails earlier and names the policy.
+          files=$(gh pr diff "${{ github.event.pull_request.number }}" \
+                    --repo "$GITHUB_REPOSITORY" --name-only)
+          blocked=$(grep -E '^(\.cursor/|\.github/workflows/|test/EFCore\.ApiBaseline\.Tests/)' \
+                      <<<"$files" || true)
+          if [ -n "$blocked" ]; then
+            echo "::error::Agent-authored PR touches out-of-class paths:"
+            echo "$blocked"
+            echo "The paved road, CI, and the public API baseline change through human PRs."
+            exit 1
+          fi
+
+      - name: Evidence separation
+        run: |
+          # Reminder, not a gate. tools/onboarding-metrics/ramp_metrics.py samples by cohort
+          # author, so an agent identity's PRs fall out of the ramp numbers today by accident of
+          # authorship. "By accident" is not a control: enabling any producer automation includes
+          # adding an explicit agent-authored label exclusion to that script. This PR belongs in
+          # the acceptance ledger, not in the ramp result.
+          echo "agent-authored: excluded from ramp metrics, counted in the acceptance ledger."

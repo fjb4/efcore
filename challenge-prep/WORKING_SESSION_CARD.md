@@ -181,14 +181,23 @@ Walk the progression:
 | **Connected: governed** | MCP supplies issue/PR/CI context; hooks capture or block; Bugbot reviews; Team Marketplace distributes | Least privilege, admin policy, Nina/Marcus approval |
 | **Scaled: automated** | Cloud agents execute bounded approved work; scheduled automation checks drift and refreshes evidence | Scoped environment/secrets, PR review, CI, Marcus-controlled deploy |
 
-Ground the connected and automated rows in committed artifacts — open `.cursor/staged/` and walk
-its three files in under 60 seconds:
+Ground the connected and automated rows in committed artifacts. Open
+`.cursor/staged/SOFTWARE_FACTORY.md` first and read **The line** down two columns — live today is
+the pilot, staged next is the factory, one gate per step across. Then name the staged files by
+gate and owner (under 2 minutes total):
 
 | Staged artifact | Enable gate (owner) |
 |---|---|
+| `SOFTWARE_FACTORY.md` - the production line, stage by stage | The map itself; nothing to enable |
 | `mcp.github.json` - read-only GitHub MCP config | Security review (Marcus) |
 | `new-joiner-mode.md` - restricted custom-mode spec | Team adoption call (Maya + David) |
+| `agent-pr-policy.md` + `workflows/agent-pr-guardrails.yml` - draft-only, provenance, evidence separation | Nina (review) + Marcus (enforcement) — **adopt first** |
+| `issue-to-draft-pr.md` + `workflows/issue-to-draft-pr.yml` - labeled issue -> draft PR | Marcus + Nina + David |
 | `drift-automation-spec.md` - scheduled drift-check automation | Security + platform review (Marcus, with Maya) |
+
+If you only have one minute, spend it on the issue-to-draft-PR trade: a human applies the label,
+the plan gate moves from before-the-code to plan-plus-diff-before-merge, and that is exactly why
+the eligible class list is narrow, starts empty, and belongs to Nina.
 
 Each is committed, inert, and labeled with its gate, owner, and precondition. Show and discuss
 them; never run or enable one - that is Acme's decision, and the design is what earns the gate.

@@ -69,10 +69,14 @@ source of truth) and **agent suggests, CI enforces**.
   committed fallback output; `.github/workflows/ramp-metrics.yml` is the team-owned refresh.
 - Fork CI: `cursor-onboarding-checks.yml` — fast SQLite-only gates (format, analyzers, API
   baseline, focused tests); `/pre-review` is its deliberate local mirror.
-- Staged surfaces: `.cursor/staged/` (added 2026-07-19) holds gate-ready **inert** designs —
-  read-only GitHub MCP config, new-joiner custom-mode spec, drift-automation spec — each named
-  with its review gate/owner; shown and talked through in-session — never run — to answer "we
-  wanted to see MCP/modes/cloud agents." Hooks, team rules, and Bugbot-at-scale remain positioning-only — "least-privilege
+- Staged surfaces: `.cursor/staged/` (added 2026-07-19, extended 2026-07-26) holds gate-ready
+  **inert** designs — `SOFTWARE_FACTORY.md` (the production-line map: live today vs staged next,
+  owner per stage), read-only GitHub MCP config, new-joiner custom-mode spec, `agent-pr-policy.md`
+  (draft-only, provenance, evidence separation), `issue-to-draft-pr.md` (labeled issue → draft PR
+  via a Cursor Automation or the Cloud Agents API), `workflows/` (the inert trigger + guardrail
+  workflows), drift-automation spec — each named with its review gate/owner; shown and talked
+  through in-session — never run — to answer "we wanted to see MCP/modes/cloud agents" and the
+  handout's software-factory ask. Hooks, team rules, and Bugbot-at-scale remain positioning-only — "least-privilege
   scale steps after the workflow earns trust." **Sync `.cursor/staged/` + the README table row
   to the demo branch before treating it as a fallback** (see CHECKLIST "Do first").
 

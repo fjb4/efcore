@@ -262,7 +262,8 @@ Use only the capabilities that serve the account:
   the implementer has an explicit Composer binding (Cursor-native, cost-efficient); creation and
   review are separated by fresh context.
 - **Custom modes** can package a restricted new-joiner setup (plan-first, limited tools) — a
-  staged option to name in the capability map, not a day-one need.
+  staged option to name in the capability map, not a day-one need
+  (`.cursor/staged/new-joiner-mode.md`).
 - **Hooks** can add audit/measurement or block unsafe actions after Acme approves the design.
 - **MCP** can connect issue, PR, CI, and documentation systems after least-privilege review.
 - **Cloud agents/automations** are a scale step after the foreground workflow has earned trust —
@@ -275,6 +276,19 @@ Use only the capabilities that serve the account:
   across the rolled-out repositories, restricted environment, scoped secrets/egress, Maya/Marcus
   review.
 - **Team rules and admin analytics** support organization-wide governance and adoption evidence.
+
+**The software-factory framing** ties those capabilities to the handout's actual ask — plan,
+design, build, review, test, and deploy increasingly running through Cursor, with PM/QA/DevOps as
+builders. `.cursor/staged/SOFTWARE_FACTORY.md` is the map: the production line stage by stage,
+each stage's Acme owner, what is live today, and the staged step that would automate it. The
+headline automated step is `issue-to-draft-pr.md` — a human labels an issue `agent-ready`, a
+Cursor Automation (GitHub *Issue label changed* trigger) or Acme's own CI calling the Cloud Agents
+API runs `/first-contribution`, and a **draft** PR returns carrying its plan. Its precondition is
+`agent-pr-policy.md`, enabled first: draft-only, provenance-labeled, plan-in-body, out-of-class
+paths blocked by `workflows/agent-pr-guardrails.yml`, and agent PRs excluded from the ramp metrics
+so automated volume never contaminates the renewal number. Product facts verified against
+cursor.com docs 2026-07-26; the API request shape is a declared drift surface to re-verify at
+enable time.
 
 ### Differentiators vs Codex and Claude Code (verified against cursor.com 2026-07-19)
 

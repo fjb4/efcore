@@ -44,7 +44,7 @@ nothing here to fall out of sync **except** the deltas, which is the one thing t
 | [`../.github/workflows/ramp-metrics.yml`](../.github/workflows/ramp-metrics.yml) | Dispatch-run wrapper so the team owns the metrics refresh after handoff (manual now; schedulable once the cohort is pinned). |
 | [`../.cursorignore`](../.cursorignore) | Keeps agent context on the source of truth and off build noise / private docs. |
 | [`../.github/workflows/cursor-onboarding-checks.yml`](../.github/workflows/cursor-onboarding-checks.yml) | The fast SQLite guardrail CI. "Agent suggests, CI enforces." |
-| [`staged/`](staged/README.md) | Gate-ready designs for the scale steps — read-only GitHub MCP config, new-joiner mode spec, drift-automation spec. Inert here; each enables only after its named review gate. |
+| [`staged/`](staged/README.md) | Gate-ready designs for the scale steps — the [software-factory map](staged/SOFTWARE_FACTORY.md), read-only GitHub MCP config, new-joiner mode spec, agent-PR policy, issue→draft-PR automation, drift-automation spec, and the inert workflows that enforce them. Inert here; each enables only after its named review gate. |
 
 **How they fit:** rules are the always-available context; commands are the workflows that cite those
 rules by name; the subagents under `agents/` are the model policy as code — commands delegate each

@@ -91,12 +91,14 @@
   the main conversation; both commands document an inline fallback if dispatch is unavailable.
   `/update-rules` gained a model-policy drift check against the README policy table.
 
-Staging upgrade (2026-07-19): `.cursor/staged/` now holds **gate-ready, inert designs** for
-three of the staged surfaces — read-only GitHub MCP config, new-joiner custom-mode spec, and
-the drift-automation spec — each labeled with its review gate and owner, shown and talked
-through on screen (never run) as the answer to why MCP/modes/cloud agents aren't live ("not
-enabled is a decision with a design attached"). Hooks, team rules, and Bugbot-at-scale remain **positioning-only** (per the
-staging in `README.md`): "least-privilege scale steps after the workflow earns trust."
+Staging upgrade (2026-07-19, extended 2026-07-26): `.cursor/staged/` holds **gate-ready, inert
+designs** for the staged surfaces — read-only GitHub MCP config, new-joiner custom-mode spec,
+drift-automation spec, and (new) `SOFTWARE_FACTORY.md`, the agent-PR policy, the labeled-issue →
+draft-PR automation, and the two inert workflows that trigger and enforce it — each labeled with
+its review gate and owner, shown and talked through on screen (never run) as the answer to why
+MCP/modes/cloud agents aren't live ("not enabled is a decision with a design attached"). Hooks,
+team rules, and Bugbot-at-scale remain **positioning-only** (per the staging in `README.md`):
+"least-privilege scale steps after the workflow earns trust."
 
 ## Demo hygiene
 
@@ -107,9 +109,10 @@ staging in `README.md`): "least-privilege scale steps after the workflow earns t
       pre-generated dashboard as fallback) — the demo cohort is **historical
       open-source data standing in for Acme joiners; say so out loud**
 - [ ] One unrehearsed-input dry run of `/scope-issue`
-- [ ] Time the `.cursor/staged/` walk in Block 5 (MCP config, new-joiner mode, drift
-      automation) — three files, their gates and owners, in under 60 seconds; shown and
-      discussed, never run
+- [ ] Time the Block 5 software-factory walk: `SOFTWARE_FACTORY.md`'s line table, then the
+      one design tension in `issue-to-draft-pr.md` (the plan gate moves; the human label is the
+      control), then name the rest of `.cursor/staged/` by gate and owner — under 2 minutes
+      total, shown and discussed, never run
 - [ ] Subagent dispatch + Composer-variant dry-run — **moved to "Do first" at the top of this
       file**; it gates all wording rehearsal
 - [ ] Rehearse the co-creation invariants: visible renewal-proof/pilot-change/owner/next-action

@@ -219,6 +219,54 @@ people across roles to become builders, and Maya must not be the only person who
 These transfers are scheduled: Session 1 assigns them; Session 3 verifies each owner has changed
 their artifact at least once without the SA.
 
+## "How does an onboarding pilot become an automated software factory?"
+
+A factory is a production line with gates, not an autonomous agent. The line is intake → plan →
+build → review → test → deploy → evidence → maintain, and
+[`.cursor/staged/SOFTWARE_FACTORY.md`](../.cursor/staged/SOFTWARE_FACTORY.md) shows every stage
+with its Acme owner, what runs today, and the staged step that would automate it. The pilot builds
+the line with humans in every stage; automation is added one stage at a time, each behind a named
+gate. Horizon order matters: **repeatable → connected → automated**. Automating a workflow that is
+not yet repeatable produces unreviewed volume, which is how the two previous pilots would fail
+again with more machinery.
+
+## "What is the first thing you would automate, and why that?"
+
+The stage where a human is currently doing something a rule already describes: a labeled issue
+drafting its own PR ([`issue-to-draft-pr.md`](../.cursor/staged/issue-to-draft-pr.md)). A human
+adds `agent-ready`, a Cursor Automation on the GitHub issue-label trigger runs the repository's own
+`/first-contribution` contract, and a **draft** PR comes back carrying the plan it followed. Acme
+can instead own the trigger in their own CI through the Cloud Agents API — same output, their
+audit log, `workflows/issue-to-draft-pr.yml` is the artifact.
+
+Be honest about the trade in the room: the foreground workflow approves the plan *before* code
+exists; an automation cannot stop mid-run, so the gate moves to plan-plus-diff before merge. That
+weakening is why the eligible-class list is narrow, starts empty, and belongs to Nina — and why
+the human applying the label, not the agent, is the first control.
+
+## "What stops that from flooding you with bad PRs — or from faking the renewal numbers?"
+
+[`agent-pr-policy.md`](../.cursor/staged/agent-pr-policy.md), which is enabled **before** anything
+that produces PRs. Draft-only, `agent-authored` label, title prefix, the plan and the `.cursor/`
+SHA in the body, existing CODEOWNERS review unchanged, a cap on open drafts, and out-of-class
+paths blocked. Labels are declarations, so
+[`workflows/agent-pr-guardrails.yml`](../.cursor/staged/workflows/agent-pr-guardrails.yml) is what
+makes them load-bearing as a required check — the same posture as the rest of the layer: agent
+suggests, CI enforces.
+
+On the numbers: agent-authored PRs are excluded from ramp and rework metrics and tracked in their
+own acceptance ledger (drafts opened, taken forward, closed, human touch time, rework tags). Ramp
+velocity answers "did new joiners ramp faster." Automated volume in that number would corrupt the
+only question Priya asked, and it would be the easiest way to win the pilot and lose the account.
+
+## "Why can't the automation merge its own work?"
+
+Because the reason to trust the output is that a human read the plan next to the diff. Remove that
+and the acceptance rate is unmeasurable and the evidence is unusable. Four things never move into
+the automated column at any horizon: approving a plan before code is written, merging, deploying,
+and deciding what the evidence means. I would rather automate a second bounded stage than remove
+the gate on the first one.
+
 ## "Why use rules, commands, skills, and a review agent?"
 
 Rules hold stable, scoped conventions. Commands expose repeatable workflows. Skills load deeper
@@ -228,11 +276,13 @@ remain the actual gates.
 
 ## "Where do MCP and cloud agents fit?"
 
-The staged designs are committed and openable — `.cursor/staged/` holds the read-only GitHub MCP
-config, the new-joiner custom-mode spec, and the drift-automation spec, each labeled with its
-review gate and owner. "Not enabled" is a decision with a design attached: Marcus reviews a
-concrete artifact, not a slide. Open and walk them; never run or enable one — that is the gated
-decision the design exists to earn.
+The staged designs are committed and openable — `.cursor/staged/` holds `SOFTWARE_FACTORY.md`
+(the production line: live today, staged next, owner per stage), the read-only GitHub MCP config,
+the new-joiner custom-mode spec, the agent-PR policy, the labeled-issue → draft-PR automation with
+its two inert workflows, and the drift-automation spec, each labeled with its review gate and
+owner. "Not enabled" is a decision with a design attached: Marcus reviews a concrete artifact, not
+a slide. Open and walk them; never run or enable one — that is the gated decision the design
+exists to earn.
 
 Not on day one by default. After security review, least-privilege MCP can pull issue, PR, review,
 and CI evidence without manual transcription. Cloud agents or automations can handle bounded,
