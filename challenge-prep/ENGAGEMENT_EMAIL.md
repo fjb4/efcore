@@ -19,32 +19,30 @@ re-wrap them.
 
 Hi Frank,
 
-Thanks for the context - glad to help with this.
+Thanks for the context - glad to run point on this.
 
 I'd start with the 12-person team because they already use Cursor and own a concrete six-week ramp problem. We'll spend the first 30 days co-building and testing a governed onboarding workflow on real work, leaving enough time to get credible evidence in front of Priya before the renewal.
 
-The outcome I want to test is first meaningful PR moving from six weeks toward two, without increasing rework and with the change making it through review, CI, and deploy. I'd rather test the 3x than promise it.
+The outcome I want to test is whether time to first meaningful PR can move from six weeks toward two, without increasing rework and with the change making it through review, CI, and release. I'd rather test the 3x than promise it.
 
 David will define what counts as meaningful and approve the baseline from Acme's repository history. Maya will build and maintain the workflow with me. Nina, Marcus, and Ravi will own the quality, platform, and task-definition pieces. That's where the software factory starts - people outside engineering owning part of how the work runs. A small cohort will run real backlog work through the workflow while we capture timestamps, review cycles, interventions, and before-and-after artifacts.
 
-I'll start stepping back during the pilot. Maya will change the workflow without me, a second engineer will run it independently, and David - not Cursor - will present the result to Priya around day 55–60. If the evidence holds, we'll test the pattern with a second team.
+I'll start stepping back during the pilot. Maya will change the workflow without me, and a second engineer who did not build it will test whether they can use it independently. David - not Cursor - will present the result to Priya between days 55 and 60. If the evidence holds, we'll test the pattern with a second team.
 
 For the renewal, I'll track three outcomes:
 
-1. Time to first meaningful PR.
-2. Rework during ramp.
-3. Design-to-deploy cycle time.
-
-Weekly active seats will provide adoption context, but it won't answer Finance's productivity question. Every claim will be labeled as observed, historical, proxy, or hypothesis.
+Time to first meaningful PR.
+Rework during ramp.
+Design-to-deploy cycle time.
+Weekly active seats will provide adoption context, but it won't answer Finance's productivity question. I'll be clear about what we actually measured, what comes from past data, and what we're still assuming.
 
 What I need from you:
 
-1. Commitment from David and Maya, plus an early evidence-threshold conversation and a midpoint readout with Priya.
-2. Segmented usage data, context on the two stalled teams, and clarity on whether Finance is evaluating price, standardization, or both.
-3. Twenty minutes each week to review decisions, risks, evidence, and the commercial story.
+Help me secure David and Maya's commitment, an early conversation with Priya to agree what evidence matters, and time on her calendar between days 55 and 60 to review the results and decide the next step.
+Team-level Cursor usage and context on why the two earlier pilots stalled, so we can design around known adoption risks and choose the right second team to test.
+Twenty minutes each week to review decisions, risks, evidence, and the commercial story.
+I'm assuming the team can provide a few new joiners at the outset and that we can obtain six months of comparable repository history.
 
-I'm assuming we can identify a small cohort within 30 days and obtain six months of comparable repository history. If either is wrong, I'll adjust the pilot rather than weaken the evidence.
-
-If this matches your account read, I'll start with the David and Maya introductions. I'll bring the working Cursor prototype to our session.
+If this matches your account read, I'll send you a short note you can use to connect me with David and Maya, then I'll take it from there. I'll bring the working Cursor prototype to our session.
 
 John Bush
