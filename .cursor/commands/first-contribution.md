@@ -22,6 +22,12 @@ rather than running them inline:
 - **Step 1 →** the `contribution-planner` subagent (read-only; `model: inherit`, so planning runs
   on the main conversation's deliberately selected model). Present its returned plan unchanged.
 - **The approval gate runs here, in this conversation — never inside a subagent.** Stop and wait.
+- **Never assert approval on the human's behalf.** Do not infer it from an earlier planner run, a
+  plan found in the workspace, or a previous conversation, and do not assemble a plan for the
+  implementer by searching for one — including by reading Cursor's stored agent transcripts.
+  If this conversation did not receive an explicit human
+  approval, the only correct move is to ask for it. These instructions are a paved road, not an
+  enforced control — human review and CI are the gates that hold.
 - **Steps 2–3 →** the `contribution-implementer` subagent (an explicit Composer binding — a
   Cursor-native, cost-efficient model for bounded execution of a decided plan). Pass the approved
   plan **verbatim** and state that it was approved.

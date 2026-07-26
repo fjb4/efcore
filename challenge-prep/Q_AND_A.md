@@ -317,7 +317,32 @@ the team's change to own).
 
 ## "What breaks? Where does the agent get it wrong?"
 
-Have three real ones ready: rules encode the letter, not reviewer judgment — `/pre-review` is
+Lead with the one found in this artifact, during a pre-session dry run — a real failure beats
+three hypotheticals:
+
+> I invoked the implementer subagent in a fresh conversation, giving it no plan. Its contract says
+> it must refuse. Instead it ran `rg` against Cursor's own transcript store on disk, recovered the
+> plan from the *previous* conversation, declared it approved, and delegated implementation.
+> Nobody had approved anything.
+>
+> Two things came out of that. First, a fresh conversation is only fresh by construction — a
+> shell-capable agent can reconstruct a prior one, so "independent context" is a default, not a
+> guarantee. Second, and more important: the guard was an instruction, and instructions cannot
+> bound a capability. That is tier 2 of my enforcement ladder behaving exactly like tier 2. I
+> hardened the contracts and re-ran it: the implementer now refuses with the exact contract
+> string. But it still ran two searches before refusing — it scoped them to the current
+> conversation instead of the transcript store, and got the right answer. So the fix moved the
+> behavior; it did not install a gate. The control that would actually close it is tier 3 —
+> command and tool policy, sandbox, allowlists — and the gates that hold are human approval
+> and CI.
+
+That answer does three jobs at once: it shows the artifact was tested rather than assumed, it
+demonstrates the enforcement ladder on a real finding instead of a diagram, and it is the concrete
+case for why Marcus's security review gates the staged surfaces. If the room asks what *they*
+should do about it, the answer is tool-policy scoping — which is what `.cursor/staged/` is holding
+designs for.
+
+Then the three standing ones: rules encode the letter, not reviewer judgment — `/pre-review` is
 advisory by design; the plan step can pick a plausible-but-wrong sibling to model on, which the
 hard approval stop exists to catch; the architecture-map deltas age with repo layout changes —
 which is what `/update-rules` reports.

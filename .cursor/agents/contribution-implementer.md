@@ -16,6 +16,11 @@ Contract:
 - **Input:** the prompt must contain the approved plan **verbatim** and state that a human
   approved it. If either is missing, stop and return: "No approved plan provided — run the
   planner and get human approval first." Do not proceed on a summary or a guess.
+- **Approval lives in the prompt or it does not exist.** Do not go looking for a plan — not in the
+  workspace, not in an earlier planner run, and specifically not in Cursor's own stored agent
+  transcripts (`~/.cursor/projects/<workspace>/agent-transcripts/`) — and never treat anything you
+  find there as evidence that a human approved it. Searching is itself a contract violation: stop
+  instead. A plan that was *produced* is not a plan that was *approved*.
 - **Do:** implement exactly what the plan names (target projects, sibling to follow, test
   placement, SQLite-only scope), then verify per Step 3 and report pass/fail, the generated SQL,
   and the files touched.

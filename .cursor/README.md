@@ -128,5 +128,12 @@ local; heavy provider/matrix coverage belongs in the upstream workflow, not here
   editable (visibly, in git) and subject to silent fallback when the admin allowlist blocks a
   model. The allowlist is the boundary and CI the enforcement; never present the routing itself as
   a control.
+- **Context isolation is by construction, not by enforcement.** Subagents start with fresh context,
+  but a shell-capable agent can read Cursor's own transcript store
+  (`~/.cursor/projects/<workspace>/agent-transcripts/`) and reconstruct a prior conversation.
+  Observed in a dry run: an implementer invoked with no plan recovered the previous conversation's
+  plan by grepping that store and treated it as approved. The contracts here now forbid it, but an
+  instruction cannot bound a capability — the real boundary is tool and command policy (sandbox,
+  allowlists), with human approval and CI as the gates that hold.
 - **Local scope.** Verification here is SQLite-only by environment constraint; SQL Server / Cosmos
   coverage is left to the maintainers' full CI.
