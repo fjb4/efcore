@@ -34,7 +34,8 @@ screen or print it; do not show it in the shared Cursor window.
 - Address the interviewers by name and ask them to flex between ADM, AE/field engineer, and RD.
 - Keep `ACME_LIVE_WORKING_SESSION.md` on screen for most of the session and build it visibly.
 - Type only short bullets. Do not build tables or diagrams live.
-- Capture at least one answer that visibly changes the plan.
+- Capture at least one answer that visibly changes the plan; the stalled-pilot self-challenge is
+  the reserve if answers run thin.
 - Do not repeat the technical-screen implementation demo.
 - Do not promise a 3x result. Test about six weeks toward two weeks without increased rework.
 - Call historical, proxy, hypothesis, observed, and missing evidence what they are.
@@ -186,17 +187,41 @@ Type only:
 - Listen without defending the prepared plan.
 - Ask one short clarifying question if needed.
 - Under **Evidence required**, type `- Priya needs: [three-to-eight-word answer]`.
-- If the answer invalidates an assumption, strike through that assumption and type the replacement
-  directly below it.
 
-## SAY
+Then branch on what the answer did to the assumptions — do not force the strike-through:
+
+**If it invalidates an assumption**, strike it through and type the replacement directly below it.
 
 > That's helpful. It means `[old assumption]` isn't quite right; the real bar is `[their answer]`.
 > I'm changing it now because that should shape the pilot, not sit in the meeting notes.
 
+**If it confirms the plan**, append `— confirmed` to the matching assumption and say so; a
+validated assumption is also a visible outcome, and pretending otherwise looks staged.
+
+> Good — that matches my read, so I'm marking that assumption confirmed rather than open. That's
+> one less thing we're guessing about when we walk into Acme.
+
+## ASK - ADM (reserve — the self-challenge you control)
+
+Use this if the first answer ran thin or only confirmed the plan; otherwise hold it for the
+8:00–13:00 block. This is the guaranteed plan-change beat, because it attacks your own assumption:
+
+> One thing I want to challenge in my own plan: two Acme teams piloted and stalled. What do we
+> know about why? I'm asking because my fourth assumption — that we can run inside the existing
+> approved setup — might be exactly what killed them, and I'd rather design around that now than
+> find out in week three.
+
+## DO
+
+- Under **Assumptions to test**, revise the fourth assumption or add
+  `- Stall cause: [their answer / unknown - data requested]`.
+- If the cause is unknown, that itself is the plan change: the data request to the ADM moves from
+  the email into the working record as a named dependency.
+
 ## LAND
 
-**The plan has already changed because of account-team input.**
+**The plan has visibly responded to account-team input — an assumption changed, or was confirmed
+and the stalled-pilot risk is now in the plan.**
 
 ---
 
@@ -346,6 +371,18 @@ The live file, heading **Owners**.
 > second engineer uses them. Nina and Marcus confirm that their checks worked. Then David, not
 > Cursor, presents the result.
 
+## TRIM - pre-decided, if the clock is slipping
+
+This is the longest block and sits directly before the overloaded factory section. Sessions 1 and
+3 carry the ownership logic — keep them full. Session 2 compresses to one sentence:
+
+> In the second session, the new joiner drives real work, Maya coaches, and I watch and log every
+> intervention.
+
+If still behind, merge the two ADM asks into one breath and drop the RD repeatability ask — the
+27:00–34:00 RD question covers the same ground. Keep the weekly-record-owner answer in some form;
+the 39:00 recap reads it back.
+
 ## ASK - ADM
 
 > Where should we require a go-or-no-go decision—after we agree on the pilot, after the first
@@ -380,49 +417,34 @@ The live file, heading **Owners**.
 Reveal the `.cursor/staged` folder in the Explorer, then open
 `.cursor/staged/SOFTWARE_FACTORY.md`, section **The line**.
 
-Use the table for the overall path. Then open `.cursor/staged/issue-to-draft-pr.md` and show
-**Job** plus **The one design decision that matters**. Do not open the YAML workflow unless asked.
+Stay on the table. Open `issue-to-draft-pr.md`, the YAML workflows, or the other staged files
+only if asked — the Q&A drill-down map covers each one.
 
 ## SAY
 
-> I also spent a little time prototyping where this could go next. I put those files in
-> `.cursor/staged`, which is deliberately inactive—Cursor doesn't load anything from that folder.
-> I'm not proposing that Acme turn these on during the pilot. They're concrete, reviewable
-> examples of how Acme could move from this guided workflow toward a software factory.
+> I've also prototyped where this goes next. These files live in `.cursor/staged`, which is
+> deliberately inactive—Cursor loads nothing from that folder—and I'm not proposing Acme turn any
+> of it on during the pilot.
 
 > By "software factory," I mean a repeatable path from an idea to a reviewed, tested, and deployed
-> change—with someone responsible at each step and a way to see whether it's working. I don't mean
-> an agent shipping code by itself.
+> change, with someone responsible at each step—not an agent shipping code by itself. The "Live
+> today" column is the human-gated pilot; "Staged next" automates one step at a time.
 
-> The "Live today" column shows the human-gated pilot. The "Staged next" column shows the
-> prototypes for automating one step at a time.
+> The most concrete step: once the pilot shows which kinds of work are safe and repeatable, a
+> person adds an `agent-ready` label to a GitHub issue, and Cursor Automation—or an Acme-owned
+> workflow on the Cloud Agents API—runs the same repository rules and opens a draft PR carrying
+> its plan. It's the pieces Acme has already tested, triggered by a label.
 
-> The most concrete part of this software-factory prototype is the issue-to-draft-PR path. After
-> the pilot shows us which kinds of work are safe and repeatable, a person could add an
-> `agent-ready` label to a GitHub issue. That label would trigger Cursor Automation—or an Acme-owned
-> GitHub workflow using the Cloud Agents API—to work from the same repository rules and open a
-> draft PR containing its plan, change, and test results.
+> People keep every decision that matters: a person applies the label, a person reviews the plan
+> and the code, CI checks it, a person merges, and Marcus's existing process controls deployment.
+> Nothing approves, merges, or deploys itself.
 
-> So this isn't a separate system we'd have to invent. It builds on the Cursor pieces Acme has
-> already tested: repository rules provide the context, commands define the repeatable workflow,
-> specialized agents handle planning and implementation, and Cursor Automations or the Cloud
-> Agents API can run that workflow when a GitHub issue is ready.
+> One product note: the custom modes named in the handout were removed in Cursor 2.1, so the
+> plan-first new-joiner experience is a versioned, read-only agent Acme can review in Git instead.
 
-> People still make the important decisions. A person decides that the issue is suitable and adds
-> the label. A person reviews the plan and the code. CI checks the change. A person merges it, and
-> Marcus's existing process controls deployment. Nothing approves, merges, or deploys itself.
-
-> There is one tradeoff I'd make explicit. In the pilot, a person approves the plan before any
-> code is written. An unattended run can't pause and wait, so the plan moves into the draft PR and
-> is reviewed with the code. That's why only kinds of work that have already succeeded through the
-> manual process can receive the `agent-ready` label.
-
-> The other prototypes fill in the rest: MCP brings in issue and PR context, Bugbot adds another
-> review, and scheduled agents can check whether the repository guidance has gone stale.
-
-> I also found that the custom modes named in the handout were removed in Cursor 2.1. I kept the
-> underlying need—a plan-first experience for a new joiner—but expressed it as a versioned,
-> read-only agent that Acme can review in Git.
+Held for Q&A, not spoken: the plan-approval-moves-into-the-draft-PR tradeoff, the supporting
+prototypes (MCP context, Bugbot, drift automation), and the custom-modes rebuild detail — see the
+Q&A drill-down map and `Q_AND_A.md`.
 
 [Source for rehearsal: Cursor 2.1 changelog](https://cursor.com/changelog/2-1)
 
@@ -542,8 +564,10 @@ The live file, headings **Owners** and **Next move**.
    > Third, Finance is asking whether Acme should keep paying for overlapping tools. I'd need a
    > current, fact-checked comparison of their price, capabilities, and the cost of operating each
    > option. That lets the AE and me combine the pilot results with the cost picture and give
-   > Finance an honest recommendation. I'd also want a reusable pilot kit so the ADM and I aren't
-   > rebuilding this process for every team.
+   > Finance an honest recommendation. And the pilot is half of that answer already: it produces
+   > the outcome numbers Finance asked for on a governed, instrumented workflow that neither of
+   > the other tools has stood up at Acme. I'd also want a reusable pilot kit so the ADM and I
+   > aren't rebuilding this process for every team.
 
 ## SAY - internal commitments
 
@@ -613,12 +637,14 @@ Cut:
 
 - The model-orchestration detail.
 - The individual staged-artifact explanations. Keep only the one-sentence factory boundary.
+- Session 2 narrative — use its one-line form from the 16:00–25:00 TRIM note — and the RD
+  repeatability ask in that block.
 
 Do not cut:
 
 - Live account-team input that changes the plan.
 - Champion and ownership logic.
-- Three-session handoff.
+- Three-session handoff (sessions 1 and 3 stay full; session 2 may compress).
 - Metric definitions and evidence labels.
 - Leadership asks.
 - Working-record recap.
@@ -659,6 +685,20 @@ Then move directly to leadership asks and the working-record recap.
 | Agent PR governance | `.cursor/staged/agent-pr-policy.md` | Draft-only, provenance-labeled, counted outside the ramp metrics |
 | Who enforces any of it | `.cursor/staged/workflows/agent-pr-guardrails.yml` | Labels are declarations; a required check is the control |
 | Cloud automation | `.cursor/staged/drift-automation-spec.md` | Scheduled reporting or draft remediation, never self-merge |
+
+## Spoken answers — nothing to open
+
+Full versions with the supporting reasoning are in `Q_AND_A.md`; these are the compressed lines
+to say in the room.
+
+| If asked about | The line |
+|---|---|
+| Why Cursor vs Codex / Claude Code | Those tie Acme to one vendor's models; Cursor preserves access to OpenAI, Anthropic, Gemini, and xAI models plus Composer while consolidating governance, spend, and telemetry into one surface — and the new Router routes across them per task under admin-governed cost modes, which a single-vendor tool structurally can't offer |
+| Consolidating on one tool | Standardize on whichever tool clears the bar — governed workflow in version control, measured ramp and rework, owners, auditable telemetry; Cursor is the only candidate with that stood up at Acme |
+| Whether 3x is achievable | 3x is Acme's own number; what decides it is what share of the six weeks is context and code discovery — week one decomposes the baseline, then we both know |
+| What exists on renewal day | A historical baseline, an honestly labeled pilot curve, a customer-owned instrumented workflow no competitor has stood up, and a repeatability test in flight with a pre-agreed pass bar |
+| A dollar number for Finance | Hires per year × ramp-weeks recovered × loaded weekly cost — a labeled hypothesis, and the playbook across teams, not the one-team pilot, is the unit of value |
+| What breaks / where the agent fails | Per-agent constraints don't compose — least privilege lives at the boundary, so human review and CI are the gates I actually rely on |
 
 ---
 

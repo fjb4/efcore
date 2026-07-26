@@ -49,7 +49,15 @@ risk, and cost rather than a list of model names (names go stale; the policy sho
   coding model.
 - **Skeptical review of high-risk changes** (`/pre-review`): an independent strong reviewer model
   plus the deterministic gates — creation and review stay separated.
-- **Auto**: the sane default where Cursor's router has fresher information than a static policy.
+- **Auto**: the sane default where Cursor's router has fresher information than a static policy —
+  and as of the **Cursor Router** announcement (2026-07-22, four days before the session), that
+  default has a product behind it: a classifier trained on 600k+ live requests that routes each
+  task across the vendors by context, complexity, and domain, with three admin-governed modes
+  (Intelligence / Balance / Cost), per-team enablement, and model allow/restrict. Cursor reports
+  30–50% cost savings vs. running a frontier model exclusively — **a vendor-published number;
+  label it that way and validate it on Acme's own telemetry.** The Router and the pinned
+  implementer are compatible, not in tension: the pin covers the one stage where a deterministic,
+  reviewable choice matters; the Router is the governed default everywhere else.
 
 This policy is **code, not a memo**: `/first-contribution` delegates planning to the
 `contribution-planner` subagent (`model: inherit`, `readonly` — it inherits the deliberately
@@ -306,7 +314,10 @@ be generated inside the vendor's own surface. Do not use automation to outrun go
 Translate the measured delta into capacity only after Acme validates loaded cost and hiring volume:
 days removed from ramp, fewer material review cycles, shorter delivery time, and any reduced senior
 interrupts. Show formulas and ranges, not a single heroic ROI number. Keep adoption data as evidence
-that the result can reach enough users to matter.
+that the result can reach enough users to matter. The Cursor Router (announced 2026-07-22) adds a
+governed lever on the other side of the ledger — the seat spend Finance is comparing line-by-line:
+admin-selected Auto modes with Cursor-reported 30–50% cost savings, cited as the vendor's published
+early-access number until validated on Acme's own usage.
 
 If the RD demands a number anyway, have one ready and label it: hires/yr × ramp-weeks recovered ×
 loaded weekly cost — illustratively ~6 hires/yr × ~4 wks × ~$4k/wk ≈ **$90–100k/yr for this one
