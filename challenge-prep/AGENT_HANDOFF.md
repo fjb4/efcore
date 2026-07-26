@@ -23,9 +23,8 @@ and role context.
   new-engineer ramp on one 12-engineer team, renewal ~90 days, no exec champion, Cursor + Codex +
   Claude Code fragmentation. Interviewers play the **internal account team** (AE/FE, ADM, RD),
   not the customer. Must extend the technical-screen artifact, in Cursor specifically.
-- Scheduling: availability submitted; Ally Anderson (recruiter) still owes the loop schedule, the
-  15-min prep-call link, and the **hiring manager's name/email** (blocker for the send-ahead
-  engagement email, due the day before the session).
+- The loop is scheduled. The **hiring manager's name/email** is still needed for the send-ahead
+  engagement email, which is due the day before the session.
 
 ## Repo state (github.com/fjb4/efcore — John's public fork of dotnet/efcore)
 
@@ -70,8 +69,8 @@ source of truth) and **agent suggests, CI enforces**.
   baseline, focused tests); `/pre-review` is its deliberate local mirror.
 - Staged surfaces: `.cursor/staged/` (added 2026-07-19) holds gate-ready **inert** designs —
   read-only GitHub MCP config, new-joiner custom-mode spec, drift-automation spec — each named
-  with its review gate/owner; openable in-session to blunt "we wanted to see MCP/modes/cloud
-  agents." Hooks, team rules, and Bugbot-at-scale remain positioning-only — "least-privilege
+  with its review gate/owner; shown and talked through in-session — never run — to answer "we
+  wanted to see MCP/modes/cloud agents." Hooks, team rules, and Bugbot-at-scale remain positioning-only — "least-privilege
   scale steps after the workflow earns trust." **Sync `.cursor/staged/` + the README table row
   to the demo branch before treating it as a fallback** (see CHECKLIST "Do first").
 
@@ -81,8 +80,8 @@ source of truth) and **agent suggests, CI enforces**.
 shape, evidence design, asks), `LIVE_SESSION_BOARD.md` (the shared Cursor-native decision record),
 `WORKING_SESSION_CARD.md` (28-minute prepared spine that expands through role-play),
 `DEMO_RUN.md` (7-minute prepared demo path + recovery), `Q_AND_A.md` (objection drills),
-`ENGAGEMENT_EMAIL.md` (send-ahead draft; HM name/subject line pending Ally),
-`INTERVIEW_LOOP.md` (Ally-call questions + the two 30-min interviews), `CHECKLIST.md`
+`ENGAGEMENT_EMAIL.md` (send-ahead draft; HM name/address still to fill in),
+`INTERVIEW_LOOP.md` (open logistics questions + the two 30-min interviews), `CHECKLIST.md`
 (**the live to-do list — read it first**). The former `ACME_WORKING_SESSION_BOARD.excalidraw`
 and its PNG/SVG exports remain fallback assets only; Excalidraw is not in the normal run path.
 
@@ -129,8 +128,8 @@ and its PNG/SVG exports remain fallback assets only; Excalidraw is not in the no
    in-product; docs-vs-product drift is exactly the overclaim risk. Confirm: planner plan +
    approval stop, `/pre-review` delegation, `composer-2.5` resolves. Rehearse the honest inline
    fallback if not.
-2. Ally call: get HM name/email + confirm subject line (`John <Last> - Challenge - Solution` per
-   her email vs `...Solution Plan` per handout; draft follows her email).
+2. Fill in the HM name/email. Subject line is settled: `John Bush - Challenge - Solution Plan`,
+   per the handout.
 3. Send `ENGAGEMENT_EMAIL.md` the day before the session.
 4. Rehearse: capability map → model policy → enforcement ladder without prompting; seven-minute
    prepared demo path (8–10 only through useful interaction, session-minute-16 hard bailout); one
@@ -142,5 +141,5 @@ and its PNG/SVG exports remain fallback assets only; Excalidraw is not in the no
   the product facts cited above with sources.
 - **Inference:** that model strategy and Cursor-native architecture will be re-tested in the
   final (from screen behavior; high confidence).
-- **Not known:** final schedule, interviewer names/roles, HM contact, whether subagent dispatch
+- **Not known:** interviewer names/roles, HM contact, whether subagent dispatch
   behaves as documented on John's plan (hence the dry-run). Verify rather than invent.

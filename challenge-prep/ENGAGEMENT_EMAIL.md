@@ -1,10 +1,9 @@
 # Send-ahead engagement email
 
-Replace all bracketed fields. The hiring-manager address and name are missing from the recruiter
-email, so confirm them with Ally. The attached handout says "Solution Plan," but Ally's newer,
-direct email says "Solution"; the draft follows the newer instruction.
+Replace all bracketed fields. The hiring-manager name and address are still missing — the
+recruiting email left the placeholder unfilled. The subject line follows the handout.
 
-**Subject:** John [Last Name] - Challenge - Solution
+**Subject:** John Bush - Challenge - Solution Plan
 
 ---
 

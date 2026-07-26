@@ -1,25 +1,23 @@
-# The Ally call (15 min) + the two 30-min interviews
+# Open logistics questions + the two 30-min interviews
 
-## Questions for Ally (ordered — the first two are blockers)
+## Still to confirm with recruiting (the first one gates the send-ahead email)
 
 1. **Who is the hiring manager, and what's their email?** The recruiting email says to
    send the plan to "the HM (insert name + email here)" — placeholder never filled in.
-2. **Exact subject line:** her email says `<NAME> - Challenge - Solution`; the handout
-   says `<NAME> - Challenge - Solution Plan`. Draft follows her email — confirm.
-3. Who are the two interviewers (names/roles), and which plays ADM vs AE/FE vs RD, so
+2. Who are the two interviewers (names/roles), and which plays ADM vs AE/FE vs RD, so
    they can be addressed in-role from the start?
-4. Is the send-ahead email itself role-played (does the HM read it in-character as the
+3. Is the send-ahead email itself role-played (does the HM read it in-character as the
    ADM)? Is a one-page attachment acceptable, or strictly email body?
-5. Does "45 + 15" mean a hard handoff to interviewer-led Q&A at 45, or does feedback
+4. Does "45 + 15" mean a hard handoff to interviewer-led Q&A at 45, or does feedback
    flow into the session?
-6. Logistics: screenshare from my own machine, or will they want the repository
+5. Logistics: screenshare from my own machine, or will they want the repository
    shared? Physical/virtual whiteboard available? Will the interviewers have read the
    send-ahead before the session?
-7. Are current Cursor features the live prototype doesn't use (hooks, skills,
+6. Are current Cursor features the live prototype doesn't use (hooks, skills,
    subagents, team rules, cloud automations, admin analytics) fair to *position*,
    clearly labeled as scale steps?
-8. Any preferred balance between role-play interaction and prepared material?
-9. Yes to the extra Cursor usage credits she offered — take them.
+7. Any preferred balance between role-play interaction and prepared material?
+8. Yes to the extra Cursor usage credits recruiting offered — take them.
 
 ## Interview 1: AI Deployment Manager (30 min) — your future ADM partner
 
@@ -62,5 +60,5 @@ They're evaluating: judgment, altitude, and whether you scale beyond one account
   policy (`Q_AND_A.md`), the five-tier enforcement ladder (`Q_AND_A.md`), and the
   matched-cohort evidence design (already strong in `README.md`).
 - Rehearse the 3-minute and 30-second versions of the Acme plan.
-- Day before: send the email (confirmed subject line), verify the demo from a fresh
+- Day before: send the email, verify the demo from a fresh
   Cursor window, sleep.
