@@ -60,8 +60,8 @@ What I need from you, maybe five hours across the whole 90 days:
    early to agree what evidence would convince her, one for the readout around day
    55–60.
 2. Segmented usage data, what you know about the two teams that stalled, and a read on
-   whether Finance is running a price comparison or a consolidation decision. That
-   changes when we want the readout to land.
+   whether the Finance comparison is a price exercise, a standardization decision, or
+   both. That changes when the readout lands and who it's for.
 3. Twenty minutes a week. I'll run the technical side and keep the decision log; you
    and the AE shape the commercial story.
 
