@@ -4,6 +4,10 @@ The greeting addresses Frank by name while the body stays in character as the pl
 that reads correctly whether or not he answers in role. Switch to a role name only if the loop
 turns out to be played straight.
 
+Written to sound like an email to a colleague, not a one-pager: no bolded section headers, one
+rhetorical flourish (the 3x line), plain words for the metrics. Read it out loud before sending;
+anything you stumble over is a phrase that got written rather than said.
+
 **To:** Frank Lamprea (hiring manager) — frank.lamprea@anysphere.co
 **Cc:** Ally Anderson (recruiter) — ally.anderson@anysphere.co, at her request
 **Subject:** John Bush - Challenge - Solution Plan
@@ -12,50 +16,56 @@ turns out to be played straight.
 
 Hey Frank,
 
-Thanks for the context. Here's how I'll run this so you can stay at eleven-account
-altitude: I'll own the engagement end-to-end and bring you decisions, evidence,
-risks, and precise asks.
+Thanks for the context — happy to run point on this one.
 
-**The plan: a 30-day, team-owned build-and-pilot phase** on the high-adoption
-12-person team — our renewal wedge, starting once the cohort and tasks are
-confirmed. Target: time-to-first-meaningful-PR from ~6 weeks toward 2, **with no
-increase in ramp rework**, and proof the workflow reaches design, review, CI, and
-deploy. 3x is the target we test, not a result I'll promise.
+Here's what I'd do. Start with the 12-person team, since they're already using Cursor
+and they own the ramp problem. Spend 30 days building the workflow with them and
+piloting it on real work. That leaves room inside the 90 days to get something in
+front of Priya before the renewal conversation starts without us.
 
-Three moves:
+What I want to move is how long it takes a new engineer to ship something that
+matters. Six weeks today. I think we can get it toward two, but only if rework doesn't
+go up, and only if it holds all the way through review, CI, and deploy. I'd rather
+test the 3x than promise it.
 
-1. **Baseline and co-design (week 1).** David defines "meaningful PR" and accepts the
-   baseline (pulled from their own repo history before we change anything). Maya
-   co-builds the rules and contribution workflows — she already wrote Cursor rules for
-   the library, so we build on her work, not over it. Nina (QA) owns the quality gates
-   and rework taxonomy, Marcus (DevOps) the CI and permission boundaries, Ravi (PM)
-   the task rubric — owned artifacts, not sign-offs, and each proves a change to
-   their piece before handoff. That's the seed of the software factory you described:
-   builders across roles and a governed paved road the next team can adopt.
-2. **Paired pilot (weeks 2–3).** A small cohort ships real changes through the
-   workflow: scoped issue → grounded plan with human approval → build → skeptical
-   pre-review → CI. We capture timestamps, review cycles, interventions, and
-   before/after artifacts as we go.
-3. **Ownership transfer (week 3+).** Maya maintains the workflow, a second engineer
-   runs it without me, and **David presents the outcome to Priya** at the midpoint
-   readout (~day 55–60, after the pilot closes) — answering the question she's
-   already asking her staff. Only then do we recommend expanding to a stalled team.
+Week one is baseline and co-design. David defines what counts as a meaningful PR and
+signs off on the baseline, which we pull from their own repo history before we touch
+anything. Maya builds the workflow with me — she's already written Cursor rules for
+this library, so we're building on her work. Nina, Marcus, and Ravi each own a piece of
+it and have to change their own piece before we hand off, which is where the software
+factory you described actually starts.
 
-**Renewal evidence:** three measures — time-to-first-meaningful-PR, ramp PR
-rework/rejection rate, and design→deploy cycle time; weekly-active seats stays a
-supporting adoption measure. Every claim gets a label — observed, historical
-baseline, proxy, or hypothesis — so what you take into the renewal survives scrutiny.
+Weeks two and three are the pilot. A small cohort takes real backlog work through the
+workflow, with a human approving the plan before anything gets built. I'm recording as
+we go: timestamps, how many review cycles, where I had to step in, and before/after
+artifacts.
 
-**What I need from you** (~five hours across the 90 days):
+From week three I start stepping back. Maya maintains the workflow, a second engineer
+runs it end to end without me, and David presents the result to Priya around day 55–60,
+not me. If it holds up, that's when we talk about a second team.
 
-1. Warm intros and named commitment from **David** and **Maya**, plus two **Priya**
-   checkpoints: evidence-threshold alignment early, midpoint readout ~day 55–60.
-2. Segmented usage telemetry, the two stalled teams' context (which tools they tried,
-   why they stalled), and whether Finance is running a price comparison or a
-   consolidation decision — the readout should land before their decision, not after.
-3. A weekly 20-minute evidence/renewal sync: I run the technical work and keep the
-   decision log; you and the AE shape the commercial narrative.
+For the renewal I want three measures: how long until a new joiner's first meaningful
+PR, how much rework their PRs need while ramping, and how long a change takes from
+design to deploy. Weekly active seats stays useful for adoption, but it won't answer
+Finance's question. I'll be clear throughout about what's measured, what's historical,
+and what's a guess.
 
-If this matches your read, I'll get the David/Maya intros moving this week.
+Two things I'm assuming: we can get three to five people for the cohort inside 30 days,
+and Acme can give us six months of git and review history for the baseline. Tell me
+early if either is wrong.
 
-John
+What I need from you, maybe five hours across the whole 90 days:
+
+1. Intros and a named commitment from David and Maya, plus two slots with Priya: one
+   early to agree what evidence would convince her, one for the readout around day
+   55–60.
+2. Segmented usage data, what you know about the two teams that stalled, and a read on
+   whether Finance is running a price comparison or a consolidation decision. That
+   changes when we want the readout to land.
+3. Twenty minutes a week. I'll run the technical side and keep the decision log; you
+   and the AE shape the commercial story.
+
+If that matches your read, I'll start on the David and Maya intros this week. I'll
+bring the working prototype to our session — it's already running against a real repo.
+
+John Bush
