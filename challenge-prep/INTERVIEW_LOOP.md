@@ -1,23 +1,23 @@
 # Open logistics questions + the two 30-min interviews
 
-## Still to confirm with recruiting (the first one gates the send-ahead email)
+## Still to confirm with recruiting
 
-1. **Who is the hiring manager, and what's their email?** The recruiting email says to
-   send the plan to "the HM (insert name + email here)" — placeholder never filled in.
-2. Who are the two interviewers (names/roles), and which plays ADM vs AE/FE vs RD, so
+Send-ahead recipients are settled: Frank Lamprea (hiring manager), copying Ally Anderson.
+
+1. Who are the two interviewers (names/roles), and which plays ADM vs AE/FE vs RD, so
    they can be addressed in-role from the start?
-3. Is the send-ahead email itself role-played (does the HM read it in-character as the
+2. Is the send-ahead email itself role-played (does Frank read it in-character as the
    ADM)? Is a one-page attachment acceptable, or strictly email body?
-4. Does "45 + 15" mean a hard handoff to interviewer-led Q&A at 45, or does feedback
+3. Does "45 + 15" mean a hard handoff to interviewer-led Q&A at 45, or does feedback
    flow into the session?
-5. Logistics: screenshare from my own machine, or will they want the repository
+4. Logistics: screenshare from my own machine, or will they want the repository
    shared? Physical/virtual whiteboard available? Will the interviewers have read the
    send-ahead before the session?
-6. Are current Cursor features the live prototype doesn't use (hooks, skills,
+5. Are current Cursor features the live prototype doesn't use (hooks, skills,
    subagents, team rules, cloud automations, admin analytics) fair to *position*,
    clearly labeled as scale steps?
-7. Any preferred balance between role-play interaction and prepared material?
-8. Yes to the extra Cursor usage credits recruiting offered — take them.
+6. Any preferred balance between role-play interaction and prepared material?
+7. Yes to the extra Cursor usage credits recruiting offered — take them.
 
 ## Interview 1: AI Deployment Manager (30 min) — your future ADM partner
 

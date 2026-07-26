@@ -23,8 +23,8 @@ and role context.
   new-engineer ramp on one 12-engineer team, renewal ~90 days, no exec champion, Cursor + Codex +
   Claude Code fragmentation. Interviewers play the **internal account team** (AE/FE, ADM, RD),
   not the customer. Must extend the technical-screen artifact, in Cursor specifically.
-- The loop is scheduled. The **hiring manager's name/email** is still needed for the send-ahead
-  engagement email, which is due the day before the session.
+- The loop is scheduled. The send-ahead engagement email goes to **Frank Lamprea** (hiring
+  manager), copying **Ally Anderson** (recruiter), the day before the session.
 
 ## Repo state (github.com/fjb4/efcore — John's public fork of dotnet/efcore)
 
@@ -82,7 +82,7 @@ source of truth) and **agent suggests, CI enforces**.
 shape, evidence design, asks), `LIVE_SESSION_BOARD.md` (the shared Cursor-native decision record),
 `WORKING_SESSION_CARD.md` (28-minute prepared spine that expands through role-play),
 `DEMO_RUN.md` (7-minute prepared demo path + recovery), `Q_AND_A.md` (objection drills),
-`ENGAGEMENT_EMAIL.md` (send-ahead draft; HM name/address still to fill in),
+`ENGAGEMENT_EMAIL.md` (send-ahead draft, recipients confirmed),
 `INTERVIEW_LOOP.md` (open logistics questions + the two 30-min interviews), `CHECKLIST.md`
 (**the live to-do list — read it first**). The former `ACME_WORKING_SESSION_BOARD.excalidraw`
 and its PNG/SVG exports remain fallback assets only; Excalidraw is not in the normal run path.
@@ -135,8 +135,8 @@ and its PNG/SVG exports remain fallback assets only; Excalidraw is not in the no
    edit; a `/update-rules` re-run after the hardening and model-pin commits; and re-verifying
    that `composer-2.5[fast=false]` renders as the standard variant. Full results at the top of
    `CHECKLIST.md`.
-2. Fill in the HM name/email. Subject line is settled: `John Bush - Challenge - Solution Plan`,
-   per the handout.
+2. Send the engagement email the day before the session — recipients and subject line are both
+   settled (`John Bush - Challenge - Solution Plan`, per the handout).
 3. Send `ENGAGEMENT_EMAIL.md` the day before the session.
 4. Rehearse: capability map → model policy → enforcement ladder without prompting; seven-minute
    prepared demo path (8–10 only through useful interaction, session-minute-16 hard bailout); one

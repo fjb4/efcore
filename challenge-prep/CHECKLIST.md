@@ -32,8 +32,8 @@
 
 ## Before sending the engagement email
 
-- [ ] **HM name + email** — the recruiting email's "the HM (insert name + email here)"
-      placeholder was never filled in; fill it before sending.
+- Recipients settled: **Frank Lamprea** (hiring manager, frank.lamprea@anysphere.co), copying
+  **Ally Anderson** (recruiter, ally.anderson@anysphere.co) at her request.
 - Subject line is settled: `John Bush - Challenge - Solution Plan`, per the handout.
 
 ## Timeline
@@ -57,7 +57,7 @@
       can halve airtime, and visible thinking beats recited prose. Keep only the block intents
       and the invariants (Markdown board changes live, capability map before commands, honest
       labels). Interviewer challenges expand the spine across 45 minutes.
-- [ ] **Day before session:** send `ENGAGEMENT_EMAIL.md` to the HM
+- [ ] **Day before session:** send `ENGAGEMENT_EMAIL.md` to Frank, copying Ally
 - [ ] Keep the Scenario Pack names visible in-session: ADM (unnamed — ask), Maya Chen
       (Staff Eng), David Park (EM), Priya Nair (Dir Eng), Nina Alvarez (QA), Marcus
       Webb (DevOps), Ravi Shah (PM)

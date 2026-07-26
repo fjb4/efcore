@@ -1,13 +1,16 @@
 # Send-ahead engagement email
 
-Replace all bracketed fields. The hiring-manager name and address are still missing — the
-recruiting email left the placeholder unfilled. The subject line follows the handout.
+The greeting addresses Frank by name while the body stays in character as the plan to the ADM —
+that reads correctly whether or not he answers in role. Switch to a role name only if the loop
+turns out to be played straight.
 
+**To:** Frank Lamprea (hiring manager) — frank.lamprea@anysphere.co
+**Cc:** Ally Anderson (recruiter) — ally.anderson@anysphere.co, at her request
 **Subject:** John Bush - Challenge - Solution Plan
 
 ---
 
-Hey [ADM name],
+Hey Frank,
 
 Thanks for the context. Here's how I'll run this so you can stay at eleven-account
 altitude: I'll own the engagement end-to-end and bring you decisions, evidence,
