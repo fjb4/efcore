@@ -92,7 +92,7 @@
   `/update-rules` gained a model-policy drift check against the README policy table.
 
 Staging upgrade (2026-07-19, extended 2026-07-26): `.cursor/staged/` holds **gate-ready, inert
-designs** for the staged surfaces — read-only GitHub MCP config, new-joiner custom-mode spec,
+designs** for the staged surfaces — read-only GitHub MCP config, restricted new-joiner agent,
 drift-automation spec, and (new) `SOFTWARE_FACTORY.md`, the agent-PR policy, the labeled-issue →
 draft-PR automation, and the two inert workflows that trigger and enforce it — each labeled with
 its review gate and owner, shown and talked through on screen (never run) as the answer to why

@@ -14,7 +14,7 @@ is live today, and which staged step advances which stage of it.
 | Staged artifact | Enable gate (owner) | Precondition |
 |---|---|---|
 | `mcp.github.json` — read-only GitHub MCP server config | Security review (Marcus) | Least-privilege token issued; foreground workflow trusted for evidence capture |
-| `new-joiner-mode.md` — restricted custom-mode spec | Team adoption call (Maya + David) | Pilot cohort feedback shows the default surface is too open for week-one joiners |
+| `new-joiner-agent.md` — restricted read-only joiner agent (supersedes the custom-mode spec; custom modes were removed in Cursor 2.1) | Team adoption call (Maya + David) | Pilot cohort feedback shows the default surface is too open for week-one joiners |
 
 ## Automated horizon — work that starts without a human starting it
 

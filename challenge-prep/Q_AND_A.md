@@ -278,7 +278,7 @@ remain the actual gates.
 
 The staged designs are committed and openable — `.cursor/staged/` holds `SOFTWARE_FACTORY.md`
 (the production line: live today, staged next, owner per stage), the read-only GitHub MCP config,
-the new-joiner custom-mode spec, the agent-PR policy, the labeled-issue → draft-PR automation with
+the restricted new-joiner agent, the agent-PR policy, the labeled-issue → draft-PR automation with
 its two inert workflows, and the drift-automation spec, each labeled with its review gate and
 owner. "Not enabled" is a decision with a design attached: Marcus reviews a concrete artifact, not
 a slide. Open and walk them; never run or enable one — that is the gated decision the design

@@ -101,8 +101,9 @@ Do not repeat the technical screen. Use a short proof:
    quality concern       -> independent review + human judgment + deterministic CI (Bugbot, gates)
    ```
 
-   Say the selection was deliberate: every surface earns its place or stays out — custom modes,
-   MCP, and cloud agents are consciously staged, not missing.
+   Say the selection was deliberate: every surface earns its place or stays out — MCP, restricted
+   agents, and cloud agents/automations are consciously staged, not missing. (If asked about
+   custom modes: removed in Cursor 2.1; the same property is staged as a read-only subagent.)
 2. **State the model policy in one breath:** planning and repository analysis inherit the
    deliberately selected main-conversation model and run read-only; bounded edits after approval
    run on an explicit Composer binding — Cursor-native and cost-efficient; high-risk review gets
@@ -190,7 +191,7 @@ gate and owner (under 2 minutes total):
 |---|---|
 | `SOFTWARE_FACTORY.md` - the production line, stage by stage | The map itself; nothing to enable |
 | `mcp.github.json` - read-only GitHub MCP config | Security review (Marcus) |
-| `new-joiner-mode.md` - restricted custom-mode spec | Team adoption call (Maya + David) |
+| `new-joiner-agent.md` - restricted read-only joiner agent | Team adoption call (Maya + David) |
 | `agent-pr-policy.md` + `workflows/agent-pr-guardrails.yml` - draft-only, provenance, evidence separation | Nina (review) + Marcus (enforcement) — **adopt first** |
 | `issue-to-draft-pr.md` + `workflows/issue-to-draft-pr.yml` - labeled issue -> draft PR | Marcus + Nina + David |
 | `drift-automation-spec.md` - scheduled drift-check automation | Security + platform review (Marcus, with Maya) |

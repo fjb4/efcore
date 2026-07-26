@@ -14,14 +14,12 @@ the evidence says the humans in that stage are spending their attention on the w
 
 | Stage | Acme owner | Live today | Staged next | The control that must hold |
 |---|---|---|---|---|
-| **Intake** — request becomes a placed, testable issue | Ravi (product) | `/scope-issue` | Read-only GitHub MCP so the issue, its links, and prior art load without transcription | Least privilege; the human still writes the acceptance criteria |
+| **Intake** — idea becomes a placed, testable issue | Ravi (product) | `/scope-issue` | Read-only GitHub MCP so the issue, its links, and prior art load without transcription | Least privilege; the human still writes the acceptance criteria |
 | **Plan** — issue becomes a grounded change plan | New joiner + Maya | `/first-contribution` step 1 (`contribution-planner`, read-only) | Same command, invoked by an automation on labeled issues, producing a plan comment | **Human approval before any edit.** Never automated away |
 | **Build** — approved plan becomes a diff | New joiner | `/first-contribution` steps 2–3 (`contribution-implementer`) | Bounded cloud-agent execution → **draft** PR | Draft only, provenance-labeled, no self-merge |
 | **Review** — diff meets independent judgment | Nina (quality) | `/pre-review` (`skeptical-reviewer`, read-only, advisory) | Bugbot on agent-authored PRs, with the same rules as context | Human review stays authoritative; Bugbot is a second opinion, not a gate |
 | **Test** — deterministic verification | Marcus (platform) | `cursor-onboarding-checks.yml` (SQLite, ~10 min) | A guardrail job that enforces the agent-PR policy mechanically | CI is the enforcement boundary. Agent suggests, CI enforces |
 | **Deploy** — change reaches production | Marcus | Acme's existing pipeline, unchanged | Unchanged | Deployment authority never moves into the agent surface |
-| **Evidence** — the line reports on itself | David (outcome) | `ramp_metrics.py` + `/renewal-evidence` | Scheduled refresh once the cohort is pinned | Evidence leadership audits is generated on Acme's CI, not inside the vendor's surface |
-| **Maintain** — the paved road stays true | Maya (builder) | `/update-rules` (read-only, monthly) | Scheduled multi-repo drift automation → draft remediation PRs | Findings and drafts only; the road changes through reviewed human merges |
 
 Read the table down the "live today" column and you have the pilot. Read it down "staged next"
 and you have the factory. Every step across is one review gate, not a re-platforming.
@@ -43,7 +41,7 @@ currently doing something a rule already describes.
 | Artifact | Horizon | Enable gate (owner) | Precondition |
 |---|---|---|---|
 | [`mcp.github.json`](mcp.github.json) — read-only GitHub MCP server | Connected | Security review (Marcus) | Least-privilege token issued; foreground workflow trusted for evidence capture |
-| [`new-joiner-mode.md`](new-joiner-mode.md) — restricted custom mode | Connected | Team adoption call (Maya + David) | Pilot feedback shows the default surface is too open for week-one joiners |
+| [`new-joiner-agent.md`](new-joiner-agent.md) — restricted read-only joiner agent | Connected | Team adoption call (Maya + David) | Pilot feedback shows the default surface is too open for week-one joiners |
 | [`issue-to-draft-pr.md`](issue-to-draft-pr.md) — labeled issue → draft PR automation | Automated | Security + engineering review (Marcus, Nina, David) | Agent-PR policy adopted; a task class with a repeatable acceptance rate identified |
 | [`agent-pr-policy.md`](agent-pr-policy.md) — provenance, draft, and evidence rules for agent-authored PRs | Automated (precondition) | Nina + Marcus | None — this is the artifact that unblocks the others |
 | [`drift-automation-spec.md`](drift-automation-spec.md) — scheduled multi-repo drift check | Automated | Security + platform review (Marcus, with Maya) | Workflow rolled out beyond one repository |

@@ -261,9 +261,12 @@ Use only the capabilities that serve the account:
   planner and skeptical reviewer inherit the deliberately selected parent model and run read-only,
   the implementer has an explicit Composer binding (Cursor-native, cost-efficient); creation and
   review are separated by fresh context.
-- **Custom modes** can package a restricted new-joiner setup (plan-first, limited tools) — a
-  staged option to name in the capability map, not a day-one need
-  (`.cursor/staged/new-joiner-mode.md`).
+- **Custom modes are gone** — removed in Cursor 2.1 (2025-11-21), with an export path to custom
+  commands. The handout still lists them; that is the handout trailing the product, so do not
+  present a mode as a live surface. The restricted week-one setup (plan-first, read-only) is
+  staged as a **subagent** instead: `.cursor/staged/new-joiner-agent.md`, versioned in git rather
+  than in per-user UI state. Say the removal out loud if the capability list comes up — tracking
+  the product is the point.
 - **Hooks** can add audit/measurement or block unsafe actions after Acme approves the design.
 - **MCP** can connect issue, PR, CI, and documentation systems after least-privilege review.
 - **Cloud agents/automations** are a scale step after the foreground workflow has earned trust —

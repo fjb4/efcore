@@ -71,7 +71,9 @@ source of truth) and **agent suggests, CI enforces**.
   baseline, focused tests); `/pre-review` is its deliberate local mirror.
 - Staged surfaces: `.cursor/staged/` (added 2026-07-19, extended 2026-07-26) holds gate-ready
   **inert** designs — `SOFTWARE_FACTORY.md` (the production-line map: live today vs staged next,
-  owner per stage), read-only GitHub MCP config, new-joiner custom-mode spec, `agent-pr-policy.md`
+  owner per stage), read-only GitHub MCP config, `new-joiner-agent.md` (restricted read-only joiner
+  agent — it replaced a custom-mode spec after custom modes were removed in Cursor 2.1),
+  `agent-pr-policy.md`
   (draft-only, provenance, evidence separation), `issue-to-draft-pr.md` (labeled issue → draft PR
   via a Cursor Automation or the Cloud Agents API), `workflows/` (the inert trigger + guardrail
   workflows), drift-automation spec — each named with its review gate/owner; shown and talked
