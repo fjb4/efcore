@@ -204,17 +204,17 @@ validated assumption is also a visible outcome, and pretending otherwise looks s
 ## ASK - ADM (reserve — the self-challenge you control)
 
 Use this if the first answer ran thin or only confirmed the plan; otherwise hold it for the
-8:00–13:00 block. This is the guaranteed plan-change beat, because it attacks your own assumption:
+8:00–13:00 block. This creates a useful plan change even if the cause is unknown, because resolving
+it becomes a named dependency:
 
 > One thing I want to challenge in my own plan: two Acme teams piloted and stalled. What do we
-> know about why? I'm asking because my fourth assumption — that we can run inside the existing
-> approved setup — might be exactly what killed them, and I'd rather design around that now than
-> find out in week three.
+> know about why? If we don't, I'd make finding that out a dependency before we assume the
+> existing setup will support this pilot.
 
 ## DO
 
-- Under **Assumptions to test**, revise the fourth assumption or add
-  `- Stall cause: [their answer / unknown - data requested]`.
+- Under **Assumptions to test**, add `- Stall cause: [their answer / unknown - data requested]`.
+- Revise the existing-setup assumption only if their answer gives you a reason to.
 - If the cause is unknown, that itself is the plan change: the data request to the ADM moves from
   the email into the working record as a named dependency.
 
@@ -433,7 +433,8 @@ only if asked — the Q&A drill-down map covers each one.
 > The most concrete step: once the pilot shows which kinds of work are safe and repeatable, a
 > person adds an `agent-ready` label to a GitHub issue, and Cursor Automation—or an Acme-owned
 > workflow on the Cloud Agents API—runs the same repository rules and opens a draft PR carrying
-> its plan. It's the pieces Acme has already tested, triggered by a label.
+> its plan. It would reuse the same rules, commands, and agents as the pilot; the difference is
+> that a label starts the workflow instead of an engineer.
 
 > People keep every decision that matters: a person applies the label, a person reviews the plan
 > and the code, CI checks it, a person merges, and Marcus's existing process controls deployment.
@@ -563,11 +564,9 @@ The live file, headings **Owners** and **Next move**.
 
    > Third, Finance is asking whether Acme should keep paying for overlapping tools. I'd need a
    > current, fact-checked comparison of their price, capabilities, and the cost of operating each
-   > option. That lets the AE and me combine the pilot results with the cost picture and give
-   > Finance an honest recommendation. And the pilot is half of that answer already: it produces
-   > the outcome numbers Finance asked for on a governed, instrumented workflow that neither of
-   > the other tools has stood up at Acme. I'd also want a reusable pilot kit so the ADM and I
-   > aren't rebuilding this process for every team.
+   > option. Then the AE and I can put that beside the pilot results and help Finance compare the
+   > tools using equivalent evidence. I'd also want a reusable pilot kit so the ADM and I aren't
+   > rebuilding this process for every team.
 
 ## SAY - internal commitments
 
@@ -693,10 +692,10 @@ to say in the room.
 
 | If asked about | The line |
 |---|---|
-| Why Cursor vs Codex / Claude Code | Those tie Acme to one vendor's models; Cursor preserves access to OpenAI, Anthropic, Gemini, and xAI models plus Composer while consolidating governance, spend, and telemetry into one surface — and the new Router routes across them per task under admin-governed cost modes, which a single-vendor tool structurally can't offer |
-| Consolidating on one tool | Standardize on whichever tool clears the bar — governed workflow in version control, measured ramp and rework, owners, auditable telemetry; Cursor is the only candidate with that stood up at Acme |
+| Why Cursor vs Codex / Claude Code | Cursor gives Acme one governed surface across models from multiple providers, while Codex and Claude Code are tied to their respective model families. Cursor Router can route work by task under Acme's administrative controls. The pilot still has to prove whether that flexibility produces better outcomes and costs for Acme |
+| Consolidating on one tool | Standardize on whichever tool clears the same bar: a governed workflow in version control, measured ramp and rework, named owners, and auditable usage and cost data. This pilot gives Cursor the opportunity to prove itself against that bar; Acme should ask the other tools for equivalent evidence |
 | Whether 3x is achievable | 3x is Acme's own number; what decides it is what share of the six weeks is context and code discovery — week one decomposes the baseline, then we both know |
-| What exists on renewal day | A historical baseline, an honestly labeled pilot curve, a customer-owned instrumented workflow no competitor has stood up, and a repeatability test in flight with a pre-agreed pass bar |
+| What exists on renewal day | A historical baseline, an honestly labeled pilot curve, a customer-owned Cursor workflow, and a repeatability test with a pre-agreed pass bar. That gives Finance concrete evidence about Cursor to compare with the alternatives |
 | A dollar number for Finance | Hires per year × ramp-weeks recovered × loaded weekly cost — a labeled hypothesis, and the playbook across teams, not the one-team pilot, is the unit of value |
 | What breaks / where the agent fails | Per-agent constraints don't compose — least privilege lives at the boundary, so human review and CI are the gates I actually rely on |
 
