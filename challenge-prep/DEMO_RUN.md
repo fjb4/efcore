@@ -16,7 +16,8 @@ demo minutes back by talking faster.
   sharing. This branch contains the complete runnable artifact and the live board. Do not depend
   on `demo-19287-sqlite-indexof` unless the checklist's branch-sync verification has passed.
 - Pin `challenge-prep/LIVE_SESSION_BOARD.md`, `.cursor/README.md`,
-  `.cursor/commands/start-onboarding-pilot.md`, and `metrics/ramp-dashboard.md` in that order.
+  `.cursor/commands/start-onboarding-pilot.md`, and `metrics/ramp-dashboard.md` in that order,
+  plus `.cursor/staged/README.md` for the Block 5 walk.
 - Start the demo block by moving from the live board to `.cursor/README.md`.
 - Use a fresh Agent conversation.
 - Keep the existing PR/green test available as supporting evidence, not the main path.
@@ -37,10 +38,11 @@ policy out loud:
 > static policy. The routing is policy-as-code in the subagent frontmatter; the enforced boundary
 > is the admin model allowlist.
 
-If pressed on the staged surfaces (MCP, custom modes, cloud agents): open `.cursor/staged/` —
-the read-only GitHub MCP config, new-joiner mode spec, and drift-automation spec are committed,
-inert, and labeled with their review gates. The line: "not enabled is a decision with a design
-attached — this is the artifact Marcus's security review would approve."
+The staged surfaces (MCP, custom modes, cloud agents) are **not** in this block. The
+`.cursor/staged/` walk is a planned beat in session-card Block 5, where the connected and
+automated stages name those exact capabilities. Here, one sentence only: those three are
+consciously staged, not missing. If the room presses early, go to the Block 5 walk rather than
+expanding the architecture lead-in.
 
 Close the architecture setup with:
 

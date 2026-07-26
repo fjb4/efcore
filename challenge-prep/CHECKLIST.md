@@ -16,16 +16,14 @@
       branch; do not call it byte-identical until `git diff --quiet challenge-prep
       demo-19287-sqlite-indexof -- .cursor` passes.
 
-## Blockers (resolve on the Ally call — see INTERVIEW_LOOP.md for the full question list)
+## Before sending the engagement email
 
-- [ ] **HM name + email** — Ally's email says to send the plan to "the HM (insert name +
-      email here)"; the placeholder was never filled in. Cannot send without it.
-- [ ] **Subject line** — Ally's email: `John <Last> - Challenge - Solution`; the handout:
-      `...Solution Plan`. Draft follows Ally's newer email; confirm.
+- [ ] **HM name + email** — the recruiting email's "the HM (insert name + email here)"
+      placeholder was never filled in; fill it before sending.
+- Subject line is settled: `John Bush - Challenge - Solution Plan`, per the handout.
 
 ## Timeline
 
-- [x] Availability submitted + Ally's 15-min prep call booked (done 2026-07-18)
 - [ ] Re-verify the artifact-only demo branch after syncing; the historical 2026-07-19
       byte-identical check is stale as of the 2026-07-22 local-ref comparison
 - [x] Decision 2026-07-19: prep materials stay on the fork (`challenge-prep` branch) —
@@ -45,8 +43,7 @@
       can halve airtime, and visible thinking beats recited prose. Keep only the block intents
       and the invariants (Markdown board changes live, capability map before commands, honest
       labels). Interviewer challenges expand the spine across 45 minutes.
-- [ ] **Day before session:** send `ENGAGEMENT_EMAIL.md` to the HM with the confirmed
-      subject line
+- [ ] **Day before session:** send `ENGAGEMENT_EMAIL.md` to the HM
 - [ ] Keep the Scenario Pack names visible in-session: ADM (unnamed — ask), Maya Chen
       (Staff Eng), David Park (EM), Priya Nair (Dir Eng), Nina Alvarez (QA), Marcus
       Webb (DevOps), Ravi Shah (PM)
@@ -81,9 +78,9 @@
 
 Staging upgrade (2026-07-19): `.cursor/staged/` now holds **gate-ready, inert designs** for
 three of the staged surfaces — read-only GitHub MCP config, new-joiner custom-mode spec, and
-the drift-automation spec — each labeled with its review gate and owner, openable on screen
-when the room asks why MCP/modes/cloud agents aren't live ("not enabled is a decision with a
-design attached"). Hooks, team rules, and Bugbot-at-scale remain **positioning-only** (per the
+the drift-automation spec — each labeled with its review gate and owner, shown and talked
+through on screen (never run) as the answer to why MCP/modes/cloud agents aren't live ("not
+enabled is a decision with a design attached"). Hooks, team rules, and Bugbot-at-scale remain **positioning-only** (per the
 staging in `README.md`): "least-privilege scale steps after the workflow earns trust."
 
 ## Demo hygiene
@@ -95,6 +92,9 @@ staging in `README.md`): "least-privilege scale steps after the workflow earns t
       pre-generated dashboard as fallback) — the demo cohort is **historical
       open-source data standing in for Acme joiners; say so out loud**
 - [ ] One unrehearsed-input dry run of `/scope-issue`
+- [ ] Time the `.cursor/staged/` walk in Block 5 (MCP config, new-joiner mode, drift
+      automation) — three files, their gates and owners, in under 60 seconds; shown and
+      discussed, never run
 - [ ] Subagent dispatch + Composer-variant dry-run — **moved to "Do first" at the top of this
       file**; it gates all wording rehearsal
 - [ ] Rehearse the co-creation invariants: visible renewal-proof/pilot-change/owner/next-action
@@ -118,7 +118,8 @@ staging in `README.md`): "least-privilege scale steps after the workflow earns t
 - [x] Excalidraw board retained as fallback only: `ACME_WORKING_SESSION_BOARD.png` is the static
       visual backup; the `.excalidraw` and SVG sources remain available (2026-07-22)
 - [ ] Screen setup: open `challenge-prep` in Cursor; pin the board, capability map, pilot command,
-      and evidence fallback; use source view, word wrap, hidden sidebar/minimap, readable zoom;
+      evidence fallback, and the staged-scale-step README; use source view, word wrap, hidden
+      sidebar/minimap, readable zoom;
       share the entire screen; notifications off
 - [ ] Full demo path timed twice **with the Markdown board live** (short source edits and tab
       transitions are the new failure modes to time); 7-minute prepared target, session-minute-16

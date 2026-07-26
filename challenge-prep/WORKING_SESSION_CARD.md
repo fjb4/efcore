@@ -3,7 +3,7 @@
 The interviewers are the internal Cursor team, not the customer. Get their names at the start,
 address them by name, and ask them to flex roles explicitly.
 
-The blocks below contain about **28 minutes of prepared airtime**. Interviewer questions and
+The blocks below contain about **29 minutes of prepared airtime**. Interviewer questions and
 decisions expand them across the 45-minute working session. Interruptions are the format working;
 do not protect the outline by talking faster or deferring account-team input to the end.
 
@@ -20,6 +20,7 @@ Pin these tabs in order:
 2. `.cursor/README.md` - the repository capability map.
 3. `.cursor/commands/start-onboarding-pilot.md` - the live plan contract and approval gate.
 4. `metrics/ramp-dashboard.md` - historical evidence fallback, opened only if useful.
+5. `.cursor/staged/README.md` - the staged-scale-step gate table, walked in Block 5.
 
 Keep the Markdown board in source view while capturing decisions. Hide the sidebar and minimap,
 turn on word wrap, increase editor zoom, and use heading navigation rather than hunting by scroll.
@@ -163,7 +164,7 @@ Pull the interviewers in:
 Decision to land: Acme owns every operating artifact, the SA has a planned exit, and expansion
 requires a successful second-user run.
 
-## Block 5 - Show the software-factory progression (3 minutes prepared)
+## Block 5 - Show the software-factory progression (4 minutes prepared)
 
 Say:
 
@@ -179,6 +180,23 @@ Walk the progression:
 | **Pilot: repeatable** | Human-gated commands, repository rules, subagents, CI, evidence capture | Approved plan, human review, deterministic CI |
 | **Connected: governed** | MCP supplies issue/PR/CI context; hooks capture or block; Bugbot reviews; Team Marketplace distributes | Least privilege, admin policy, Nina/Marcus approval |
 | **Scaled: automated** | Cloud agents execute bounded approved work; scheduled automation checks drift and refreshes evidence | Scoped environment/secrets, PR review, CI, Marcus-controlled deploy |
+
+Ground the connected and automated rows in committed artifacts — open `.cursor/staged/` and walk
+its three files in under 60 seconds:
+
+| Staged artifact | Enable gate (owner) |
+|---|---|
+| `mcp.github.json` - read-only GitHub MCP config | Security review (Marcus) |
+| `new-joiner-mode.md` - restricted custom-mode spec | Team adoption call (Maya + David) |
+| `drift-automation-spec.md` - scheduled drift-check automation | Security + platform review (Marcus, with Maya) |
+
+Each is committed, inert, and labeled with its gate, owner, and precondition. Show and discuss
+them; never run or enable one - that is Acme's decision, and the design is what earns the gate.
+
+Say:
+
+> Not enabled is a decision with a design attached. This is the artifact Marcus's security review
+> would approve or reject, not a slide promising it later.
 
 Make the north-star factory job concrete:
 

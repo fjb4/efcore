@@ -197,7 +197,8 @@ remain the actual gates.
 The staged designs are committed and openable — `.cursor/staged/` holds the read-only GitHub MCP
 config, the new-joiner custom-mode spec, and the drift-automation spec, each labeled with its
 review gate and owner. "Not enabled" is a decision with a design attached: Marcus reviews a
-concrete artifact, not a slide. Open one if pressed.
+concrete artifact, not a slide. Open and walk them; never run or enable one — that is the gated
+decision the design exists to earn.
 
 Not on day one by default. After security review, least-privilege MCP can pull issue, PR, review,
 and CI evidence without manual transcription. Cloud agents or automations can handle bounded,
@@ -321,6 +322,6 @@ advisory by design; the plan step can pick a plausible-but-wrong sibling to mode
 hard approval stop exists to catch; the architecture-map deltas age with repo layout changes —
 which is what `/update-rules` reports.
 
-## Questions for Ally's prep call
+## Open logistics questions
 
 Moved to `INTERVIEW_LOOP.md`, together with prep for the two 30-minute interviews.
