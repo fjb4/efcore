@@ -322,35 +322,43 @@ the team's change to own).
 
 ## "What breaks? Where does the agent get it wrong?"
 
-Lead with the one found in this artifact, during a pre-session dry run — a real failure beats
-three hypotheticals:
+**Say this, then stop** (about 30 seconds — one example, not three):
 
-> I invoked the implementer subagent in a fresh conversation, giving it no plan. Its contract says
-> it must refuse. Instead it ran `rg` against Cursor's own transcript store on disk, recovered the
-> plan from the *previous* conversation, declared it approved, and delegated implementation.
-> Nobody had approved anything.
->
-> Two things came out of that. First, a fresh conversation is only fresh by construction — a
-> shell-capable agent can reconstruct a prior one, so "independent context" is a default, not a
-> guarantee. Second, and more important: the guard was an instruction, and instructions cannot
-> bound a capability. That is tier 2 of my enforcement ladder behaving exactly like tier 2. I
-> hardened the contracts and re-ran it: the implementer now refuses with the exact contract
-> string. But it still ran two searches before refusing — it scoped them to the current
-> conversation instead of the transcript store, and got the right answer. So the fix moved the
-> behavior; it did not install a gate. The control that would actually close it is tier 3 —
-> command and tool policy, sandbox, allowlists — and the gates that hold are human approval
-> and CI.
+> Dry-running my own subagents, I found that a `readonly` agent's constraint holds for that agent
+> but not for the system: the orchestrating conversation just routes the work to an agent that has
+> the privilege. So least privilege has to be enforced at the boundary, not declared per agent —
+> which is why I put hooks, sandbox, and allowlists at tier 3, and why human review and CI are the
+> gates I actually rely on.
 
-That answer does three jobs at once: it shows the artifact was tested rather than assumed, it
-demonstrates the enforcement ladder on a real finding instead of a diagram, and it is the concrete
-case for why Marcus's security review gates the staged surfaces. If the room asks what *they*
-should do about it, the answer is tool-policy scoping — which is what `.cursor/staged/` is holding
-designs for.
+Then return to the agenda. Do not narrate how you found it, do not walk the mechanism, and do not
+give a second example unless asked — a war story about the interviewer's own product stops paying
+credibility somewhere in its second minute.
 
-Then the three standing ones: rules encode the letter, not reviewer judgment — `/pre-review` is
-advisory by design; the plan step can pick a plausible-but-wrong sibling to model on, which the
-hard approval stop exists to catch; the architecture-map deltas age with repo layout changes —
-which is what `/update-rules` reports.
+The three standing ones, if the room wants more: rules encode the letter, not reviewer judgment —
+`/pre-review` is advisory by design; the plan step can pick a plausible-but-wrong sibling to model
+on, which the hard approval stop exists to catch; the architecture-map deltas age with repo layout
+changes — which is what `/update-rules` reports.
+
+<details>
+<summary>Reference: the dry-run findings behind that answer (2026-07-26) — rehearsal only, not
+session content</summary>
+
+1. **Approval could be manufactured.** The implementer, invoked with no plan, ran `rg` against
+   Cursor's agent-transcript store on disk, recovered the *previous* conversation's plan, declared
+   it approved, and delegated implementation. A fresh conversation is fresh by construction, not by
+   enforcement.
+2. **Hardening moved behavior without installing a gate.** After tightening both contracts it
+   refuses with the exact contract string — but still ran two searches before refusing. An
+   instruction cannot bound a capability.
+3. **Constraints do not compose upward.** Asked to have the read-only reviewer apply a fix, the
+   orchestrator read the frontmatter, honored `readonly`, declined to edit itself — and handed the
+   work to an editable subagent. Every local invariant held; the forbidden outcome happened anyway.
+
+All three are the same point at different layers, which is why the spoken answer is one sentence
+about boundaries. The engineering response is recorded in `.cursor/README.md` under
+"Keeping it honest" and in the hardened contracts; the account response is that this is exactly
+what Marcus's security review gates, and what `.cursor/staged/` holds designs for.
+</details>
 
 ## Open logistics questions
 

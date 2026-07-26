@@ -11,16 +11,18 @@
         reasoning tier, exactly as the wording claims. **Set the picker deliberately before
         the session.**
   - [x] A bare `composer-2.5` resolves to **Composer 2.5 Fast** (~6x the token price). Pin
-        changed to `composer-2.5[fast=false]`; bracket parameters are documented at
-        cursor.com/docs/subagents. **Re-verify the card reads the standard variant** — if the
-        parameter is rejected, fall back to `composer-2.5[]`.
+        changed to `composer-2.5[fast=false]` and re-verified in-product: the card reads
+        "Composer 2.5", standard variant. The cost claim is now observed, not assumed.
   - [x] Approval-contract failure found and fixed: the implementer recovered a prior
         conversation's plan from Cursor's agent-transcript store and declared it approved.
         Contracts hardened; re-run refuses with the exact contract string (but still searched
         first — the fix moved behavior, it did not install a gate). This is now the lead
         answer in `Q_AND_A.md` under "What breaks?".
-  - [ ] `/pre-review` delegates to `skeptical-reviewer`, **and whether `readonly` blocks an
-        explicitly requested edit** — the one claim in the enforcement ladder still untested.
+  - [x] `/pre-review` delegates to `skeptical-reviewer` and passes the scope argument through.
+        `readonly` is honored **as a property of the agent** — asked to apply a fix, the
+        orchestrator read the frontmatter, declined to edit, and routed the work to an editable
+        subagent instead. Constraints do not compose upward; least privilege has to be enforced
+        at the boundary. Spoken answer: `Q_AND_A.md`, "What breaks?" (30 seconds, one example).
   - [ ] `/update-rules` re-run after the hardening and model-pin commits (the 2026-07-19 clean
         check predates them).
 - [ ] **Re-sync `demo-19287-sqlite-indexof` if keeping it as a clean fallback.** Verified
