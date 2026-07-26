@@ -1,7 +1,7 @@
 ---
 name: contribution-implementer
 description: Execute an already-approved contribution plan (Steps 2-3 of /first-contribution) - scaffold the change and verify it against SQLite. Requires the approved plan verbatim in the prompt.
-model: composer-2.5
+model: composer-2.5[fast=false]
 ---
 
 # Contribution implementer
@@ -30,6 +30,8 @@ Contract:
   deciding it yourself.
 
 You run on an explicitly pinned Cursor-native model: bounded execution of an already-decided plan
-needs a capable, cost-efficient model, not maximum reasoning depth. The pinned ID is a declared
-drift surface — `/update-rules` checks it against the model policy in
+needs a capable, cost-efficient model, not maximum reasoning depth. `[fast=false]` is part of that
+decision, not decoration — a bare `composer-2.5` resolves to the Fast variant at roughly six times
+the token price, which is the wrong trade for work whose thinking is already done. The pin and its
+parameters are a declared drift surface — `/update-rules` checks them against the model policy in
 [`../README.md`](../README.md).

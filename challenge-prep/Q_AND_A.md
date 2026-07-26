@@ -54,15 +54,20 @@ risk, and cost rather than a list of model names (names go stale; the policy sho
 This policy is **code, not a memo**: `/first-contribution` delegates planning to the
 `contribution-planner` subagent (`model: inherit`, `readonly` — it inherits the deliberately
 selected parent model rather than guaranteeing a reasoning tier), implementation after human
-approval to `contribution-implementer` (an explicit Composer binding — `composer-2.5`, Cursor's
-own coding model, a Cursor-native, cost-efficient choice; note Composer 2.5 has Standard and Fast
-variants at different prices — say "cost-efficient," not "the fast model," until the dry-run
-confirms which variant executes), and `/pre-review` to `skeptical-reviewer` (`model: inherit`,
+approval to `contribution-implementer` (an explicit Composer binding —
+`composer-2.5[fast=false]`, Cursor's own coding model, pinned to the standard variant), and
+`/pre-review` to `skeptical-reviewer` (`model: inherit`,
 `readonly`). The policy is defined by phase, capability, risk, and cost; `inherit` avoids naming
 a model where possible, and the one pinned ID is a **declared drift surface** — `/update-rules`
 checks it against the documented policy table on the
 maintainer's monthly cadence. The approval gate stays in the main conversation, never inside a
 subagent.
+
+The `[fast=false]` parameter is worth naming out loud if model strategy gets any depth: a bare
+`composer-2.5` resolves to the Fast variant at roughly six times the token price — found by
+running it, not by reading about it. The frontmatter therefore encodes a **cost decision**, not
+just a model name, and it is one line in a git diff that Maya's team reviews. That is what
+policy-as-code buys over a policy memo: the expensive default is visible and reversible.
 
 Keep the enforcement claim precise: the frontmatter is a **paved-road default** — bypassable, but a
 bypass is a visible git diff and `/update-rules` reports divergence from the documented policy as

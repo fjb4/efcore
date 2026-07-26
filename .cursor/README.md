@@ -38,7 +38,7 @@ nothing here to fall out of sync **except** the deltas, which is the one thing t
 | `commands/renewal-evidence.md` | `/renewal-evidence [pilot path]` — audit outcome evidence without inventing missing data. |
 | `commands/update-rules.md` | `/update-rules [scope]` — drift check: diff this layer against its sources of truth (read-only). |
 | `agents/contribution-planner.md` | Subagent for `/first-contribution` Step 1. `model: inherit`, `readonly` — planning inherits the deliberately selected parent model and cannot edit. |
-| `agents/contribution-implementer.md` | Subagent for `/first-contribution` Steps 2–3, after human approval. Explicit Composer binding (`model: composer-2.5`) — cost-efficient bounded execution, not maximum reasoning depth. |
+| `agents/contribution-implementer.md` | Subagent for `/first-contribution` Steps 2–3, after human approval. Explicit Composer binding (`model: composer-2.5[fast=false]`) — cost-efficient bounded execution, not maximum reasoning depth. |
 | `agents/skeptical-reviewer.md` | Subagent behind `/pre-review`. `model: inherit`, `readonly` — fresh context, strong model, cannot edit. |
 | [`../tools/onboarding-metrics/`](../tools/onboarding-metrics/ramp_metrics.py) | Mines ramp metrics (time-to-first-PR, rework) from real PR history; feeds the evidence ledger. |
 | [`../.github/workflows/ramp-metrics.yml`](../.github/workflows/ramp-metrics.yml) | Dispatch-run wrapper so the team owns the metrics refresh after handoff (manual now; schedulable once the cohort is pinned). |
@@ -59,7 +59,7 @@ Phase-appropriate models, expressed in versioned subagent frontmatter rather tha
 | Phase | Agent | Frontmatter | Why |
 |-------|-------|-------------|-----|
 | Plan / repository analysis | `contribution-planner` | `model: inherit`, `readonly: true` | High-context reasoning is spent where wrong-sibling errors start. |
-| Bounded implementation | `contribution-implementer` | `model: composer-2.5` | Executing an approved plan needs a capable, cost-efficient model, not maximum depth — an explicit Cursor-native binding. |
+| Bounded implementation | `contribution-implementer` | `model: composer-2.5[fast=false]` | Executing an approved plan needs a capable, cost-efficient model, not maximum depth — an explicit Cursor-native binding. `[fast=false]` selects the standard variant; a bare ID resolves to Fast at ~6x the token price (verified in-product 2026-07-26). |
 | Skeptical review | `skeptical-reviewer` | `model: inherit`, `readonly: true` | Strong model, fresh unanchored context, cannot edit. |
 
 The policy is defined by **phase, capability, risk, and cost** — the frontmatter is just its

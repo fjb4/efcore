@@ -52,10 +52,9 @@ Close the architecture setup with:
 
 Then the one-line proof: open the three files under `.cursor/agents/` and point at the `model:`
 and `readonly:` lines — planner and reviewer `inherit` + read-only, implementer pinned to
-`composer-2.5` (Cursor's own coding model, a cost-efficient native binding; do **not** call it
-"the fast tier" — Composer 2.5 has a separate Fast mode at 6x the price, and the dry-run
-confirms which variant the frontmatter selects); the approval gate stays in the main
-conversation. Say:
+`composer-2.5[fast=false]` (Cursor's own coding model, pinned to the standard variant — the
+bracket parameter is the cost decision: a bare ID resolves to Fast at ~6x the token price);
+the approval gate stays in the main conversation. Say:
 
 > Maya changes the model pin in one line, the change is a git diff her team reviews, and
 > `/update-rules` flags it if it drifts from the documented policy — a pinned name going stale is

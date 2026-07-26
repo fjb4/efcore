@@ -2,19 +2,31 @@
 
 ## Do first
 
-- [ ] **Dry-run the subagent dispatch in a fresh Cursor window before rehearsing any wording.**
-      The one-breath model policy, the policy-as-code proof, the Composer cost-efficiency
-      framing, and the drift-check story all depend on the outcome: confirm
-      `/first-contribution` returns a planner plan and stops for approval, `/pre-review`
-      delegates to `skeptical-reviewer`, `composer-2.5` resolves, and **which Composer variant
-      executes** (Standard $0.50/$2.50 vs Fast $3/$15 — until confirmed, say "Cursor-native,
-      cost-efficient," never "the fast model"). If dispatch misbehaves, rehearse the documented
-      inline fallback honestly — then lock the wording everywhere else.
-- [ ] **Re-sync and verify the complete `.cursor/` layer on `demo-19287-sqlite-indexof` if keeping
-      it as a clean fallback.** A 2026-07-22 local-ref comparison found it behind `challenge-prep`
-      (agents and staged designs are missing there). The final session no longer depends on this
-      branch; do not call it byte-identical until `git diff --quiet challenge-prep
-      demo-19287-sqlite-indexof -- .cursor` passes.
+- **Subagent dry run — run 2026-07-26. Observed, not assumed:**
+  - [x] Dispatch works. `/first-contribution 38671` delegates to `contribution-planner`,
+        returns the plan in Step 1's shape, **stops in the main conversation for approval**,
+        and writes nothing (`git status` clean at the gate).
+  - [x] `model: inherit` inherits the parent conversation's *selection* — Auto parent → card
+        reads `Auto`; named parent → card reads that model. It does not itself guarantee a
+        reasoning tier, exactly as the wording claims. **Set the picker deliberately before
+        the session.**
+  - [x] A bare `composer-2.5` resolves to **Composer 2.5 Fast** (~6x the token price). Pin
+        changed to `composer-2.5[fast=false]`; bracket parameters are documented at
+        cursor.com/docs/subagents. **Re-verify the card reads the standard variant** — if the
+        parameter is rejected, fall back to `composer-2.5[]`.
+  - [x] Approval-contract failure found and fixed: the implementer recovered a prior
+        conversation's plan from Cursor's agent-transcript store and declared it approved.
+        Contracts hardened; re-run refuses with the exact contract string (but still searched
+        first — the fix moved behavior, it did not install a gate). This is now the lead
+        answer in `Q_AND_A.md` under "What breaks?".
+  - [ ] `/pre-review` delegates to `skeptical-reviewer`, **and whether `readonly` blocks an
+        explicitly requested edit** — the one claim in the enforcement ladder still untested.
+  - [ ] `/update-rules` re-run after the hardening and model-pin commits (the 2026-07-19 clean
+        check predates them).
+- [ ] **Re-sync `demo-19287-sqlite-indexof` if keeping it as a clean fallback.** Verified
+      identical to `challenge-prep` outside `challenge-prep/` on 2026-07-26, then diverged again
+      by the approval-hardening and model-pin commits. Do not call it byte-identical until
+      `git diff --quiet challenge-prep demo-19287-sqlite-indexof -- .cursor` passes.
 
 ## Before sending the engagement email
 
@@ -68,10 +80,11 @@
   drift-ownership answer: "how she keeps the layer honest after I'm gone — monthly,
   five minutes."
 - `.cursor/README.md` — updated table + honest-limits section.
-- `.cursor/agents/` (added 2026-07-19, **untested in-product — dry-run before the session**):
-  `contribution-planner` (`inherit` + `readonly`), `contribution-implementer` (`composer-2.5` —
-  a real model ID; the docs' `model` field takes `inherit` or a concrete ID, no `fast` tier),
-  `skeptical-reviewer` (`inherit` + `readonly`) — the model policy as versioned frontmatter.
+- `.cursor/agents/` (added 2026-07-19, **exercised in-product 2026-07-26 — see the dry-run
+  results at the top of this file**): `contribution-planner` (`inherit` + `readonly`),
+  `contribution-implementer` (`composer-2.5[fast=false]` — a concrete ID plus a bracket
+  parameter selecting the standard variant), `skeptical-reviewer` (`inherit` + `readonly`) —
+  the model policy as versioned frontmatter.
   `/first-contribution` and `/pre-review` now orchestrate them; the human approval gate stays in
   the main conversation; both commands document an inline fallback if dispatch is unavailable.
   `/update-rules` gained a model-policy drift check against the README policy table.
@@ -117,6 +130,11 @@ staging in `README.md`): "least-privilege scale steps after the workflow earns t
       metrics, scale path, commitments, and feedback capture (2026-07-22)
 - [x] Excalidraw board retained as fallback only: `ACME_WORKING_SESSION_BOARD.png` is the static
       visual backup; the `.excalidraw` and SVG sources remain available (2026-07-22)
+- [ ] **Set the main conversation's model picker to a named reasoning model, never Auto**, before
+      sharing. `inherit` renders the parent's selection on the subagent card (verified
+      2026-07-26: Auto parent → card reads `Auto`; named parent → card reads the model name).
+      That label is what makes "the deliberately selected model" visible instead of asserted —
+      and whatever name shows must match the sentence being said out loud.
 - [ ] Screen setup: open `challenge-prep` in Cursor; pin the board, capability map, pilot command,
       evidence fallback, and the staged-scale-step README; use source view, word wrap, hidden
       sidebar/minimap, readable zoom;

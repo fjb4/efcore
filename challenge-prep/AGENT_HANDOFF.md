@@ -52,8 +52,10 @@ source of truth) and **agent suggests, CI enforces**.
   hard approval gate after planning), `/pre-review` (skeptical advisory review), `/update-rules`
   (read-only drift check), `/start-onboarding-pilot` (engagement/pilot planning, hard stop for
   approval), `/renewal-evidence` (read-only evidence audit; refuses to overclaim).
-- `.cursor/agents/` — **added 2026-07-19, untested in-product**: `contribution-planner`
-  (`model: inherit`, `readonly: true`), `contribution-implementer` (`model: composer-2.5`),
+- `.cursor/agents/` — added 2026-07-19, **exercised in-product 2026-07-26** (dispatch, gate stop,
+  model resolution, and the approval contract all verified; see `CHECKLIST.md`):
+  `contribution-planner` (`model: inherit`, `readonly: true`), `contribution-implementer`
+  (`model: composer-2.5[fast=false]`),
   `skeptical-reviewer` (`model: inherit`, `readonly: true`). The model-orchestration policy as
   versioned frontmatter. `/first-contribution` and `/pre-review` orchestrate them; **the human
   approval gate stays in the main conversation**; both commands document an inline fallback if
@@ -100,8 +102,11 @@ and its PNG/SVG exports remain fallback assets only; Excalidraw is not in the no
    feature of customer ownership; own the evaluation standard (governed workflow, measured
    outcomes, transferable ownership, auditable telemetry) — Cursor arrives as the only candidate
    with data. Probe which tools the two stalled teams used before choosing the expansion target.
-4. **`composer-2.5` pin, not Sonnet**: Cursor's subagent `model` field takes `inherit` or a
-   concrete model ID — there is **no** `fast` tier value. Composer 2.5 is Cursor's own fast/cheap
+4. **`composer-2.5[fast=false]` pin, not Sonnet**: Cursor's subagent `model` field takes
+   `inherit` or a concrete model ID, optionally with bracket parameters (`[fast=false]`,
+   `[effort=high]`, `[context=300k]`). **Verified in-product 2026-07-26: a bare `composer-2.5`
+   resolves to Composer 2.5 *Fast*** — roughly 6x the token price — so the pin now selects the
+   standard variant explicitly. Composer 2.5 is Cursor's own fast/cheap
    model ($0.5/$2.5 per 1M vs Sonnet 5's frontier $3/$15), its ID appears verbatim in the docs'
    examples (demo-safe), and pinning Cursor's differentiated model is itself positioning.
    Hard-coded names are fine **if registered**: the README policy table is the registry,
@@ -124,10 +129,12 @@ and its PNG/SVG exports remain fallback assets only; Excalidraw is not in the no
 
 ## Open items (mirror of CHECKLIST.md — verify there for current state)
 
-1. **Dry-run the subagent dispatch in a fresh Cursor window** — the agents are untested
-   in-product; docs-vs-product drift is exactly the overclaim risk. Confirm: planner plan +
-   approval stop, `/pre-review` delegation, `composer-2.5` resolves. Rehearse the honest inline
-   fallback if not.
+1. **Dry run mostly complete (2026-07-26)** — dispatch, the approval stop, `inherit` semantics,
+   and the Composer variant are all verified; the approval contract failed, was hardened, and
+   now refuses. Still open: `/pre-review` delegation and whether `readonly` blocks a requested
+   edit; a `/update-rules` re-run after the hardening and model-pin commits; and re-verifying
+   that `composer-2.5[fast=false]` renders as the standard variant. Full results at the top of
+   `CHECKLIST.md`.
 2. Fill in the HM name/email. Subject line is settled: `John Bush - Challenge - Solution Plan`,
    per the handout.
 3. Send `ENGAGEMENT_EMAIL.md` the day before the session.
